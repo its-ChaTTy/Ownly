@@ -1,9 +1,11 @@
-import Test from "@/components/Test/Test";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   return (
     <>
-      <Test />
+      <div className="section">
+        <Footer />
+      </div>
     </>
   )
 }
