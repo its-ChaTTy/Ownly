@@ -5,17 +5,29 @@ import { withSessionRoute } from "@/lib/ironOptions";
 export default withSessionRoute(SignUp);
 
 async function SignUp(req, res) {
-    const body = await req.body;
+    const { email, name, password } = req.body;
+    console.log(req.body);
 
-    const response = await createUser({
-        name: body.name,
-        email: body.email,
-        password: hashSync(body.password, 10),
-    });
+    try {
+        const Euser = await fetchUser(email);
+        if (Euser) {
+            return res.send({ status: 403, message: "User already exists" });
+        }
+        const response = await createUser({
+            name: name,
+            email: email,
+            password: hashSync(password, 10),
+        });
 
-    const user = await fetchUser(body.email);
-    req.session.user = user;
-    await req.session.save();
-    
-    res.send({ status: 200, message: JSON.stringify(response) });
+        const user = await fetchUser(email);
+        req.session.user = user;
+        await req.session.save();
+
+        res.send({ status: 200, message: JSON.stringify(response) });
+    }
+    catch (error) {
+        console.log(error);
+        res.send({ status: 500, message: "Internal Server Error" });
+    }
+
 }
