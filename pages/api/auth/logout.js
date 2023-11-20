@@ -1,4 +1,5 @@
 import { withSessionRoute } from "@/lib/ironOptions";
+
 export default withSessionRoute(logoutRoute);
 
 async function logoutRoute(req, res) {
