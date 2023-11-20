@@ -1,6 +1,6 @@
 import { hashSync } from "bcrypt";
-import { createUser, fetchUser } from "../../../services/userService";
-import { withSessionRoute } from "../../../lib/ironOptions";
+import { createUser, fetchUser } from "@/services/userService";
+import { withSessionRoute } from "@/lib/ironOptions";
 export default withSessionRoute(SignUp);
 
 async function SignUp(req, res) {
