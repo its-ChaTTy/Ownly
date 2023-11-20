@@ -9,11 +9,14 @@ async function loginRoute(req, res) {
     const { email, password } = await req.body;
 
     const user = await fetchUser(email);
+
     if (user === null) {
         return res.json({ status: 400, message: "User not found, try signing up..." });
     }
+
     const isMatch = await compareSync(password, user.password)
     delete user.password;
+    
     if (isMatch) {
         req.session.user = user;
         await req.session.save();

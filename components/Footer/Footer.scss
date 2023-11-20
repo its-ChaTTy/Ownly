@@ -1,5 +1,5 @@
 .Footer {
-    background-color: #113447 ;
+    background-color: #113447;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
@@ -26,7 +26,7 @@
             justify-content: space-around;
             align-items: flex-start;
 
-            &--socials{
+            &--socials {
                 display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
@@ -37,7 +37,7 @@
                     font-size: 1.5rem;
                     padding-right: 10px;
                 }
-            
+
             }
 
         }
@@ -56,7 +56,7 @@
                 justify-content: flex-start;
                 align-items: flex-start;
 
-                p{
+                p {
                     color: white;
                     font-weight: 200;
                 }
@@ -69,11 +69,50 @@
                 }
             }
 
-
         }
 
         &--seperator {
             grid-area: 11 / 1 / 13 / 13;
         }
+    }
+
+    @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+
+        height: auto;
+        padding: 20px 20px;
+
+        &__container {
+            
+            display: flex;
+            flex-direction: column;
+
+            &--description {
+                justify-content: space-between;
+                align-items: flex-start;
+
+                // for each item have padding top
+                *{
+                    padding-top: 10px;
+                }
+
+
+            }
+            
+            &--links {
+                flex-direction: column;
+
+                &--column{
+                    padding-top: 20px;
+                }
+
+            }
+
+            &--seperator {
+                padding-top: 20px;
+            }
+        }
+
     }
 }
