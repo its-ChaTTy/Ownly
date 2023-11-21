@@ -1,7 +1,7 @@
 import { withIronSessionApiRoute } from "iron-session/next";
 import { ironOptions } from "@/lib/ironOptions";
 import { compareSync } from "bcrypt";
-import { fetchUser } from "@/services/userService";
+import { fetchUser } from "@/services/user.service";
 
 export default withIronSessionApiRoute(loginRoute, ironOptions);
 
@@ -16,7 +16,7 @@ async function loginRoute(req, res) {
 
     const isMatch = await compareSync(password, user.password)
     delete user.password;
-    
+
     if (isMatch) {
         req.session.user = user;
         await req.session.save();

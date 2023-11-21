@@ -14,7 +14,7 @@ export async function login(data) {
 }
 
 export async function register(data) {
-    return await fetch('/api/auth/register', {
+    return await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

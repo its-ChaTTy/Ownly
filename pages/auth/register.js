@@ -1,9 +1,10 @@
 import { isEmail, isName, isPassword } from "@/utils/validator"
 import { register } from "@/operations/auth.fetch"
-import { Input, Button } from '@chakra-ui/react'
+import { Input, Button, FormControl } from '@chakra-ui/react'
 import { useState } from "react"
 import '@/styles/routes/auth/register.scss'
 import { FaArrowLeft } from "react-icons/fa";
+
 
 
 
@@ -23,10 +24,10 @@ function Register() {
             alert('Please enter a valid name')
             return
         }
-        if (!isPassword(password)) {
-            alert('Password must be at least 8 characters')
-            return
-        }
+        // if (!isPassword(password)) {
+        //     alert('Password must be at least 8 characters')
+        //     return
+        // }
         if (password !== confirmPassword) {
             alert('Passwords do not match')
             return
@@ -36,7 +37,7 @@ function Register() {
             alert('Registration successful')
             window.location.href = '/'
         } else {
-            alert('Registration failed, Please check your credentials')
+            alert(res.message)
         }
     }
 
@@ -52,24 +53,32 @@ function Register() {
                 <div className="Register__form">
                     <h1>Hello User</h1>
                     <p>Sign up to create an account.</p>
-                    <Input placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} style={{
-                        color: '#737F95',
-                        border: '1px solid #737F95',
-                        backgroundColor: 'white'
-                    }} />
-                    <Input placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} style={{
-                        color: '#737F95',
-                        border: '1px solid #737F95',
-                        backgroundColor: 'white'
-                    }} />
-                    <Input placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} style={{
-                        color: '#737F95',
-                        border: '1px solid #737F95',
-                    }} />
-                    <Input placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} style={{
-                        color: '#737F95',
-                        border: '1px solid #737F95',
-                    }} />
+                    <FormControl>
+                        <Input placeholder="Name" onChange={(e) => setName(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                            backgroundColor: 'white'
+                        }} type="text" value={name} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                            backgroundColor: 'white'
+                        }} type="email" value={email} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Password" onChange={(e) => setPassword(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                        }} type="password" value={password} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                        }} type="password" value={confirmPassword} />
+                    </FormControl>
                     <Button onClick={handleRegister} style={{
                         backgroundColor: '#113447',
                         color: 'white',
