@@ -1,5 +1,5 @@
 import { hashSync } from "bcrypt";
-import { createUser, fetchUser } from "@/services/userService";
+import { createUser, fetchUser } from "@/services/user.service";
 import { withSessionRoute } from "@/lib/ironOptions";
 
 export default withSessionRoute(SignUp);
