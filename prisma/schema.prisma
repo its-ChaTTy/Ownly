@@ -12,10 +12,11 @@ model User {
   email       String        @unique
   password    String
   name        String
-  address     String
-  phone       Int
-  location    String
+  address     String        @default("")
+  phone       Int           @default(0)
+  location    String        @default("")
   isVerified  Boolean       @default(false)
+  totalEarned Int           @default(0)
   ActiveRent  ActiveRent[]
   items       Item[]
   OverRent    OverRent[]
@@ -44,6 +45,8 @@ model ActiveRent {
   startDate DateTime
   endDate   DateTime
   status    Status
+  isPaid    Boolean  @default(false)
+  price     Int
   item      Item     @relation(fields: [itemId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
@@ -55,6 +58,8 @@ model OverRent {
   startDate DateTime
   endDate   DateTime
   status    Status
+  isPaid    Boolean  @default(false)
+  price     Int
   item      Item     @relation(fields: [itemId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
