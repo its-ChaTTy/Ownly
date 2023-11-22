@@ -1,7 +1,7 @@
 import db from '@/lib/prisma'
 
 export async function fetchUser(email) {
-    return (db).user.findUnique({
+    return db.user.findUnique({
         where: {
             email,
         },

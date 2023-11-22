@@ -6,7 +6,6 @@ export default withSessionRoute(SignUp);
 
 async function SignUp(req, res) {
     const { email, name, password } = req.body;
-    console.log(req.body);
 
     try {
         const Euser = await fetchUser(email);
