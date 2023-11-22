@@ -1,0 +1,84 @@
+/* HeroBrowse.scss */
+
+.HeroBrowse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 5vh;
+    width: 60vw;
+    margin: 0 auto;
+
+    &__Header {
+        font-size: 3.2vw;
+        font-weight: 450;
+        margin-bottom: 2vh;
+    }
+
+    &__Para {
+        width: 40vw;
+        font-size: 1.5vw;
+        margin-bottom: 2vh;
+    }
+
+    &__Button {
+        display: flex;
+        flex-direction: row;
+        /* Make buttons stack in a column by default */
+        justify-content: space-between;
+        width: 20vw;
+        font-size: 1vw;
+
+
+
+
+
+    }
+
+    @media (max-width: 1219px) {
+        .HeroBrowse__Button {
+            height: 18vh;
+
+            flex-direction: column;
+            justify-content: space-around;
+            /* Switch to row layout when screen is smaller */
+            width: 13vw;
+
+            /* Adjust width as needed */
+
+        }
+    }
+
+    @media (max-width: 821px) {
+        height: 18vh;
+
+        flex-direction: column;
+        justify-content: space-around;
+        /* Switch to row layout when screen is smaller */
+        width: 100vw;
+        /* Adjust width as needed */
+    }
+
+    .HeroBrowse__BrowseBtn,
+    .HeroBrowse__ListBtn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1.431px solid;
+        padding: 1.5vh;
+        border-radius: 5vh;
+        color: white;
+        padding: 2vh;
+    }
+
+    .HeroBrowse__BrowseBtn {
+        background: #277CA5;
+        border-color: #277CA5;
+    }
+
+    .HeroBrowse__ListBtn {
+        background: #113447;
+        border-color: #113447;
+    }
+}
