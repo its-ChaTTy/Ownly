@@ -1,8 +1,8 @@
-import { AuthProvider } from '@/context/authContext';
-import { getUserFromSession } from '@/context/authContext';
-import { ChakraProvider } from '@chakra-ui/react'
-import App from 'next/app'
-import '@/styles/root/_global.scss'
+import { AuthProvider } from "@/context/authContext";
+import { getUserFromSession } from "@/context/authContext";
+import { ChakraProvider } from "@chakra-ui/react";
+import App from "next/app";
+import "@/styles/root/_global.scss";
 
 function MyApp({ Component, pageProps, user }) {
   return (
@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, user }) {
         <Component {...pageProps} />
       </ChakraProvider>
     </AuthProvider>
-  )
+  );
 }
 
 MyApp.getInitialProps = async (appContext) => {
