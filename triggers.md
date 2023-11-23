@@ -3,14 +3,14 @@
 1. After a RentRequest is accepted then reject all other requests for that property during that tenure
 ```sql
 CREATE OR REPLACE FUNCTION updateRentRequests(
-  id INT,
+  i INT,
   sd TIMESTAMP WITH TIME ZONE,
   ed TIMESTAMP WITH TIME ZONE
 ) RETURNS VOID AS $$
 BEGIN
   UPDATE "RentRequest"
   SET status = 'REJECTED'
-  WHERE "itemId" = id
+  WHERE "itemId" = i
     AND "startDate" >= sd
     AND "endDate" <= ed;
 END;

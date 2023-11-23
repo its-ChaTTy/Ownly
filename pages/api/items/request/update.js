@@ -11,7 +11,6 @@ async function requestUpdate(req, res) {
         const request = await updateRequest(id, { startDate, endDate }, userId);
         res.json({ status: 200, request })
     } catch (error) {
-        console.log(error)
         res.json({ status: 500, error })
     }
 

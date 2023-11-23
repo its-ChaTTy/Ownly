@@ -23,11 +23,10 @@ async function requestAccept(req, res) {
     const requests = await getActiveRent(itemId);
     if (requests) {
         const currentRequests = requests.ActiveRent;
-        console.log(currentRequests);
         for (let i = 0; i < currentRequests.length; i++) {
             const request = currentRequests[i];
-            if (request.startDate <= endDate && request.endDate >= startDate) {
-                return res.json({ status: 404, message: "Item not available in the given time period" });
+            if ((new Date(request.startDate) <= new Date(endDate)) && (new Date(request.endDate) >= new Date(startDate))) {
+                return res.json({ status: 400, message: "Item not available in the given time period" });
             }
         }
     }
@@ -41,3 +40,32 @@ async function requestAccept(req, res) {
     }
 
 }
+
+function isD1Greater(d1,d2){
+    if(d1.getFullYear() > d2.getFullYear()){
+        return true;
+    }
+    else if(d1.getFullYear() < d2.getFullYear()){
+        return false;
+    }
+    else{
+        if(d1.getMonth() > d2.getMonth()){
+            return true;
+        }
+        else if(d1.getMonth() < d2.getMonth()){
+            return false;
+        }
+        else{
+            if(d1.getDate() > d2.getDate()){
+                return true;
+            }
+            else if(d1.getDate() < d2.getDate()){
+                return false;
+            }
+            else{
+                return true;
+            }
+        }
+    }
+}
+

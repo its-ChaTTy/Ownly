@@ -10,7 +10,6 @@ async function requestDelete(req, res) {
         const request = await deleteRequest(id, userId);
         res.json({ status: 200, request })
     } catch (error) {
-        console.log(error)
         res.json({ status: 500, error })
     }
 }

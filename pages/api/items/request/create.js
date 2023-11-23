@@ -9,12 +9,13 @@ async function requestCreate(req, res) {
 
     const item = await fetchItem(itemId);
 
+    const days = calculateDays(startDate, endDate);
     const data = {
         itemId,
         startDate,
         endDate,
         userId,
-        days: calculateDays(startDate, endDate),
+        days: days,
         price: days * item.price
     }
 
