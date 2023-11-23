@@ -5,8 +5,8 @@ export default function Home() {
   return (
     <>
       <div className="section">
-        {/* <Navbar /> */}
-        <HeroBrowse />
+        <Navbar />
+        {/* <HeroBrowse /> */}
         {/* <Footer /> */}
       </div>
     </>
