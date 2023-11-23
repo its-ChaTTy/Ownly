@@ -4,8 +4,18 @@ import React from "react";
 import Image from "next/image";
 import { FaSearch, FaUserPlus, FaSignInAlt } from "react-icons/fa";
 import "./Navbar.scss";
+import { useRouter } from "next/router";
 
 function Navbar() {
+  const router = useRouter();
+  const handleLogin = () => {
+    router.push("/auth/login");
+  };
+
+  const handleSignup = () => {
+    router.push("/auth/register");
+  };
+
   return (
     <div className="Navbar">
       <div className="Navbar__container">
@@ -36,10 +46,16 @@ function Navbar() {
           </div>
 
           <div>
-            <button className="signup-button">Sign Up</button>
+            <button className="signup-button" onClick={handleSignup}>
+              {" "}
+              Sign Up{" "}
+            </button>
           </div>
           <div>
-            <button className="login-button">Login</button>
+            <button className="login-button" onClick={handleLogin}>
+              {" "}
+              Login{" "}
+            </button>
           </div>
         </div>
       </div>

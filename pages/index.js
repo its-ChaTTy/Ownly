@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <div className="section">
-        <Navbar />
+        {/* <Navbar /> */}
         <HeroBrowse />
         {/* <Footer /> */}
       </div>

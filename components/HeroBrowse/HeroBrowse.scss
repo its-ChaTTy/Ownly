@@ -1,12 +1,10 @@
-/* HeroBrowse.scss */
-
 .HeroBrowse {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     justify-content: center;
-    paddings: 5vh;
+    padding: 5vh;
     width: 60vw;
     margin: 0 auto;
 
@@ -14,6 +12,7 @@
         font-size: 3.2vw;
         font-weight: 450;
         margin-bottom: 2vh;
+
     }
 
     &__Para {
@@ -30,13 +29,9 @@
         width: 20vw;
         font-size: 1vw;
 
-
-
-
-
     }
 
-    @media (max-width: 1219px) {
+    @media (max-width: 1280px) {
         .HeroBrowse__Button {
             height: 18vh;
 
@@ -48,16 +43,66 @@
             /* Adjust width as needed */
 
         }
+
     }
 
-    @media (max-width: 821px) {
-        height: 18vh;
+    @media(max-width: 1024px) {
+        .HeroBrowse__Header {
+            font-size: 3.5rem;
+            width: 80vw;
+        }
 
-        flex-direction: column;
-        justify-content: space-around;
-        /* Switch to row layout when screen is smaller */
-        width: 100vw;
-        /* Adjust width as needed */
+        .HeroBrowse__Para {
+            font-size: 1.6rem;
+            width: 60vw;
+        }
+
+        .HeroBrowse__Button {
+            width: 30vw;
+            // height: 10vh;
+            font-size: 1.3rem;
+        }
+
+        .HeroBrowse__ListBtn {
+            margin-top: 2vh;
+        }
+    }
+
+    @media (max-width: 820px) {
+        .HeroBrowse__Header {
+            font-size: 2.5rem;
+            width: 80vw;
+        }
+
+        .HeroBrowse__Para {
+            font-size: 1.2rem;
+            width: 60vw;
+        }
+
+        .HeroBrowse__Button {
+            width: 30vw;
+            // height: 10vh;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 452px) {
+        .HeroBrowse__Header {
+            font-size: 1.48rem;
+            width: 90vw;
+        }
+
+        .HeroBrowse__Para {
+            font-size: 1rem;
+            width: 75vw;
+        }
+
+        .HeroBrowse__Button {
+            width: 45vw;
+            // height: 10vh;
+            font-size: 0.8rem;
+        }
+
     }
 
     .HeroBrowse__BrowseBtn,
