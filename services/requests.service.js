@@ -1,6 +1,6 @@
 import db from '@/lib/prisma'
 
-export async function createRequest (data) {
+export async function createRequest(data) {
   return await db.rentRequest.create({
     data
   })
@@ -22,19 +22,32 @@ export async function getRequestById(id) {
   })
 }
 
-export async function updateRequest(id, data) {
+export async function updateRequest(id, data, userId) {
   return await db.rentRequest.update({
     where: {
-      id
+      id,
+      userId
     },
     data
   })
 }
 
-export async function deleteRequest(id) {
+export async function deleteRequest(id, userId) {
   return await db.rentRequest.delete({
     where: {
+      id,
+      userId
+    }
+  })
+}
+
+export async function acceptRequest(id) {
+  return await db.rentRequest.update({
+    where: {
       id
+    },
+    data: {
+      status: 'ACCEPTED'
     }
   })
 }

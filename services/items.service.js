@@ -80,3 +80,24 @@ export async function getRentHistory(id){
         }
     })
 }
+
+export async function isItemByUser(id, userId){
+    return await db.item.findFirst({
+        where: {
+            id,
+            userId,
+            isAvailable: true
+        },
+    })
+}
+
+export async function getActiveRent(id){
+    return await db.item.findUnique({
+        where: {
+            id
+        },
+        include: {
+            ActiveRent: true
+        }
+    })
+}

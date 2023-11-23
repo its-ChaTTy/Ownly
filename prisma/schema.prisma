@@ -44,7 +44,6 @@ model ActiveRent {
   userId    Int
   startDate DateTime
   endDate   DateTime
-  status    Status
   isPaid    Boolean  @default(false)
   price     Int
   item      Item     @relation(fields: [itemId], references: [id])
@@ -57,7 +56,6 @@ model OverRent {
   userId    Int
   startDate DateTime
   endDate   DateTime
-  status    Status
   isPaid    Boolean  @default(false)
   price     Int
   item      Item     @relation(fields: [itemId], references: [id])
@@ -70,7 +68,9 @@ model RentRequest {
   userId    Int
   startDate DateTime
   endDate   DateTime
-  status    Status
+  days      Int      @default(0)
+  price     Int      @default(0)
+  status    Status   @default(PENDING)
   item      Item     @relation(fields: [itemId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
