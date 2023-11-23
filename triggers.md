@@ -63,3 +63,28 @@ BEFORE UPDATE ON "Item"
 FOR EACH ROW
 EXECUTE FUNCTION rejectRentRequestsOnUserUpdate();
 ```
+
+3. If a property is made unavailable then you can't create any more new requests for that property
+```sql
+CREATE OR REPLACE FUNCTION checkItemAvailability()
+RETURNS TRIGGER AS $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1
+    FROM "Item"
+    WHERE "Item"."id" = NEW."itemId"
+      AND "Item"."isAvailable" = true
+  ) THEN
+    RAISE EXCEPTION 'The requested item is not available';
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_item_availability_trigger
+BEFORE INSERT ON "RentRequest"
+FOR EACH ROW
+EXECUTE FUNCTION checkItemAvailability();
+
+```
