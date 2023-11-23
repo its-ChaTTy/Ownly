@@ -1,12 +1,12 @@
 import db from '@/lib/prisma'
 
-export async function listItem(data){
+export async function listItem(data) {
     return await db.item.create({
         data
     })
 }
 
-export async function fetchAvailableItems(){
+export async function fetchAvailableItems() {
     return await db.item.findMany({
         where: {
             isAvailable: true
@@ -14,7 +14,7 @@ export async function fetchAvailableItems(){
     })
 }
 
-export async function fetchItemByCategory(cat){
+export async function fetchItemByCategory(cat) {
     return await db.item.findMany({
         where: {
             category: cat
@@ -22,7 +22,7 @@ export async function fetchItemByCategory(cat){
     })
 }
 
-export async function fetchItem(id){
+export async function fetchItem(id) {
     return await db.item.findUnique({
         where: {
             id
@@ -30,7 +30,7 @@ export async function fetchItem(id){
     })
 }
 
-export async function updateItem(id, data, userId){
+export async function updateItem(id, data, userId) {
     return await db.item.update({
         where: {
             id,
@@ -40,15 +40,19 @@ export async function updateItem(id, data, userId){
     })
 }
 
-// export async function deleteItem(id){
-//     return await db.item.delete({
-//         where: {
-//             id
-//         }
-//     })
-// }
+export async function deleteItem(id, userId) {
+    return await db.item.update({
+        where: {
+            id,
+            userId
+        },
+        data: {
+            userId: 0,
+        }
+    })
+}
 
-export async function getRequestsOfItem(id){
+export async function getRequestsOfItem(id) {
     return await db.item.findUnique({
         where: {
             id
@@ -59,7 +63,7 @@ export async function getRequestsOfItem(id){
     })
 }
 
-export async function getCurrentBorrower(id){
+export async function getCurrentBorrower(id) {
     return await db.item.findUnique({
         where: {
             id
@@ -70,7 +74,7 @@ export async function getCurrentBorrower(id){
     })
 }
 
-export async function getRentHistory(id){
+export async function getRentHistory(id) {
     return await db.item.findUnique({
         where: {
             id
@@ -81,7 +85,7 @@ export async function getRentHistory(id){
     })
 }
 
-export async function isItemByUser(id, userId){
+export async function isItemByUser(id, userId) {
     return await db.item.findFirst({
         where: {
             id,
@@ -91,7 +95,7 @@ export async function isItemByUser(id, userId){
     })
 }
 
-export async function getActiveRent(id){
+export async function getActiveRent(id) {
     return await db.item.findUnique({
         where: {
             id

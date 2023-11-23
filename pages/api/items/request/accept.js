@@ -13,6 +13,7 @@ async function requestAccept(req, res) {
     // startDate is the start date of the request
     // endDate is the end date of the request
     // check if the item is available in the given time period i.e no other request is accepted for the same item in the given time period
+    
     const { id, itemId, userId, startDate, endDate } = req.body;
 
     const item = await isItemByUser(itemId, userId);
@@ -39,33 +40,5 @@ async function requestAccept(req, res) {
         return res.json({ status: 500, message: "Internal server error" });
     }
 
-}
-
-function isD1Greater(d1,d2){
-    if(d1.getFullYear() > d2.getFullYear()){
-        return true;
-    }
-    else if(d1.getFullYear() < d2.getFullYear()){
-        return false;
-    }
-    else{
-        if(d1.getMonth() > d2.getMonth()){
-            return true;
-        }
-        else if(d1.getMonth() < d2.getMonth()){
-            return false;
-        }
-        else{
-            if(d1.getDate() > d2.getDate()){
-                return true;
-            }
-            else if(d1.getDate() < d2.getDate()){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-    }
 }
 

@@ -1,10 +1,13 @@
 TODO
 
 1. Database triggers
---> If Rent tenure over, send the data to OverRent table and delete from ActiveRent table
---> After A RentRequest is accepted then reject all other requests for that property during that tenure
 --> If a property is rented out then it should not be available for rent for that tenure
 --> As soon as Payment is done, update the status of the rent request to paid and add that price to earned in User
 --> If an Item is deleted then delete all the requests for that item and update user to 0 which is pointing to NULL user to avoid foreign key constraint and deleting user renting history
 --> Before Creating RentRequest, check if item is available for rent or not, if not then reject the request
 
+DONE
+--> After A RentRequest is accepted then reject all other requests for that property during that tenure [done]
+
+PG_CRON
+--> If Rent tenure over, send the data to OverRent table and delete from ActiveRent table // will use pg_cron for this --> Later
