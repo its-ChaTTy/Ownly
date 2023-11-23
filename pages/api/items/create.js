@@ -1,9 +1,9 @@
 import { withSessionRoute } from "@/lib/ironOptions";
 import { listItem } from "@/services/items.service";
 
-// export default withSessionRoute(createItem);
+export default withSessionRoute(createItem);
 
-export default async function createItem(req, res) {
+async function createItem(req, res) {
 
     const { name, description, price, category, imageURL, userId } = req.body;
 

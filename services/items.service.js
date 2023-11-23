@@ -30,10 +30,11 @@ export async function fetchItem(id){
     })
 }
 
-export async function updateItem(id, data){
+export async function updateItem(id, data, userId){
     return await db.item.update({
         where: {
-            id
+            id,
+            userId
         },
         data
     })
