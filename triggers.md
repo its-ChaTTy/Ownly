@@ -39,3 +39,27 @@ FOR EACH ROW
 WHEN (NEW.status = 'ACCEPTED')
 EXECUTE FUNCTION request_accepted();
 ```
+
+2. If an Item is deleted i.e. userId is set to 0, then 'REJECT' all the requests for that item and update user to 0 which is pointing to NULL user to avoid foreign key constraint and deleting user renting history
+```sql
+CREATE OR REPLACE FUNCTION rejectRentRequestsOnUserUpdate()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Check if the userId is updated to 0
+  IF NEW."userId" = 0 AND OLD."userId" IS DISTINCT FROM 0 THEN
+    -- Reject all RentRequests with the same itemId
+    UPDATE "RentRequest"
+    SET status = 'REJECTED'
+    WHERE "itemId" = NEW.id;
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create a trigger to execute the function before each update on Item
+CREATE TRIGGER reject_rent_requests_trigger
+BEFORE UPDATE ON "Item"
+FOR EACH ROW
+EXECUTE FUNCTION rejectRentRequestsOnUserUpdate();
+```
