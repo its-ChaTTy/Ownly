@@ -48,6 +48,7 @@ export async function deleteItem(id, userId) {
         },
         data: {
             userId: 0,
+            isAvailable: false
         }
     })
 }
