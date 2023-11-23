@@ -1,5 +1,5 @@
-import { AuthProvider } from '@/context/authContext';
-import { getUserFromSession } from '@/context/authContext';
+import { AuthProvider } from '@/context/auth.context';
+import { getUserFromSession } from '@/context/auth.context';
 import { ChakraProvider } from '@chakra-ui/react'
 import App from 'next/app'
 import '@/styles/root/_global.scss'
