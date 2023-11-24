@@ -65,11 +65,15 @@
 
   }
 
-  @media (max-width: 821px) {
+  @media (max-width: 768px) {
     .Navbar__container {
       display: flex;
       justify-content: start;
       align-items: center;
+
+      &--pages {
+        flex-direction: column;
+      }
     }
 
     .Navbar__leftside {
