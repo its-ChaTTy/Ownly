@@ -12,7 +12,14 @@ import {
 
 function ListItem() {
     return (
-        <div>ListItem</div>
+        <>
+            <div className='ListItem'>
+                <div className='ListItem__top'></div>
+                <div className='ListItem__description'></div>
+                <div className='ListItem__images'></div>
+                <div className='ListItem__pricing'></div>
+            </div>
+        </>
     )
 }
 
