@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,8 +8,83 @@ datasource db {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  name     String
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  name        String
+  address     String        @default("")
+  phone       Int           @default(0)
+  location    String        @default("")
+  isVerified  Boolean       @default(false)
+  totalEarned Int           @default(0)
+  ActiveRent  ActiveRent[]
+  items       Item[]
+  OverRent    OverRent[]
+  RentRequest RentRequest[]
+}
+
+model Item {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  category    Category
+  price       Int
+  imageURL    String[]
+  userId      Int
+  isAvailable Boolean       @default(true)
+  ActiveRent  ActiveRent[]
+  user        User          @relation(fields: [userId], references: [id])
+  OverRent    OverRent[]
+  RentRequest RentRequest[]
+}
+
+model ActiveRent {
+  id        Int      @id @default(autoincrement())
+  itemId    Int
+  userId    Int
+  startDate DateTime
+  endDate   DateTime
+  isPaid    Boolean  @default(false)
+  price     Int
+  item      Item     @relation(fields: [itemId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model OverRent {
+  id        Int      @id @default(autoincrement())
+  itemId    Int
+  userId    Int
+  startDate DateTime
+  endDate   DateTime
+  isPaid    Boolean  @default(false)
+  price     Int
+  item      Item     @relation(fields: [itemId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model RentRequest {
+  id        Int      @id @default(autoincrement())
+  itemId    Int
+  userId    Int
+  startDate DateTime
+  endDate   DateTime
+  days      Int      @default(0)
+  price     Int      @default(0)
+  status    Status   @default(PENDING)
+  item      Item     @relation(fields: [itemId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+enum Category {
+  ELECTRONICS
+  FURNITURE
+  CLOTHING
+  OTHER
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  REJECTED
+  CANCELLED
 }
