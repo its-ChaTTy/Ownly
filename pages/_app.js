@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps, user }) {
         <Component {...pageProps} />
       </ChakraProvider>
     </AuthProvider>
-  )
+  );
 }
 
 MyApp.getInitialProps = async (appContext) => {

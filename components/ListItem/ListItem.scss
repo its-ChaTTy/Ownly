@@ -1,0 +1,125 @@
+.ListItem {
+    display: grid;
+    grid-template-columns: 0.5fr repeat(10, 1fr) 0.5fr;
+    grid-template-rows: 0.75fr repeat(10, 1fr) 0.75fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    height: 90vh;
+
+    &__top {
+        grid-area: 2 / 2 / 4 / 12;
+        display: flex;
+        flex-direction: row;
+
+        p {
+            font-size: 0.8rem;
+            color: gray;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            color: black;
+            font-weight: 600;
+        }
+
+        
+    }
+
+    &__description {
+        grid-area: 4 / 2 / 12 / 7;
+        margin-right: 20px;
+
+        h1 {
+            font-size: 1.4rem;
+            color: black;
+            font-weight: 600;
+
+        }
+
+        .form_label {
+
+            color: #636363;
+            margin-bottom: 1.5vh;
+
+
+        }
+
+        &--card {
+            // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+            // border-radius: 10px;
+            padding: 20px;
+            // border-style: solid 20px #000000;
+        }
+    }
+
+    &__images {
+        grid-area: 4 / 7 / 8 / 12;
+        height: 30vh;
+
+        &--card {
+            // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+            // border-radius: 10px;
+            padding: 20px;
+
+            // border-style: solid 20px #000000;
+            .ListItem__images--card--button {
+                height: 25vh;
+                width: 12vw;
+            }
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            color: black;
+            font-weight: 600;
+        }
+        // .upload-image{
+        //     width: 5vw;
+        //     display: flex;
+        //     flex-direction: column;
+        //     justify-content: center;
+        // }
+
+    }
+
+    &__pricing {
+        margin-top: 6.2vh;
+        height: 25vh;
+
+        h1 {
+            font-size: 1.4rem;
+            color: black;
+            font-weight: 600;
+        }
+
+        grid-area: 8 / 7 / 12 / 12;
+
+        &--card {
+            // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
+            // border-radius: 10px;
+            padding: 20px;
+
+            // border-style: solid 20px #000000;
+            &--buttons {
+                margin-top: 1.5vh;
+                display: flex;
+                justify-content: flex-end;
+                align-items: flex-end;
+
+                #discard {
+                    color: #CC4A2D;
+                    background-color: #FEEAEA;
+                    margin-right: 1vw;
+                }
+
+                #submit {
+                    color: #113447;
+                    background-color: #EAF2F6;
+                }
+            }
+        }
+    }
+
+
+
+}
