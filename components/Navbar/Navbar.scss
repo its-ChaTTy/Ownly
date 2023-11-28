@@ -68,7 +68,7 @@
   @media (max-width: 768px) {
     .Navbar__container {
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
 
       &--pages {

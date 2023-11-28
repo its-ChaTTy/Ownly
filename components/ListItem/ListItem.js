@@ -92,15 +92,13 @@ function ListItem() {
                       src="/Images/Logos/image-upload.png"
                       alt="Upload Image"
                     />
-                    {/* <p fontSize="sm" mt="2">
-                      Click to upload drag and drop
-                    </p> */}
                   </div>
                 </Button>
                 <Input
                   id="upload"
                   type="file"
                   display="none"
+                  accept="image/*"
                   onChange={(e) => {
                     // Handle file upload logic here
                   }}
@@ -109,6 +107,7 @@ function ListItem() {
             </FormControl>
           </Card>
         </div>
+        
         <div className="ListItem__pricing">
           <h1>Pricing</h1>
           <Card
