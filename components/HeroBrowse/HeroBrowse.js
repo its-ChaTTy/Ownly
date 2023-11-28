@@ -3,6 +3,9 @@ import { FaArrowRight } from "react-icons/fa"; // Import arrow icon from React I
 import React from "react";
 
 function HeroBrowse() {
+  const handleListItem = () => {
+    router.push("/auth/register");
+  };
   return (
     <div className="HeroBrowse">
       <h1 className="HeroBrowse__Header">
@@ -17,7 +20,7 @@ function HeroBrowse() {
         <button className="HeroBrowse__BrowseBtn">
           Browse an Item &nbsp; <FaArrowRight />
         </button>
-        <button className="HeroBrowse__ListBtn">
+        <button className="HeroBrowse__ListBtn" onClick={handleListItem}>
           List an Item &nbsp; <FaArrowRight />
         </button>
       </div>

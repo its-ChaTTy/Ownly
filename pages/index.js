@@ -5,10 +5,10 @@ import ListItem from "@/components/ListItem/ListItem";
 export default function Home() {
   return (
     <>
-      <div>
+      {/* <div>
         <ListItem />
-      </div>
-      {/* <div className="section">
+      </div> */}
+      <div className="section">
         <Navbar />
       </div>
       <div className="section">
@@ -16,7 +16,7 @@ export default function Home() {
       </div>
       <div className="section">
         <Footer />
-      </div> */}
+      </div>
     </>
   );
 }
