@@ -1,11 +1,14 @@
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import HeroBrowse from "@/components/HeroBrowse/HeroBrowse";
-
+import ListItem from "@/components/ListItem/ListItem";
 export default function Home() {
   return (
     <>
-      <div className="section">
+      <div>
+        <ListItem />
+      </div>
+      {/* <div className="section">
         <Navbar />
       </div>
       <div className="section">
@@ -13,7 +16,7 @@ export default function Home() {
       </div>
       <div className="section">
         <Footer />
-      </div>
+      </div> */}
     </>
   );
 }
