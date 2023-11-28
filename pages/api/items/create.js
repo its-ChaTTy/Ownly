@@ -19,6 +19,7 @@ async function createItem(req, res) {
         res.json({ status: 200, item });
     }
     catch (error) {
+        console.log(error);
         res.json({ status: 500, error });
     }
 
