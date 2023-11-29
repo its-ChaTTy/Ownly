@@ -1,7 +1,7 @@
 /* Navbar.scss */
 
 .Navbar {
-  background-color: white;
+  background-color: transparent;
   color: black;
   padding: 10px 20px;
   margin-top: 2vh;
@@ -14,7 +14,6 @@
       img {
         width: 120px;
         height: 40px;
-
       }
     }
 
@@ -34,7 +33,7 @@
     }
   }
 
-  @media(max-width:1248px) {
+  @media (max-width: 1248px) {
     .Navbar__container--pages {
       width: 35vw;
 
@@ -52,8 +51,7 @@
     }
   }
 
-  @media(max-width: 1025px) {
-
+  @media (max-width: 1025px) {
     .Navbar__rightside {
       width: 45vw;
     }
@@ -62,7 +60,6 @@
   .fabar-icon {
     display: none;
     size: 1.5rem;
-
   }
 
   @media (max-width: 768px) {
@@ -80,11 +77,6 @@
       display: none;
     }
 
-    .Navbar__rightside {
-      margin-left: 5vw;
-      width: 70vw;
-    }
-
     & .Navbar__container--search {
       display: flex;
       align-items: center;
@@ -95,7 +87,7 @@
         border: none;
         border-radius: 20px;
         //background colour grey
-        background: #F2F2F2;
+        background: #f2f2f2;
         width: 50vw;
       }
     }
@@ -103,19 +95,6 @@
     .fabar-icon {
       display: block;
       // size: 6rem;
-    }
-
-    .signup-button,
-    .login-button {
-      display: flex;
-      height: 47.152px;
-      padding: 10.901px 20px;
-      margin-left: 2vw;
-      width: 15vw;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1429.863px;
-      box-shadow: 0px 1.43129px 2.86259px 0px rgba(198, 228, 246, 0.05);
     }
   }
 
@@ -131,7 +110,6 @@
     align-items: center;
     justify-content: center;
     gap: 2rem;
-
   }
 
   &__leftside {
@@ -142,7 +120,7 @@
   }
 
   &__rightside {
-    width: 37vw;
+    width: 32vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -158,7 +136,7 @@
       border: none;
       border-radius: 20px;
       //background colour grey
-      background: #F2F2F2;
+      background: #f2f2f2;
       width: 22vw;
     }
   }
@@ -170,30 +148,4 @@
     margin-left: 10px;
     cursor: pointer;
   }
-
-  .signup-button,
-  .login-button {
-    display: flex;
-    height: 47.152px;
-    padding: 10.901px 20px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 1429.863px;
-    box-shadow: 0px 1.43129px 2.86259px 0px rgba(198, 228, 246, 0.05);
-  }
-
-  .signup-button {
-    border: 1.431px solid #B9F5FF;
-    background: #B9F5FF;
-  }
-
-  .login-button {
-    border: 1.431px solid #113447;
-    background: #113447;
-    //text colour white
-    color: white;
-
-
-  }
-
 }

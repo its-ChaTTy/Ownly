@@ -1,129 +1,163 @@
 .HeroBrowse {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    padding: 5vh;
-    width: 60vw;
-    margin: 0 auto;
-
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  &__left {
     &__Header {
-        font-size: 3.2vw;
-        font-weight: 450;
-        margin-bottom: 2vh;
-
+      font-size: 3.2vw;
+      font-weight: 450;
+      margin-bottom: 2vh;
     }
 
     &__Para {
-        width: 40vw;
-        font-size: 1.5vw;
-        margin-bottom: 2vh;
+      width: 40vw;
+      font-size: 1.2vw;
+      margin-bottom: 2vh;
+      color: rgba(110, 120, 141, 1);
+    }
+
+    &__search {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      input {
+        margin-right: 10px;
+        padding: 0.5rem 0rem 0.5rem 1.3rem;
+        border: none;
+        border-radius: 20px;
+        //background colour grey
+        background: #f2f2f2;
+        width: 25vw;
+      }
+      p {
+        font-size: 1rem;
+        color: rgba(154, 159, 165, 1);
+      }
+      button {
+        background-color: rgba(185, 245, 255, 1);
+        padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+        border-radius: 1.5rem;
+      }
     }
 
     &__Button {
-        display: flex;
-        flex-direction: row;
-        /* Make buttons stack in a column by default */
-        justify-content: space-between;
+      display: flex;
+      flex-direction: row;
+      margin-top: 2rem;
+      img {
         width: 20vw;
-        font-size: 1vw;
+        cursor: pointer;
+      }
+      &--monetize{
+        margin-right: 2rem;
+      }
+    //   &--explore{
+    //     width: 20vw;
+    //     height: 13vw;
+    //     margin-top: 1rem;
+    //   }
+    }
+  }
 
+  &__right {
+    img {
+      width: 36vw;
+      border-radius: 1.5rem;
+    }
+  }
+
+  @media (max-width: 1280px) {
+    .HeroBrowse__Button {
+      height: 18vh;
+
+      flex-direction: column;
+      justify-content: space-around;
+      /* Switch to row layout when screen is smaller */
+      width: 13vw;
+
+      /* Adjust width as needed */
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .HeroBrowse__Header {
+      font-size: 3.5rem;
+      width: 80vw;
     }
 
-    @media (max-width: 1280px) {
-        .HeroBrowse__Button {
-            height: 18vh;
-
-            flex-direction: column;
-            justify-content: space-around;
-            /* Switch to row layout when screen is smaller */
-            width: 13vw;
-
-            /* Adjust width as needed */
-
-        }
-
+    .HeroBrowse__Para {
+      font-size: 1.6rem;
+      width: 60vw;
     }
 
-    @media(max-width: 1024px) {
-        .HeroBrowse__Header {
-            font-size: 3.5rem;
-            width: 80vw;
-        }
-
-        .HeroBrowse__Para {
-            font-size: 1.6rem;
-            width: 60vw;
-        }
-
-        .HeroBrowse__Button {
-            width: 30vw;
-            // height: 10vh;
-            font-size: 1.3rem;
-        }
-
-        .HeroBrowse__ListBtn {
-            margin-top: 2vh;
-        }
-    }
-
-    @media (max-width: 820px) {
-        .HeroBrowse__Header {
-            font-size: 2.5rem;
-            width: 80vw;
-        }
-
-        .HeroBrowse__Para {
-            font-size: 1.2rem;
-            width: 60vw;
-        }
-
-        .HeroBrowse__Button {
-            width: 30vw;
-            // height: 10vh;
-            font-size: 1rem;
-        }
-    }
-
-    @media (max-width: 452px) {
-        .HeroBrowse__Header {
-            font-size: 1.48rem;
-            width: 90vw;
-        }
-
-        .HeroBrowse__Para {
-            font-size: 1rem;
-            width: 75vw;
-        }
-
-        .HeroBrowse__Button {
-            width: 45vw;
-            // height: 10vh;
-            font-size: 0.8rem;
-        }
-
-    }
-
-    .HeroBrowse__BrowseBtn,
-    .HeroBrowse__ListBtn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1.431px solid;
-        padding: 1.5vh;
-        border-radius: 5vh;
-        color: white;
-        padding: 2vh;
-    }
-
-    .HeroBrowse__BrowseBtn {
-        background: #277CA5;
-        border-color: #277CA5;
+    .HeroBrowse__Button {
+      width: 30vw;
+      // height: 10vh;
+      font-size: 1.3rem;
     }
 
     .HeroBrowse__ListBtn {
-        background: #113447;
-        border-color: #113447;
+      margin-top: 2vh;
     }
+  }
+
+  @media (max-width: 820px) {
+    .HeroBrowse__Header {
+      font-size: 2.5rem;
+      width: 80vw;
+    }
+
+    .HeroBrowse__Para {
+      font-size: 1.2rem;
+      width: 60vw;
+    }
+
+    .HeroBrowse__Button {
+      width: 30vw;
+      // height: 10vh;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 452px) {
+    .HeroBrowse__Header {
+      font-size: 1.48rem;
+      width: 90vw;
+    }
+
+    .HeroBrowse__Para {
+      font-size: 1rem;
+      width: 75vw;
+    }
+
+    .HeroBrowse__Button {
+      width: 45vw;
+      // height: 10vh;
+      font-size: 0.8rem;
+    }
+  }
+
+  .HeroBrowse__left__BrowseBtn,
+  .HeroBrowse__left__ListBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.431px solid;
+    padding: 1.5vh;
+    border-radius: 5vh;
+    color: white;
+    padding: 2vh;
+  }
+
+  .HeroBrowse__left__BrowseBtn {
+    background: #277ca5;
+    border-color: #277ca5;
+  }
+
+  .HeroBrowse__left__ListBtn {
+    background: #113447;
+    border-color: #113447;
+  }
 }

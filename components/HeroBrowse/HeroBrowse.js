@@ -8,21 +8,31 @@ function HeroBrowse() {
   };
   return (
     <div className="HeroBrowse">
-      <h1 className="HeroBrowse__Header">
-        Unlock Possibilities, Rent with <br /> Ease, Earn Smartly!
-      </h1>
-      <p className="HeroBrowse__Para">
-        Explore a world of possibilities, effortlessly share what you have,
-        brand turn every lend into an opportunity to earn in your vibrant
-        neighborhood.
-      </p>
-      <div className="HeroBrowse__Button">
-        <button className="HeroBrowse__BrowseBtn">
-          Browse an Item &nbsp; <FaArrowRight />
-        </button>
-        <button className="HeroBrowse__ListBtn" onClick={handleListItem}>
-          List an Item &nbsp; <FaArrowRight />
-        </button>
+      <div className="HeroBrowse__left">
+        <h1 className="HeroBrowse__left__Header">
+          Unlock Possibilities, Rent with <br /> Ease, Earn Smartly!
+        </h1>
+        <p className="HeroBrowse__left__Para">
+          Explore a world of possibilities, effortlessly share what you have,
+          brand turn every lend into an opportunity to earn in your vibrant
+          neighborhood.
+        </p>
+        <div className="HeroBrowse__left__search">
+						<input
+							type="text"
+							className="search-bar"
+							placeholder="Search for items to rent"
+						/>
+            <p>Or</p>
+            <button className="HeroBrowse__left__search__btn">List an Item</button>
+					</div>
+        <div className="HeroBrowse__left__Button">
+          <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.png" />
+          <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.png" />
+        </div>
+      </div>
+      <div className="HeroBrowse__right">
+        <img src="/Images/Home_page/home_page.png" alt="Hero Browse" />
       </div>
     </div>
   );
