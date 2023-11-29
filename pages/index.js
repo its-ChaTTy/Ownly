@@ -1,8 +1,10 @@
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
 import HeroBrowse from "@/components/HeroBrowse/HeroBrowse";
-import '../styles/routes/index.scss'
 import About from "@/components/About/About";
+import Store from "@/components/Store/Store";
+import '../styles/routes/index.scss'
+
 export default function Home() {
   return (
     <>
@@ -14,6 +16,9 @@ export default function Home() {
       </div>
       <div className="section">
         <About />
+      </div>
+      <div className="section">
+        <Store />
       </div>
       <div className="section">
         <Footer />
