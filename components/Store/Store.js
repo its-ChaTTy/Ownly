@@ -57,7 +57,6 @@ const Store = () => {
                     </div>
                 ))}
             </div>
-            {/* filter items wrt to pill, if pill === 'ALL' then show al items */}
             <div className='Store__items'>
                 {items.map((item, index) => {
                     if (item.category === selectedPill || selectedPill === 'ALL') {
@@ -81,6 +80,9 @@ const Store = () => {
 
                 }
                 )}
+            </div>
+            <div className='Store__button'>
+                <button>Load More</button>
             </div>
         </div>
     )
