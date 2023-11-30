@@ -1,0 +1,119 @@
+.Store {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  &__header {
+    text-align: center;
+    &--text1 {
+      color: rgba(110, 120, 141, 1);
+      font-size: 1.2rem;
+      font-family: "Roboto", sans-serif;
+    }
+    &--text2 {
+      color: black;
+      font-size: 2.7rem;
+      font-family: "Roboto", sans-serif;
+    }
+    &--text3 {
+      color: rgba(110, 120, 141, 1);
+      font-size: 1.2rem;
+      font-family: "Roboto", sans-serif;
+    }
+  }
+  &__pills {
+    display: flex;
+    &--pill {
+      border-radius: 1rem;
+      width: 10vw;
+      text-align: center;
+      margin: 1rem;
+      cursor: pointer;
+      padding: 0.2rem 0 0.2rem 0;
+      &__text {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  &__items {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &--item {
+      margin: 2rem;
+      cursor: pointer;
+
+      &__overlay {
+        &:hover {
+          opacity: 1;
+        }
+        position: absolute;
+        width: 15vw;
+        height: 15vw;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: all 0.5s ease;
+        cursor: pointer;
+
+        &--button2 {
+          color: white;
+          border: 1px solid white;
+          font-family: 'Roboto', sans-serif;
+          padding: .3rem 1rem .3rem 1rem;
+          border-radius: 1rem;
+          font-size: .8rem;
+        }
+        &--button1 {
+            background-color: white;
+            color: black;
+            border: 1px solid white;
+            font-family: 'Roboto', sans-serif;
+            padding: .3rem 1.5rem .3rem 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+            font-size: .8rem;
+          }
+      }
+      &__image {
+        img {
+          width: 15vw;
+          height: 15vw;
+        }
+      }
+      &__text {
+        margin-top: 0.7rem;
+        &--name {
+          font-weight: 400;
+          font-family: "Roboto", sans-serif;
+        }
+        &--price {
+          font-weight: 600;
+          font-family: "Roboto", sans-serif;
+        }
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: rgba(17, 52, 71, 0.08);
+    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
+    border-radius: 1.5rem;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
