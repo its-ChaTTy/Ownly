@@ -4,6 +4,9 @@ import HeroBrowse from "@/components/HeroBrowse/HeroBrowse";
 import About from "@/components/About/About";
 import Store from "@/components/Store/Store";
 import '../styles/routes/index.scss'
+import How from "@/components/How/How";
+import Earning from "@/components/Earning/Earning";
+import How_it_works from "@/components/How_it_works/How_it_works";
 
 export default function Home() {
   return (
@@ -19,6 +22,15 @@ export default function Home() {
       </div>
       <div className="section">
         <Store />
+      </div>
+      <div className="section">
+        <How />
+      </div>
+      <div className="section">
+        <Earning />
+      </div>
+      <div className="section">
+        <How_it_works />
       </div>
       <div className="section">
         <Footer />
