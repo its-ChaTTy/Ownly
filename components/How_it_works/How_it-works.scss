@@ -1,0 +1,28 @@
+.Works {
+    background-image: url('/Images/Assets/how_it_works.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 60vh;
+    background-color: rgba(17, 52, 71, 1);
+    background-position: center;
+    padding: 12rem 1rem 1rem 2rem;
+    &__button {
+        margin-top: 1rem;
+        color: black;
+        background-color: white;
+        border: 1.5px solid rgba(148, 243, 218, 1);
+        border-radius: 1.5rem;
+        padding: .5rem 1rem .5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    &__text1 {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.2rem;
+        font-family: "Roboto", sans-serif;
+    }
+    &__text2 {
+        color: white;
+        font-size: 2.5rem;
+        font-family: "Roboto", sans-serif;
+    }
+}

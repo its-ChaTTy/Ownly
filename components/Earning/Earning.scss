@@ -1,0 +1,43 @@
+.Earning {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 2rem 0 2rem 0;
+    &__left {
+        &--content {
+            margin-bottom: 1.5rem;
+            &__text1 {
+                color: rgba(110, 120, 141, 1);
+                font-size: 1.2rem;
+                font-family: "Roboto", sans-serif;
+            }
+            &__text2 {
+                color: black;
+                font-size: 2.7rem;
+                font-family: "Roboto", sans-serif;
+            }
+            &__text3 {
+                color: rgba(110, 120, 141, 1);
+                font-size: 1.2rem;
+                font-family: "Roboto", sans-serif;
+            }
+            &__button {
+                margin-top: 1rem;
+                color: black;
+                background-color: rgba(185, 245, 255, 1);
+                border: 1px solid white;
+                border-radius: 1rem;
+                padding: .5rem 1rem .5rem 1rem;
+            }
+        }
+        img {
+            width: 40vw;
+        }
+    }
+    &__right {
+        img {
+            width: 37vw;
+            border-radius: 1rem;
+        }
+    }
+}
