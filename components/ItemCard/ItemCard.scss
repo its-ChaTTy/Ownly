@@ -1,0 +1,38 @@
+.ItemCard {
+    margin-right: 2rem;
+  &__content {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    &--text {
+      &__category {
+        font-family: "Roboto", sans-serif;
+        font-size: 0.8rem;
+        color: rgba(52, 64, 84, 1);
+        font-weight: 400;
+      }
+      &__name {
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        color: rgba(52, 64, 84, 1);
+        font-weight: 500;
+      }
+      &__price {
+        font-family: "Roboto", sans-serif;
+        font-size: 1rem;
+        color: rgba(52, 64, 84, 1);
+        font-weight: 500;
+      }
+    }
+    &--button {
+      &__button {
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        color: rgba(39, 124, 165, 1);
+        background-color: rgba(185, 245, 255, 0.37);
+      }
+    }
+  }
+}

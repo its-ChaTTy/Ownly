@@ -3,13 +3,18 @@ import '@/styles/routes/dashboard.scss'
 import { useEffect, useState } from 'react'
 import { RiHome6Line } from "react-icons/ri";
 import { FaCompass } from "react-icons/fa";
-import { MdInsertChartOutlined } from "react-icons/md";
-
+import { Md1KPlus, MdInsertChartOutlined } from "react-icons/md";
+import Navbar from '@/components/Navbar/Navbar';
+import {
+    Modal, ModalOverlay,
+    ModalContent,
+} from '@chakra-ui/react';
+import ListItem from '@/components/ListItem/ListItem';
 
 export default function listingDashboard() {
 
     const [page, setPage] = useState('profile')
-
+    const [updateModal, showUpdateModal] = useState(false)
     const [user, setUser] = useState({
         name: "name",
         email: "email",
@@ -21,52 +26,61 @@ export default function listingDashboard() {
 
     const items = [
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
         },
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
         },
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
         },
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
         },
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
         },
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
         },
         {
-            name: "name",
-            price: "price",
-            category: "category",
-            imageURL: "/Images/Logos/image-upload.png"
-        }
+            name: "Speaker",
+            price: "20",
+            category: "Electronics",
+            imageURL: "/Images/Store/temp.png"
+        },
     ]
 
 
     return (
         <>
+            <div className="navbar__main">
+                <Navbar />
+            </div>
+            <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size='xxl'>
+                <ModalOverlay />
+                <ModalContent>
+                    <ListItem />
+                </ModalContent>
+            </Modal>
             <div className='Listing'>
                 <div className='Listing__sidebar'>
                     <span
@@ -78,7 +92,7 @@ export default function listingDashboard() {
                         <RiHome6Line style={{
                             "marginRight": "0.7rem"
                         }} />
-                        <p>Profile</p>
+                        <p>My Profile</p>
                     </span>
                     <span onClick={() => {
                         setPage('listings');
@@ -97,6 +111,11 @@ export default function listingDashboard() {
                             "marginRight": "0.7rem"
                         }} />
                         <p>History</p>
+                    </span>
+                    <span onClick={() => {
+                        showUpdateModal(!updateModal)
+                    }} className='Listing__sidebar--item'>
+                        <p className='Listing__sidebar--item__text'>+ Add Item</p>
                     </span>
                 </div>
 

@@ -1,10 +1,11 @@
 /* Navbar.scss */
 
 .Navbar {
-  background-color: transparent;
+  background-color: white;
+  width: 100vw;
   color: black;
   padding: 10px 20px;
-  margin-top: 2vh;
+  // margin-top: 2vh;
 
   &__container {
     display: flex;
