@@ -1,4 +1,14 @@
 import ListItem from '@/components/ListItem/ListItem'
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+} from "@chakra-ui/react"
+import { useState } from 'react';
 
 export async function getServerSideProps(context) {
 
@@ -6,7 +16,7 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         permanent: false,
-        destination: "/login",
+        destination: "/auth/login",
       },
     };
   }
@@ -18,8 +28,23 @@ export async function getServerSideProps(context) {
   }
 }
 function list({ user }) {
+
+  const [isOpen, setIsOpen] = useState(true)
+
   return (
-    <ListItem user={user} />
+    <Modal isOpen={isOpen} onClose={() => { setIsOpen(false) }} size={'xl'}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Modal Title</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <ListItem user={user} />
+        </ModalBody>
+        <ModalFooter>
+          <button>Close</button>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   )
 }
 

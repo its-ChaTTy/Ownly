@@ -56,17 +56,6 @@ function ListItem({ user }) {
 	return (
 		<>
 			<div className="ListItem">
-				<div className="ListItem__top">
-					<Button
-						className="ListItem__top--back"
-						variant="ghost"
-					><FaArrowLeft /></Button>
-					<div className="ListItem__top--content">
-						<p>Back to home</p>
-						<h1>Add New Product</h1>
-					</div>
-				</div>
-
 				<div className="ListItem__description">
 					<h1>Description</h1>
 					<Card

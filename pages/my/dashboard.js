@@ -75,9 +75,9 @@ export default function listingDashboard() {
             <div className="navbar__main">
                 <Navbar />
             </div>
-            <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size='xxl'>
+            <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size={'xxl'}>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent w={'80%'} h={'80%'} >
                     <ListItem />
                 </ModalContent>
             </Modal>
