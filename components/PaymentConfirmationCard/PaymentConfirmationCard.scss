@@ -1,0 +1,37 @@
+.PaymentConfirmationCard {
+    &--h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: '#113447';
+        margin-bottom: 1rem;
+    }
+
+    &--p {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        padding: 0 1.5rem;
+    }
+
+    &--button{
+        height: 5rem;
+        width: 15rem;
+    }
+    &--modalContent{
+        height: 18rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+    @media (max-width: 768px) {
+        &--h1 {
+            font-size: 1.5rem;
+        }
+
+        &--p {
+            font-size: 0.8rem;
+        }
+    }
+
+}
