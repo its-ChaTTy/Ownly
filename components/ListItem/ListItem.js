@@ -9,13 +9,11 @@ import {
 	Textarea,
 	Image,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Images from "next/image";
-import { FaArrowLeft } from "react-icons/fa6";
 import { listItem } from "@/operations/items.fetch";
-import { useRouter } from "next/router";
 
-function ListItem({ user }) {
+function ListItem({ user, setDiscard }) {
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
@@ -23,13 +21,16 @@ function ListItem({ user }) {
 	const [price, setPrice] = useState(0);
 	const [images, setImages] = useState([]);
 
-	const router = useRouter();
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!name || !description || !category || !price || !images) {
 			alert("Please fill all the fields");
+			return;
+		}
+
+		if (isNaN(price)) {
+			alert("Price must be a number");
 			return;
 		}
 
@@ -45,6 +46,7 @@ function ListItem({ user }) {
 		const response = await listItem(product);
 		if (response.status === 200) {
 			alert("Product added successfully");
+			window.location.reload();
 		}
 		else {
 			alert("Error adding product, please try again");
@@ -162,7 +164,7 @@ function ListItem({ user }) {
 								// background="rgba(39, 124, 165, 0.10)"
 								onClick={
 									() => {
-										router.push("/");
+										setDiscard(false);
 									}
 								}>
 								Discard

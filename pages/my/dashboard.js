@@ -80,7 +80,7 @@ export default function listingDashboard() {
             <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size={'xxl'}>
                 <ModalOverlay />
                 <ModalContent w={'80%'} h={'80%'} >
-                    <ListItem />
+                    <ListItem user={user} setDiscard={() => showUpdateModal(!updateModal)} />
                 </ModalContent>
             </Modal>
             {/* <PaymentConfirmationCard isOpen={paymentModal} onClose={() => showPaymentModal(!paymentModal)} /> */}
