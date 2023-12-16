@@ -80,4 +80,48 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: max-content;
+
+    &__description {
+      margin-right: 0;
+      margin-bottom: 20px;
+      height: max-content;
+      
+      padding: 20px;
+      &--card {
+        padding:0 20px;
+      }
+
+    }
+
+    &__images {
+      height: max-content;
+      padding:0 20px;
+
+      &--card {
+        padding:10px 20px;
+        .ListItem__images--card--button {
+          height: 15vh;
+          width: 30vw;
+        }
+      }
+    }
+
+    &__pricing {
+      height: max-content;
+      padding: 0 20px;
+      margin-top: 5vh;
+
+      &--card {
+        padding:0 20px;
+      }
+    }
+
+  }
+
 }

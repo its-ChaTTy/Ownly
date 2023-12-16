@@ -79,7 +79,7 @@ export default function listingDashboard() {
             </div>
             <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size={'xxl'}>
                 <ModalOverlay />
-                <ModalContent w={'80%'} h={'80%'} >
+                <ModalContent w={'90%'} h={'80%'} >
                     <ListItem user={user} setDiscard={() => showUpdateModal(!updateModal)} />
                 </ModalContent>
             </Modal>
