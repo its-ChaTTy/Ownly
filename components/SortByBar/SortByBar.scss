@@ -1,0 +1,33 @@
+.SortByBar {
+    display: flex;
+    border: 1px solid;
+    height: 10vh;
+    padding-top: 2vh;
+    border-color: #E5E5E5;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    font-weight: 600;
+
+    &__new {
+         padding-left: 2vw;
+         align-items: center;
+         margin-bottom: 16px;
+    
+         label {
+            margin-right: 8px;
+         }
+     
+    }
+    &__sort {
+      padding-right: 3vw;
+       align-items: center;
+       justify-content: flex-end;
+       margin-bottom: 16px;
+   
+       label {
+         margin-right: 8px;
+       }
+    }
+   }
