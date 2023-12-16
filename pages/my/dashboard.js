@@ -10,11 +10,13 @@ import {
     ModalContent,
 } from '@chakra-ui/react';
 import ListItem from '@/components/ListItem/ListItem';
+import PaymentConfirmationCard from '@/components/PaymentConfirmationCard/PaymentConfirmationCard';
 
 export default function listingDashboard() {
 
     const [page, setPage] = useState('profile')
     const [updateModal, showUpdateModal] = useState(false)
+    const [paymentModal, showPaymentModal] = useState(true)
     const [user, setUser] = useState({
         name: "name",
         email: "email",
@@ -81,6 +83,7 @@ export default function listingDashboard() {
                     <ListItem />
                 </ModalContent>
             </Modal>
+            {/* <PaymentConfirmationCard isOpen={paymentModal} onClose={() => showPaymentModal(!paymentModal)} /> */}
             <div className='Listing'>
                 <div className='Listing__sidebar'>
                     <span
