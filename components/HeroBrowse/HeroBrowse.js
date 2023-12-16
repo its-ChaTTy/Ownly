@@ -1,6 +1,7 @@
 import "./HeroBrowse.scss";
 import { FaArrowRight } from "react-icons/fa"; // Import arrow icon from React Icons
 import React from "react";
+import Link from "next/link";
 
 function HeroBrowse() {
   const handleListItem = () => {
@@ -28,7 +29,9 @@ function HeroBrowse() {
 					</div>
         <div className="HeroBrowse__left__Button">
           <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.png" />
-          <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.png" />
+          <Link href="/productPage">
+            <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.png" />
+          </Link>
         </div>
       </div>
       <div className="HeroBrowse__right">
