@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import ListItem from '@/components/ListItem/ListItem';
 import PaymentConfirmationCard from '@/components/PaymentConfirmationCard/PaymentConfirmationCard';
+import RentalHistory from '@/components/RentalHistory/RentalHistory';
 
 export default function listingDashboard() {
 
@@ -25,7 +26,58 @@ export default function listingDashboard() {
         imageURL: "/Images/Logos/image-upload.png",
         totalEarned: "totalEarned",
     })
-
+    const history_items = [
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'The Oyster Perpetual GMT-Master II in 18 ct yellow gold with a black dial and a Jubilee bracelet.',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+    ]
     const items = [
         {
             name: "Speaker",
@@ -148,8 +200,12 @@ export default function listingDashboard() {
                     }
                     {
                         page === 'history' ?
-                            <div className='Listing__main--history'>
-                                <h1>History</h1>
+                            <div>
+                                {history_items.map((item, index) => {
+                                    return (<div className='Listing__main--item' key={index}>
+                                        <RentalHistory item={item} />
+                                    </div>)
+                                })}
                             </div>
                             : null
                     }
