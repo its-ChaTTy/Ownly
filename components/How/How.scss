@@ -1,26 +1,31 @@
 .How {
     &__header {
         text-align: center;
+
         &--text1 {
             color: rgba(110, 120, 141, 1);
             font-size: 1.2rem;
             font-family: "Roboto", sans-serif;
         }
+
         &--text2 {
             color: black;
             font-size: 2.7rem;
             font-family: "Roboto", sans-serif;
         }
+
         &--text3 {
             color: rgba(110, 120, 141, 1);
             font-size: 1.2rem;
             font-family: "Roboto", sans-serif;
         }
     }
+
     &__blocks {
         display: flex;
         align-items: center;
         justify-content: center;
+
         img {
             width: 40vw;
             margin: 2rem;

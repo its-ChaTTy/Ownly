@@ -6,6 +6,7 @@
     background-color: rgba(17, 52, 71, 1);
     background-position: center;
     padding: 12rem 1rem 1rem 2rem;
+
     &__button {
         margin-top: 1rem;
         color: black;
@@ -15,11 +16,13 @@
         padding: .5rem 1rem .5rem 1rem;
         margin-bottom: 1rem;
     }
+
     &__text1 {
         color: rgba(255, 255, 255, 0.8);
         font-size: 1.2rem;
         font-family: "Roboto", sans-serif;
     }
+
     &__text2 {
         color: white;
         font-size: 2.5rem;

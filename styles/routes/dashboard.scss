@@ -5,7 +5,7 @@
 .Listing {
   display: grid;
   grid-template-columns: 0.75fr repeat(2, 1fr) 0.7fr repeat(7, 1fr) 0.75fr;
-//   grid-template-rows: repeat(12, 1fr);
+  //   grid-template-rows: repeat(12, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 
@@ -66,7 +66,7 @@
       padding: 0 5px;
 
       background-color: white;
-      
+
       &--item {
         font-size: 0.8rem;
 

@@ -19,6 +19,7 @@ const About = () => {
             'button': 'Start Requesting'
         },
     ];
+    
     return (
         <div className='AboutSection'>
             <div className='AboutSection__header'>

@@ -1,12 +1,13 @@
-.section{
+.section {
     &_navbar {
         position: sticky;
         top: 0;
         z-index: 1;
     }
+
     &_main {
-    display: flex;
-    flex-direction: row;
+        display: flex;
+        flex-direction: row;
 
         &__filter {
             width: 60vw;

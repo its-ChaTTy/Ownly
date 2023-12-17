@@ -1,11 +1,11 @@
 .Product {
-    display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-left: 2rem;
   padding-right: 2rem;
-  
+
   &__Cards {
     padding-left: 2rem;
     padding-right: 2rem;
@@ -21,6 +21,7 @@
         &:hover {
           opacity: 1;
         }
+
         position: absolute;
         width: 15vw;
         height: 15vw;
@@ -42,29 +43,34 @@
           border-radius: 1rem;
           font-size: .8rem;
         }
+
         &--button1 {
-            background-color: white;
-            color: black;
-            border: 1px solid white;
-            font-family: 'Roboto', sans-serif;
-            padding: .3rem 1.5rem .3rem 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 1rem;
-            font-size: .8rem;
-          }
+          background-color: white;
+          color: black;
+          border: 1px solid white;
+          font-family: 'Roboto', sans-serif;
+          padding: .3rem 1.5rem .3rem 1.5rem;
+          margin-bottom: 1rem;
+          border-radius: 1rem;
+          font-size: .8rem;
+        }
       }
+
       &__image {
         img {
           width: 15vw;
           height: 15vw;
         }
       }
+
       &__text {
         margin-top: 0.7rem;
+
         &--name {
           font-weight: 400;
           font-family: "Roboto", sans-serif;
         }
+
         &--price {
           font-weight: 600;
           font-family: "Roboto", sans-serif;

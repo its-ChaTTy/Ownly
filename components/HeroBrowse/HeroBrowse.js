@@ -4,9 +4,11 @@ import React from "react";
 import Link from "next/link";
 
 function HeroBrowse() {
+  
   const handleListItem = () => {
     router.push("/auth/register");
   };
+
   return (
     <div className="HeroBrowse">
       <div className="HeroBrowse__left">
@@ -19,14 +21,14 @@ function HeroBrowse() {
           neighborhood.
         </p>
         <div className="HeroBrowse__left__search">
-						<input
-							type="text"
-							className="search-bar"
-							placeholder="Search for items to rent"
-						/>
-            <p>Or</p>
-            <button className="HeroBrowse__left__search__btn">List an Item</button>
-					</div>
+          <input
+            type="text"
+            className="search-bar"
+            placeholder="Search for items to rent"
+          />
+          <p>Or</p>
+          <button className="HeroBrowse__left__search__btn">List an Item</button>
+        </div>
         <div className="HeroBrowse__left__Button">
           <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.png" />
           <Link href="/productPage">

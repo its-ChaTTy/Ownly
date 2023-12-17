@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import './Store.scss'
 
 const Store = () => {
+    
     const pills = ['ALL', 'ELECTRONICS', 'STATIONARY', 'APPAREL', 'FITNESS', 'FASHION']
     const [selectedPill, setSelectedPill] = useState('ALL')
+
     const items = [
         // item with name, price,imageurl and different category
         {
@@ -43,6 +45,7 @@ const Store = () => {
             'category': 'MUSIC'
         },
     ]
+
     return (
         <div className='Store'>
             <div className='Store__header'>
@@ -76,9 +79,7 @@ const Store = () => {
                                 </div>
                             </div>
                         )
-                    }
-
-                }
+                    }}
                 )}
             </div>
             <div className='Store__button'>

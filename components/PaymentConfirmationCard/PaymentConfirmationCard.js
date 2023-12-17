@@ -6,13 +6,13 @@ import {
 } from '@chakra-ui/react';
 import './PaymentConfirmationCard.scss'
 
-function PaymentConfirmationCard({isOpen, onClose}) {
+function PaymentConfirmationCard({ isOpen, onClose }) {
     return (
         <div className='PaymentConfirmationCard'>
             <Modal isOpen={isOpen} onClose={onClose} size={'md'} isCentered>
                 <ModalOverlay />
                 <ModalContent textAlign={'center'} className='PaymentConfirmationCard--modalContent'>
-                {/* <CloseButton className='PaymentConfirmationCard--closeButton' onClick={() => { }} /> */}
+                    {/* <CloseButton className='PaymentConfirmationCard--closeButton' onClick={() => { }} /> */}
                     <h1 className='PaymentConfirmationCard--h1'>Payment Sucessful</h1>
                     <p className='PaymentConfirmationCard--p'>
                         Please note that as your payment is processed manually, our team will review and confirm your payment shortly. Once verified, you will receive a final confirmation email with your order details and shipping information.

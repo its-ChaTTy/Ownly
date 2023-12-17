@@ -5,26 +5,32 @@
   align-items: center;
   padding-left: 2rem;
   padding-right: 2rem;
+
   &__header {
     text-align: center;
+
     &--text1 {
       color: rgba(110, 120, 141, 1);
       font-size: 1.2rem;
       font-family: "Roboto", sans-serif;
     }
+
     &--text2 {
       color: black;
       font-size: 2.7rem;
       font-family: "Roboto", sans-serif;
     }
+
     &--text3 {
       color: rgba(110, 120, 141, 1);
       font-size: 1.2rem;
       font-family: "Roboto", sans-serif;
     }
   }
+
   &__pills {
     display: flex;
+
     &--pill {
       border-radius: 1rem;
       width: 10vw;
@@ -32,6 +38,7 @@
       margin: 1rem;
       cursor: pointer;
       padding: 0.2rem 0 0.2rem 0;
+
       &__text {
         font-size: 0.9rem;
       }
@@ -53,6 +60,7 @@
         &:hover {
           opacity: 1;
         }
+
         position: absolute;
         width: 15vw;
         height: 15vw;
@@ -74,29 +82,34 @@
           border-radius: 1rem;
           font-size: .8rem;
         }
+
         &--button1 {
-            background-color: white;
-            color: black;
-            border: 1px solid white;
-            font-family: 'Roboto', sans-serif;
-            padding: .3rem 1.5rem .3rem 1.5rem;
-            margin-bottom: 1rem;
-            border-radius: 1rem;
-            font-size: .8rem;
-          }
+          background-color: white;
+          color: black;
+          border: 1px solid white;
+          font-family: 'Roboto', sans-serif;
+          padding: .3rem 1.5rem .3rem 1.5rem;
+          margin-bottom: 1rem;
+          border-radius: 1rem;
+          font-size: .8rem;
+        }
       }
+
       &__image {
         img {
           width: 15vw;
           height: 15vw;
         }
       }
+
       &__text {
         margin-top: 0.7rem;
+
         &--name {
           font-weight: 400;
           font-family: "Roboto", sans-serif;
         }
+
         &--price {
           font-weight: 600;
           font-family: "Roboto", sans-serif;
