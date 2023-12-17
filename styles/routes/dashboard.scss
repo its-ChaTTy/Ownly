@@ -5,7 +5,7 @@
 .Listing {
   display: grid;
   grid-template-columns: 0.75fr repeat(2, 1fr) 0.7fr repeat(7, 1fr) 0.75fr;
-  grid-template-rows: repeat(12, 1fr);
+//   grid-template-rows: repeat(12, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
 
@@ -87,7 +87,7 @@
     justify-content: space-between;
     overflow-y: scroll;
     overflow-x: auto;
-    padding-top: 2vw;
+    padding-top: 6vw;
 
     @media (max-width: 768px) {
       flex-direction: column;
