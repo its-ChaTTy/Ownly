@@ -13,7 +13,29 @@ import ListItem from '@/components/ListItem/ListItem';
 import PaymentConfirmationCard from '@/components/PaymentConfirmationCard/PaymentConfirmationCard';
 import RentalHistory from '@/components/RentalHistory/RentalHistory';
 
-export default function listingDashboard() {
+export async function getServerSideProps(context) {
+
+    if (context.req.session.user === undefined) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/auth/login",
+            },
+        };
+    }
+
+    const user = context.req.session.user;
+    
+    // fetch user profile
+    // fetch user history
+    // fetch user listings
+
+    return {
+        props: { user: user },
+    }
+}
+
+export default function listingDashboard({ usr }) {
 
     const [page, setPage] = useState('profile')
     const [updateModal, showUpdateModal] = useState(false)
@@ -26,6 +48,7 @@ export default function listingDashboard() {
         imageURL: "/Images/Logos/image-upload.png",
         totalEarned: "totalEarned",
     })
+
     const history_items = [
         {
             'id': 'abcdefg',
@@ -78,6 +101,7 @@ export default function listingDashboard() {
             'item_image': '/Images/Store/temp.png'
         },
     ]
+
     const items = [
         {
             name: "Speaker",

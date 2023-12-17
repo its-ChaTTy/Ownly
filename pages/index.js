@@ -3,10 +3,10 @@ import Navbar from "@/components/Navbar/Navbar";
 import HeroBrowse from "@/components/HeroBrowse/HeroBrowse";
 import About from "@/components/About/About";
 import Store from "@/components/Store/Store";
-import '../styles/routes/index.scss'
 import How from "@/components/How/How";
 import Earning from "@/components/Earning/Earning";
 import How_it_works from "@/components/How_it_works/How_it_works";
+import '@/styles/routes/index.scss'
 
 export default function Home() {
   return (

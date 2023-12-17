@@ -1,10 +1,10 @@
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/Navbar/Navbar";
-import '@/styles/routes/productPage.scss'
 import SortbyBar from "@/components/SortByBar/SortByBar";
 import ProductPageFilter from "@/components/ProductPageFilter/ProductPageFilter";
 import ProductPageCards from "@/components/ProductPageCards/ProductPageCards";
 import { useState, useEffect } from "react";
+import '@/styles/routes/productPage.scss'
 
 export default function ProductPage() {
 

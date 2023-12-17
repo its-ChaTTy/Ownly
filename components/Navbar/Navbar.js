@@ -1,5 +1,3 @@
-// Navbar.jsx
-
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -17,6 +15,10 @@ function Navbar() {
 	const handleSignup = () => {
 		router.push("/auth/register");
 	};
+
+	const handleUser = () => {
+		router.push("/my/dashboard");
+	}
 
 	return (
 		<div className="Navbar">
@@ -46,7 +48,7 @@ function Navbar() {
 							placeholder="Search for items to rent"
 						/>
 					</div>
-					<div>
+					<div onClick={handleUser} >
 						<Image style={{cursor: "pointer"}} src={'/Images/Assets/profile.png'} width={43} height={43} />
 					</div>
 					<div>
