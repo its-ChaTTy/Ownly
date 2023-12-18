@@ -1,10 +1,9 @@
-// Navbar.jsx
-
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.scss";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Navbar() {
 	const router = useRouter();
@@ -17,6 +16,10 @@ function Navbar() {
 	const handleSignup = () => {
 		router.push("/auth/register");
 	};
+
+	const handleUser = () => {
+		router.push("/my/dashboard");
+	}
 
 	return (
 		<div className="Navbar">
@@ -46,9 +49,13 @@ function Navbar() {
 							placeholder="Search for items to rent"
 						/>
 					</div>
-					<div>
-						<Image style={{cursor: "pointer"}} src={'/Images/Assets/profile.png'} width={43} height={43} />
+					
+					<div onClick={handleUser} >
+						<Link href="/profile">
+							<Image style={{cursor: "pointer"}} src={'/Images/Assets/profile.png'} width={43} height={43} />
+						</Link>
 					</div>
+					
 					<div>
 						<Image style={{cursor: "pointer"}} src={'/Images/Assets/cart.png'} width={43} height={43} />
 

@@ -4,27 +4,10 @@
   grid-template-rows: 0.75fr repeat(10, 1fr) 0.75fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  height: 90vh;
-
-  &__top {
-    grid-area: 2 / 2 / 4 / 12;
-    display: flex;
-    flex-direction: row;
-
-    p {
-      font-size: 0.8rem;
-      color: gray;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-      color: black;
-      font-weight: 600;
-    }
-  }
+  height: 73vh;
 
   &__description {
-    grid-area: 4 / 2 / 12 / 7;
+    grid-area: 2 / 2 / 12 / 7;
     margin-right: 20px;
 
     h1 {
@@ -39,23 +22,17 @@
     }
 
     &--card {
-      // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-      // border-radius: 10px;
       padding: 20px;
-      // border-style: solid 20px #000000;
     }
   }
 
   &__images {
-    grid-area: 4 / 7 / 8 / 12;
+    grid-area: 2 / 7 / 7 / 12;
     height: 30vh;
 
     &--card {
-      // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-      // border-radius: 10px;
       padding: 20px;
 
-      // border-style: solid 20px #000000;
       .ListItem__images--card--button {
         height: 25vh;
         width: 12vw;
@@ -67,13 +44,6 @@
       color: black;
       font-weight: 600;
     }
-
-    // .upload-image{
-    //     width: 5vw;
-    //     display: flex;
-    //     flex-direction: column;
-    //     justify-content: center;
-    // }
   }
 
   &__pricing {
@@ -86,14 +56,11 @@
       font-weight: 600;
     }
 
-    grid-area: 8 / 7 / 12 / 12;
+    grid-area: 7 / 7 / 12 / 12;
 
     &--card {
-      // box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.5);
-      // border-radius: 10px;
       padding: 20px;
 
-      // border-style: solid 20px #000000;
       &--buttons {
         margin-top: 1.5vh;
         display: flex;
@@ -113,4 +80,48 @@
       }
     }
   }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: max-content;
+
+    &__description {
+      margin-right: 0;
+      margin-bottom: 20px;
+      height: max-content;
+      
+      padding: 20px;
+      &--card {
+        padding:0 20px;
+      }
+
+    }
+
+    &__images {
+      height: max-content;
+      padding:0 20px;
+
+      &--card {
+        padding:10px 20px;
+        .ListItem__images--card--button {
+          height: 15vh;
+          width: 30vw;
+        }
+      }
+    }
+
+    &__pricing {
+      height: max-content;
+      padding: 0 20px;
+      margin-top: 5vh;
+
+      &--card {
+        padding:0 20px;
+      }
+    }
+
+  }
+
 }

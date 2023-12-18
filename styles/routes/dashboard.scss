@@ -1,14 +1,21 @@
 .navbar__main {
   position: fixed;
 }
+
 .Listing {
   display: grid;
   grid-template-columns: 0.75fr repeat(2, 1fr) 0.7fr repeat(7, 1fr) 0.75fr;
-  grid-template-rows: repeat(12, 1fr);
+  //   grid-template-rows: repeat(12, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &__sidebar {
-    // grid-area: 2 / 2 / 6 / 4;
     position: fixed;
     top: 100px;
     left: 100px;
@@ -34,6 +41,7 @@
       cursor: pointer;
       flex-direction: row;
       justify-content: space-between;
+
       &__text {
         padding-left: 3rem;
         padding-right: 3rem;
@@ -44,6 +52,31 @@
         background-color: rgba(185, 245, 255, 0.37);
       }
     }
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 95%;
+      height: 50px;
+      top: 70px;
+      left: 10px;
+      opacity: 1;
+      z-index: 10;
+      padding: 0 5px;
+
+      background-color: white;
+
+      &--item {
+        font-size: 0.8rem;
+
+        &__text {
+          padding: 0.5rem 0.5rem;
+        }
+
+      }
+    }
+
   }
 
   &__main {
@@ -54,9 +87,20 @@
     justify-content: space-between;
     overflow-y: scroll;
     overflow-x: auto;
-    padding-top: 2vw;
+    padding-top: 6vw;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      overflow-x: auto;
+      overflow-y: auto;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: nowrap;
+      padding-top: 20vh;
+    }
+
     &--item {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
   }
 }

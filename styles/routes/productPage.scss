@@ -1,0 +1,20 @@
+.section {
+    &_navbar {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    &_main {
+        display: flex;
+        flex-direction: row;
+
+        &__filter {
+            width: 60vw;
+            position: sticky;
+            top: 60px;
+            // z-index: 1;
+        }
+
+    }
+}

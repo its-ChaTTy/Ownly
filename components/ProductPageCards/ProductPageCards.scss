@@ -1,4 +1,4 @@
-.Store {
+.Product {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -6,46 +6,7 @@
   padding-left: 2rem;
   padding-right: 2rem;
 
-  &__header {
-    text-align: center;
-
-    &--text1 {
-      color: rgba(110, 120, 141, 1);
-      font-size: 1.2rem;
-      font-family: "Roboto", sans-serif;
-    }
-
-    &--text2 {
-      color: black;
-      font-size: 2.7rem;
-      font-family: "Roboto", sans-serif;
-    }
-
-    &--text3 {
-      color: rgba(110, 120, 141, 1);
-      font-size: 1.2rem;
-      font-family: "Roboto", sans-serif;
-    }
-  }
-
-  &__pills {
-    display: flex;
-
-    &--pill {
-      border-radius: 1rem;
-      width: 10vw;
-      text-align: center;
-      margin: 1rem;
-      cursor: pointer;
-      padding: 0.2rem 0 0.2rem 0;
-
-      &__text {
-        font-size: 0.9rem;
-      }
-    }
-  }
-
-  &__items {
+  &__Cards {
     padding-left: 2rem;
     padding-right: 2rem;
     display: flex;
@@ -116,17 +77,5 @@
         }
       }
     }
-  }
-
-  &__button {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    background-color: rgba(17, 52, 71, 0.08);
-    padding: 0.7rem 1.2rem 0.7rem 1.2rem;
-    border-radius: 1.5rem;
-    font-family: "Roboto", sans-serif;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
   }
 }

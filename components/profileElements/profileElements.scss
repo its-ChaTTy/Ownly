@@ -1,0 +1,118 @@
+.profileElements {
+    background-color: #f9fafb;
+    margin-left: 4vw;
+    width: 69vw;
+    height: auto;
+    margin-top: 3vh;
+    padding-bottom: 4vh;
+    border: 1px solid;
+    border-radius: 20px;
+    border-color: #0000001a;
+    box-shadow: inset;
+
+    &__profilePicture {
+        margin-left: 2vw;
+        margin-top: 2vh;
+        &--text{
+            color: #636363;
+            font-weight: 500;
+        }
+        &--workspaceAdmin{
+            display: flex;
+            margin-top: 2vh;
+
+            &--textWrapper{
+                margin-left: 1vw;
+                &--text1{
+                    font-weight: bold;
+                }
+                &--text2{
+                    font-size: 15px;
+                }  
+            }
+        }
+        &--upload {
+            background-color: #277ca51a;
+            display: flex;
+            border: 0.88px dashed;
+            border-color: #277ca5;
+            width: 9vw;
+            height: 4.5vh;
+            margin-top: 3vh;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            &--icon {
+                color: #277ca5;
+            }
+            &--txt {
+                margin-left: 0.6vw;
+                font-family: "SF UI Display-Medium", Helvetica;
+                color: #277ca5;
+                font-size: 12px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    &__details {
+        margin-left: 2vw;
+        margin-top: 3vh;
+        &--container {
+            display: inline-flex;
+            flex-direction: column;
+            margin-top: 2vh;
+            &--text {
+                color: #636363;
+                font-family: "SF UI Display-Medium", Helvetica;
+                font-weight: bold;
+                font-size: 16px;
+            }
+            &--field {
+                margin-top: 1vh;
+                border: 2px solid;
+                border-color: #0000001a;
+                border-radius: 5px;
+                height: 5vh;
+                width: 64vw;
+            }
+        }
+    }
+
+    &__line {
+        border-color: #636363;
+        border-bottom: 0.5px solid;
+        width: 64vw;
+        margin-left: 2vw;
+        margin-top: 4vh;
+    }
+
+    &__button {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 3vh;
+        
+        &--cancel {
+            align-self: center;
+            font-size: 15px;
+            font-weight: bold;
+        }
+        &--saveWrapper {
+            margin-left: 1vw;
+            margin-right: 2.5vw;
+            background-color: #113447;
+            border-radius: 7.26px;
+            width: 9vw;
+            height: 5.5vh;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            &--save {
+                color: white;
+                font-size: 15px;
+                font-weight: bold;
+            }
+        }
+    }
+    
+}

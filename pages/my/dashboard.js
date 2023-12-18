@@ -10,11 +10,36 @@ import {
     ModalContent,
 } from '@chakra-ui/react';
 import ListItem from '@/components/ListItem/ListItem';
+import PaymentConfirmationCard from '@/components/PaymentConfirmationCard/PaymentConfirmationCard';
+import RentalHistory from '@/components/RentalHistory/RentalHistory';
 
-export default function listingDashboard() {
+export async function getServerSideProps(context) {
+
+    if (context.req.session.user === undefined) {
+        return {
+            redirect: {
+                permanent: false,
+                destination: "/auth/login",
+            },
+        };
+    }
+
+    const user = context.req.session.user;
+    
+    // fetch user profile
+    // fetch user history
+    // fetch user listings
+
+    return {
+        props: { user: user },
+    }
+}
+
+export default function listingDashboard({ usr }) {
 
     const [page, setPage] = useState('profile')
     const [updateModal, showUpdateModal] = useState(false)
+    const [paymentModal, showPaymentModal] = useState(true)
     const [user, setUser] = useState({
         name: "name",
         email: "email",
@@ -23,6 +48,59 @@ export default function listingDashboard() {
         imageURL: "/Images/Logos/image-upload.png",
         totalEarned: "totalEarned",
     })
+
+    const history_items = [
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'The Oyster Perpetual GMT-Master II in 18 ct yellow gold with a black dial and a Jubilee bracelet.',
+            'item_image': '/Images/Store/temp.png'
+        },
+        {
+            'id': 'abcdefg',
+            'order_placed': '2nd June, 23',
+            'total': '600',
+            'duration': '2',
+            'delivered_date': '5th June, 23',
+            'item_name': 'Speaker',
+            'item_desc': 'Sound wonderful, just looking like a wow',
+            'item_image': '/Images/Store/temp.png'
+        },
+    ]
 
     const items = [
         {
@@ -75,12 +153,13 @@ export default function listingDashboard() {
             <div className="navbar__main">
                 <Navbar />
             </div>
-            <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size='xxl'>
+            <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size={'xxl'}>
                 <ModalOverlay />
-                <ModalContent>
-                    <ListItem />
+                <ModalContent w={'90%'} h={'80%'} >
+                    <ListItem user={user} setDiscard={() => showUpdateModal(!updateModal)} />
                 </ModalContent>
             </Modal>
+            {/* <PaymentConfirmationCard isOpen={paymentModal} onClose={() => showPaymentModal(!paymentModal)} /> */}
             <div className='Listing'>
                 <div className='Listing__sidebar'>
                     <span
@@ -145,8 +224,12 @@ export default function listingDashboard() {
                     }
                     {
                         page === 'history' ?
-                            <div className='Listing__main--history'>
-                                <h1>History</h1>
+                            <div>
+                                {history_items.map((item, index) => {
+                                    return (<div className='Listing__main--item' key={index}>
+                                        <RentalHistory item={item} />
+                                    </div>)
+                                })}
                             </div>
                             : null
                     }

@@ -18,7 +18,7 @@ function ItemCard({ item }) {
         <>
             <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size='xxl'>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent w={'90%'} h={'80%'}>
                     <ListItem />
                 </ModalContent>
             </Modal>
