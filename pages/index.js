@@ -6,23 +6,23 @@ import Store from "@/components/Store/Store";
 import How from "@/components/How/How";
 import Earning from "@/components/Earning/Earning";
 import How_it_works from "@/components/How_it_works/How_it_works";
-import '@/styles/routes/index.scss'
+import "@/styles/routes/index.scss";
 import { fetchAvailableItems } from "@/services/items.service";
-
+import Cart from "@/components/Cart/Cart";
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
   return {
-    props: { allItems: allItems, },
+    props: { allItems: allItems },
   };
 }
 
-export default function Home({allItems}) {
+export default function Home({ allItems }) {
   return (
     <>
       <div className="section_navbar">
         <Navbar />
       </div>
-
+      {/* <Cart /> */}
       <div className="section">
         <About />
       </div>
