@@ -1,50 +1,12 @@
 import React, { useState } from 'react'
 import './Store.scss'
+import Slideshow from '../SlideShow/SlideShow'
 
-const Store = () => {
+const Store = ({allItems}) => {
     
     const pills = ['ALL', 'ELECTRONICS', 'STATIONARY', 'APPAREL', 'FITNESS', 'FASHION']
     const [selectedPill, setSelectedPill] = useState('ALL')
 
-    const items = [
-        // item with name, price,imageurl and different category
-        {
-            'name': 'Item 1',
-            'price': '10/day',
-            'imageurl': '/Images/Store/temp.png',
-            'category': 'ELECTRONICS'
-        },
-        {
-            'name': 'Item 3',
-            'price': '30/day',
-            'imageurl': '/Images/Store/temp.png',
-            'category': 'STATIONARY'
-        },
-        {
-            'name': 'Item 4',
-            'price': '40/day',
-            'imageurl': '/Images/Store/temp.png',
-            'category': 'APPAREL'
-        },
-        {
-            'name': 'Item 5',
-            'price': '50/day',
-            'imageurl': '/Images/Store/temp.png',
-            'category': 'FITNESS'
-        },
-        {
-            'name': 'Item 6',
-            'price': '60/day',
-            'imageurl': '/Images/Store/temp.png',
-            'category': 'FASHION'
-        },
-        {
-            'name': 'Item 7',
-            'price': '70/day',
-            'imageurl': '/Images/Store/temp.png',
-            'category': 'MUSIC'
-        },
-    ]
 
     return (
         <div className='Store'>
@@ -61,7 +23,7 @@ const Store = () => {
                 ))}
             </div>
             <div className='Store__items'>
-                {items.map((item, index) => {
+                {allItems.map((item, index) => {
                     if (item.category === selectedPill || selectedPill === 'ALL') {
                         return (
                             // Add a on hover view which displays 2 buttons over the card
@@ -71,7 +33,8 @@ const Store = () => {
                                     <button className='Store__items--item__overlay--button2'>Add to Cart</button>
                                 </div>
                                 <div className='Store__items--item__image'>
-                                    <img src={item.imageurl} alt='item' />
+                                    {/* <img src={item.imageURL[0]} alt='item' /> */}
+                                    <Slideshow imageURL={item.imageURL} />
                                 </div>
                                 <div className='Store__items--item__text'>
                                     <p className='Store__items--item__text--name'>{item.name}</p>

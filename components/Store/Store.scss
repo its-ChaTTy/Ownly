@@ -57,6 +57,7 @@
       cursor: pointer;
 
       &__overlay {
+        z-index: 10;
         &:hover {
           opacity: 1;
         }
@@ -65,7 +66,7 @@
         width: 15vw;
         height: 15vw;
         background-color: rgba(0, 0, 0, 0.5);
-        border-radius: 1rem;
+        // border-radius: 1rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
