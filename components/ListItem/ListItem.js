@@ -18,29 +18,45 @@ const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
 function ListItem({ user, setDiscard }) {
+
 	const supabase = createClient(supabaseUrl, supabaseKey)
 	const [imageUrls, setImageUrls] = useState([])
+
 	async function uploadFile(file, file_path) {
 		const { data, error } = await supabase.storage.from('ownly-images').upload(file_path, file)
 		const res = supabase.storage.from('ownly-images').getPublicUrl(file_path);
 		if (error) {
 			console.log(error)
 		} else {
-			console.log(res['data'].publicUrl)
 			setImageUrls([...imageUrls, res['data'].publicUrl])
 		}
 	}
+
+	const uploadImages = async (file) => {
+		const file_path = generate();
+		if (file.size > 1024 * 3) {
+			alert('File is larger than 3MB');
+			return;
+		}
+		await uploadFile(file, file_path);
+	}
+
+	const removeImage = (index) => {
+		const imageUrlsCopy = [...imageUrls];
+		imageUrlsCopy.splice(index, 1);
+		setImageUrls(imageUrlsCopy);
+	}
+
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [category, setCategory] = useState("");
 	const [price, setPrice] = useState(0);
-	const [images, setImages] = useState([]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-				
+
 		if (!name || !description || !category || !price || !images) {
 			alert("Please fill all the fields");
 			return;
@@ -51,18 +67,12 @@ function ListItem({ user, setDiscard }) {
 			return;
 		}
 
-		images.map(async (item) => {
-			const file_path = generate();
-			await uploadFile(item, file_path);
-		})
-
-		// we should try running the lines below after the images have been uploaded so that imageUrls has been set
 		const product = {
 			name,
 			description,
 			category,
 			price: parseInt(price),
-			"images": imageUrls,
+			imageURL: imageUrls,
 			userId: user.id,
 		};
 
@@ -76,7 +86,6 @@ function ListItem({ user, setDiscard }) {
 		}
 
 	}
-
 
 	return (
 		<>
@@ -125,8 +134,13 @@ function ListItem({ user, setDiscard }) {
 							border: "1.5px solid #E2E8F0",
 							height: "100%",
 						}}
+						direction={{ base: 'column', sm: 'row' }}
+						alignItems={"center"}
+						justifyContent={"space-between"}
+						overflow='hidden'
+						variant='outline'
 					>
-						<FormControl id="images">
+						<FormControl id="images" width={"15vw"}>
 							<label htmlFor="upload" style={{ width: "100%" }}>
 								<Button
 									className="ListItem__images--card--button"
@@ -158,14 +172,29 @@ function ListItem({ user, setDiscard }) {
 									display="none"
 									accept="image/*"
 									onChange={(e) => {
-										// Handle file upload logic here
-										// need to add the uploaded file in the array of images
-										setImages([...images, e.target.files[0]])
-										console.log(images)
+										if (imageUrls.length <= 2)
+											uploadImages(e.target.files[0])
+										else alert("You can only upload 3 images")
 									}}
 								/>
 							</label>
 						</FormControl>
+						{
+							imageUrls.length > 0 && imageUrls.map((item, index) => {
+								return (
+									<div className="ListItem__images--card--image" key={index}>
+										<p onClick={() => removeImage(index)}
+											className="ListItem__images--card--image--cross"> &nbsp;X&nbsp; </p>
+										<Image
+											boxSize="130px"
+											objectFit="cover"
+											src={item}
+											alt="Uploading Image"
+										/>
+									</div>
+								)
+							})
+						}
 					</Card>
 				</div>
 
