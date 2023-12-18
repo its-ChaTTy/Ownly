@@ -9,11 +9,27 @@ import {
 	Textarea,
 	Image,
 } from "@chakra-ui/react";
+import { generate, count } from "random-words";
 import { useEffect, useState } from "react";
 import Images from "next/image";
 import { listItem } from "@/operations/items.fetch";
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
 function ListItem({ user, setDiscard }) {
+	const supabase = createClient(supabaseUrl, supabaseKey)
+	const [imageUrls, setImageUrls] = useState([])
+	async function uploadFile(file, file_path) {
+		const { data, error } = await supabase.storage.from('ownly-images').upload(file_path, file)
+		const res = supabase.storage.from('ownly-images').getPublicUrl(file_path);
+		if (error) {
+			console.log(error)
+		} else {
+			console.log(res['data'].publicUrl)
+			setImageUrls([...imageUrls, res['data'].publicUrl])
+		}
+	}
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
@@ -24,6 +40,7 @@ function ListItem({ user, setDiscard }) {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+				
 		if (!name || !description || !category || !price || !images) {
 			alert("Please fill all the fields");
 			return;
@@ -34,12 +51,18 @@ function ListItem({ user, setDiscard }) {
 			return;
 		}
 
+		images.map(async (item) => {
+			const file_path = generate();
+			await uploadFile(item, file_path);
+		})
+
+		// we should try running the lines below after the images have been uploaded so that imageUrls has been set
 		const product = {
 			name,
 			description,
 			category,
 			price: parseInt(price),
-			images,
+			"images": imageUrls,
 			userId: user.id,
 		};
 
@@ -136,6 +159,9 @@ function ListItem({ user, setDiscard }) {
 									accept="image/*"
 									onChange={(e) => {
 										// Handle file upload logic here
+										// need to add the uploaded file in the array of images
+										setImages([...images, e.target.files[0]])
+										console.log(images)
 									}}
 								/>
 							</label>
