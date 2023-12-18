@@ -41,7 +41,7 @@ function ProfileElements() {
             <div className="profileElements__button">
                 <div className="profileElements__button--cancel">Cancel</div>
                 <div className='profileElements__button--saveWrapper'>
-                <div className="profileElements__button--saveWrapper--save">Save Changes</div>
+                    <div className="profileElements__button--saveWrapper--save">Save Changes</div>
                 </div>
             </div>
         </div>
