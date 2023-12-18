@@ -31,7 +31,7 @@ export async function getServerSideProps(context) {
     // fetch user listings
 
     return {
-        props: { user: user },
+        props: { usr: user },
     }
 }
 
@@ -156,7 +156,7 @@ export default function listingDashboard({ usr }) {
             <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size={'xxl'}>
                 <ModalOverlay />
                 <ModalContent w={'90%'} h={'80%'} >
-                    <ListItem user={user} setDiscard={() => showUpdateModal(!updateModal)} />
+                    <ListItem user={usr} setDiscard={() => showUpdateModal(!updateModal)} />
                 </ModalContent>
             </Modal>
             {/* <PaymentConfirmationCard isOpen={paymentModal} onClose={() => showPaymentModal(!paymentModal)} /> */}

@@ -1,0 +1,26 @@
+.navList {
+    background-color: #f9fafb;
+    margin-left: 5vw;
+    width: 17vw;
+    height: 22vh;
+    margin-top: 3vh;
+    border: 1px solid;
+    border-radius: 20px;
+    border-color: #0000001a;
+    box-shadow: inset;
+    
+    &__elements {
+        display: flex;
+        margin-left: 25px;
+        padding-top: 3vh;
+
+        &--icon {
+            margin-top: 4px;
+        }
+
+        p {
+            margin-left: 10px;
+            font-weight: 500;
+        }
+    }
+}
