@@ -6,9 +6,17 @@ import Store from "@/components/Store/Store";
 import How from "@/components/How/How";
 import Earning from "@/components/Earning/Earning";
 import How_it_works from "@/components/How_it_works/How_it_works";
-import "@/styles/routes/index.scss";
+import '@/styles/routes/index.scss'
+import { fetchAvailableItems } from "@/services/items.service";
 
-export default function Home() {
+export async function getServerSideProps(context) {
+  let allItems = await fetchAvailableItems();
+  return {
+    props: { allItems: allItems, },
+  };
+}
+
+export default function Home({allItems}) {
   return (
     <>
       <div className="section_navbar">
@@ -19,7 +27,7 @@ export default function Home() {
         <About />
       </div>
       <div className="section">
-        <Store />
+        <Store allItems={allItems} />
       </div>
       <div className="section">
         <How />
