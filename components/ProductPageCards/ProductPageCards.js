@@ -1,5 +1,6 @@
 import React from "react";
 import './ProductPageCards.scss';
+import Slideshow from "../SlideShow/Slideshow";
 
 function ProductPageCards({ items }) {
     
@@ -14,7 +15,7 @@ function ProductPageCards({ items }) {
                             <button className='Product__Cards--item__overlay--button2'>Add to Cart</button>
                         </div>
                         <div className='Product__Cards--item__image'>
-                            <img src={item.imageurl} alt='item' />
+                            <Slideshow imageURL={item.imageURL} />
                         </div>
                         <div className='Product__Cards--item__text'>
                             <p className='Product__Cards--item__text--name'>{item.name}</p>

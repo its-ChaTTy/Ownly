@@ -2,9 +2,12 @@ import "./HeroBrowse.scss";
 import { FaArrowRight } from "react-icons/fa"; // Import arrow icon from React Icons
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import useAuth from "@/hooks/useAuth";
 
-function HeroBrowse() {
-  
+function HeroBrowse({ user }) {
+  const router = useRouter();
+  const {addModal , setAddModal} = useAuth()
   const handleListItem = () => {
     router.push("/auth/register");
   };
@@ -27,7 +30,13 @@ function HeroBrowse() {
             placeholder="Search for items to rent"
           />
           <p>Or</p>
-          <button className="HeroBrowse__left__search__btn">List an Item</button>
+          <button onClick={() => {
+            if(user === null) {
+              router.push('/auth/login')
+            } else {
+              setAddModal(!addModal)
+            }
+          }} className="HeroBrowse__left__search__btn">List an Item</button>
         </div>
         <div className="HeroBrowse__left__Button">
           <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.png" />

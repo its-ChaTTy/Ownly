@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import './Store.scss'
 import Slideshow from '../SlideShow/Slideshow'
+import { useRouter } from 'next/router'
 
-const Store = ({allItems}) => {
-    
+const Store = ({ allItems, user }) => {
+    const router = useRouter();
     const pills = ['ALL', 'ELECTRONICS', 'STATIONARY', 'APPAREL', 'FITNESS', 'FASHION']
     const [selectedPill, setSelectedPill] = useState('ALL')
 
+    const first10Items = allItems.slice(0, 10);
 
     return (
         <div className='Store'>
@@ -23,7 +25,7 @@ const Store = ({allItems}) => {
                 ))}
             </div>
             <div className='Store__items'>
-                {allItems.map((item, index) => {
+                {first10Items.map((item, index) => {
                     if (item.category === selectedPill || selectedPill === 'ALL') {
                         return (
                             // Add a on hover view which displays 2 buttons over the card
@@ -42,11 +44,18 @@ const Store = ({allItems}) => {
                                 </div>
                             </div>
                         )
-                    }}
+                    }
+                }
                 )}
             </div>
             <div className='Store__button'>
-                <button>Load More</button>
+                <button onClick={() => {
+                    if (user === null) {
+                        router.push('/login')
+                    } else {
+                        router.push('/productPage')
+                    }
+                }}>Load More</button>
             </div>
         </div>
     )

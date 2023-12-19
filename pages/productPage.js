@@ -4,120 +4,35 @@ import SortbyBar from "@/components/SortByBar/SortByBar";
 import ProductPageFilter from "@/components/ProductPageFilter/ProductPageFilter";
 import ProductPageCards from "@/components/ProductPageCards/ProductPageCards";
 import { useState, useEffect } from "react";
+import { fetchAvailableItems } from "@/services/items.service";
 import '@/styles/routes/productPage.scss'
 
-export default function ProductPage() {
+export async function getServerSideProps(context) {
+  let allItems = await fetchAvailableItems();
+  const user = context.req.session.user;
+  var userProp;
+  if (user === undefined) {
+    userProp = null;
+  } else {
+    userProp = user;
+  }
+  return {
+    props: { allItems: allItems, user: userProp },
+  };
+}
 
-  const items = [
-    {
-      'name': 'Item 1',
-      'price': 10,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'ELECTRONICS'
-    },
-    {
-      'name': 'Item 3',
-      'price': 30,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'STATIONARY'
-    },
-    {
-      'name': 'Item 4',
-      'price': 40,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'APPAREL'
-    },
-    {
-      'name': 'Item 5',
-      'price': 50,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'FITNESS'
-    },
-    {
-      'name': 'Item 6',
-      'price': 60,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'FASHION'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-    {
-      'name': 'Item 7',
-      'price': 70,
-      'imageurl': '/Images/Store/temp.png',
-      'category': 'MUSIC'
-    },
-  ]
-
+export default function ProductPage({ allItems, user }) {
 
   const [sortOrder, setSortOrder] = useState(0);
-  const [itemsArray, setItems] = useState(items);
+  const [itemsArray, setItems] = useState(allItems);
 
   const sortProducts = (sortOrder) => {
     if (sortOrder === 1) {
-      items.sort((a, b) => {
+      allItems.sort((a, b) => {
         return a.price - b.price;
       })
     } else {
-      items.sort((a, b) => {
+      allItems.sort((a, b) => {
         return b.price - a.price;
       })
     }
@@ -125,7 +40,7 @@ export default function ProductPage() {
 
   useEffect(() => {
     sortProducts(sortOrder);
-    setItems(items);
+    setItems(allItems);
   }, [sortOrder])
 
 
