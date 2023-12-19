@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './Store.scss'
-import Slideshow from '../SlideShow/SlideShow'
+import Slideshow from '../SlideShow/Slideshow'
 
 const Store = ({allItems}) => {
     

@@ -13,24 +13,29 @@
     &__profilePicture {
         margin-left: 2vw;
         margin-top: 2vh;
-        &--text{
+
+        &--text {
             color: #636363;
             font-weight: 500;
         }
-        &--workspaceAdmin{
+
+        &--workspaceAdmin {
             display: flex;
             margin-top: 2vh;
 
-            &--textWrapper{
+            &--textWrapper {
                 margin-left: 1vw;
-                &--text1{
+
+                &--text1 {
                     font-weight: bold;
                 }
-                &--text2{
+
+                &--text2 {
                     font-size: 15px;
-                }  
+                }
             }
         }
+
         &--upload {
             background-color: #277ca51a;
             display: flex;
@@ -42,9 +47,11 @@
             align-items: center;
             justify-content: center;
             border-radius: 11px;
+
             &--icon {
                 color: #277ca5;
             }
+
             &--txt {
                 margin-left: 0.6vw;
                 font-family: "SF UI Display-Medium", Helvetica;
@@ -58,16 +65,19 @@
     &__details {
         margin-left: 2vw;
         margin-top: 3vh;
+
         &--container {
             display: inline-flex;
             flex-direction: column;
             margin-top: 2vh;
+
             &--text {
                 color: #636363;
                 font-family: "SF UI Display-Medium", Helvetica;
                 font-weight: bold;
                 font-size: 16px;
             }
+
             &--field {
                 margin-top: 1vh;
                 border: 2px solid;
@@ -91,12 +101,13 @@
         display: flex;
         justify-content: flex-end;
         margin-top: 3vh;
-        
+
         &--cancel {
             align-self: center;
             font-size: 15px;
             font-weight: bold;
         }
+
         &--saveWrapper {
             margin-left: 1vw;
             margin-right: 2.5vw;
@@ -107,6 +118,7 @@
             align-items: center;
             display: flex;
             justify-content: center;
+
             &--save {
                 color: white;
                 font-size: 15px;
@@ -114,5 +126,5 @@
             }
         }
     }
-    
+
 }

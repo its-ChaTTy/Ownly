@@ -9,22 +9,67 @@ import {
 	Textarea,
 	Image,
 } from "@chakra-ui/react";
+import { generate, count } from "random-words";
 import { useEffect, useState } from "react";
 import Images from "next/image";
 import { listItem } from "@/operations/items.fetch";
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
 function ListItem({ user, setDiscard }) {
+
+	const supabase = createClient(supabaseUrl, supabaseKey)
+	const [imageUrls, setImageUrls] = useState([])
+
+	async function uploadFile(file, file_path) {
+		const { data, error } = await supabase.storage.from('ownly-images').upload(file_path, file)
+		const res = supabase.storage.from('ownly-images').getPublicUrl(file_path);
+		if (error) {
+			console.log(error)
+		} else {
+			setImageUrls([...imageUrls, res['data'].publicUrl])
+		}
+	}
+
+	const uploadImages = async (file) => {
+		const file_path = generate();
+		if (file.size > 1024 * 1024 * 3) {
+			console.log(file.size)
+			alert('File is larger than 3MB');
+			return;
+		}
+		await uploadFile(file, file_path);
+	}
+
+	const removeImage = async (index) => {
+		const imageUrlsCopy = [...imageUrls];
+		const imageUrl = imageUrlsCopy[index];
+		const match = imageUrl.match(/\/([^\/]+)$/);
+		console.log(match[1])
+
+		// dont know why this is not deleting
+		const {data, error} = await supabase.storage.from('ownly-images').remove([`${match[1]}.png`])
+		if (error) {
+			console.log(error)
+		} else {
+			console.log("Image removed successfully");
+		}
+		imageUrlsCopy.splice(index, 1);
+		setImageUrls(imageUrlsCopy);
+	}
+
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [category, setCategory] = useState("");
 	const [price, setPrice] = useState(0);
-	const [images, setImages] = useState([]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (!name || !description || !category || !price || !images) {
+
+		if (!name || !description || !category || !price || !imageUrls) {
 			alert("Please fill all the fields");
 			return;
 		}
@@ -39,7 +84,7 @@ function ListItem({ user, setDiscard }) {
 			description,
 			category,
 			price: parseInt(price),
-			images,
+			imageURL: imageUrls,
 			userId: user.id,
 		};
 
@@ -53,7 +98,6 @@ function ListItem({ user, setDiscard }) {
 		}
 
 	}
-
 
 	return (
 		<>
@@ -88,6 +132,10 @@ function ListItem({ user, setDiscard }) {
 								<option value="ELECTRONICS">Electronics</option>
 								<option value="FURNITURE">Furniture</option>
 								<option value="CLOTHING">Clothing</option>
+								<option value="STATIONARY">Stationary</option>
+								<option value="FITNESS">Fitness</option>
+								<option value="FASHION">Fashion</option>
+								<option value="APPAREL">Apparel</option>
 								<option value="OTHER">Other</option>
 							</Select>
 						</FormControl>
@@ -102,8 +150,13 @@ function ListItem({ user, setDiscard }) {
 							border: "1.5px solid #E2E8F0",
 							height: "100%",
 						}}
+						direction={{ base: 'column', sm: 'row' }}
+						alignItems={"center"}
+						justifyContent={"space-between"}
+						overflow='hidden'
+						variant='outline'
 					>
-						<FormControl id="images">
+						<FormControl id="images" width={"15vw"}>
 							<label htmlFor="upload" style={{ width: "100%" }}>
 								<Button
 									className="ListItem__images--card--button"
@@ -135,11 +188,29 @@ function ListItem({ user, setDiscard }) {
 									display="none"
 									accept="image/*"
 									onChange={(e) => {
-										// Handle file upload logic here
+										if (imageUrls.length <= 2)
+											uploadImages(e.target.files[0])
+										else alert("You can only upload 3 images")
 									}}
 								/>
 							</label>
 						</FormControl>
+						{
+							imageUrls.length > 0 && imageUrls.map((item, index) => {
+								return (
+									<div className="ListItem__images--card--image" key={index}>
+										<p onClick={() => removeImage(index)}
+											className="ListItem__images--card--image--cross"> &nbsp;X&nbsp; </p>
+										<Image
+											boxSize="130px"
+											objectFit="cover"
+											src={item}
+											alt="Uploading Image"
+										/>
+									</div>
+								)
+							})
+						}
 					</Card>
 				</div>
 

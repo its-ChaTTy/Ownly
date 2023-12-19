@@ -9,6 +9,16 @@ function Navbar() {
 	const router = useRouter();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+	function scrollToSection(sectionId) {
+		const section = document.getElementById(sectionId);
+	
+		if (section) {
+			section.scrollIntoView({ behavior: 'smooth' });
+		} else {
+			console.error(`Section with ID ${sectionId} not found.`);
+		}
+	}
+
 	const handleLogin = () => {
 		router.push("/auth/login");
 	};
@@ -18,7 +28,7 @@ function Navbar() {
 	};
 
 	const handleUser = () => {
-		router.push("/my/dashboard");
+		router.push("/profile");
 	}
 
 	return (
@@ -35,10 +45,11 @@ function Navbar() {
 						/>
 					</div>
 					<div className="Navbar__container--pages">
-						<p>Home</p>
-						<p>How it works</p>
-						<p>About us</p>
-						<p>Contact</p>
+						<p onClick={() => {router.push('/')}}>Home</p>
+						<p onClick={() => scrollToSection('how')}>Features</p>
+						<p onClick={() => {scrollToSection('howItWorks')}}>How it works</p>
+						<p onClick={() => {scrollToSection('about')}}>About us</p>
+						<p onClick={() => {scrollToSection('footer')}}>Contact</p>
 					</div>
 				</div>
 				<div className="Navbar__rightside">

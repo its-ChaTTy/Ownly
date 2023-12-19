@@ -37,6 +37,18 @@
         height: 25vh;
         width: 12vw;
       }
+
+      &--image{
+        padding: 10px 10px ;
+        &--cross{
+          position: absolute;
+          color: #cc4a2d;
+          cursor: pointer;
+          background-color: white;
+          border-radius: 100%;
+          font-size: 18px;
+        }
+      }
     }
 
     h1 {

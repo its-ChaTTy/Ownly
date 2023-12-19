@@ -1,26 +1,38 @@
 .navList {
-    background-color: #f9fafb;
-    margin-left: 5vw;
-    width: 17vw;
-    height: 22vh;
-    margin-top: 3vh;
-    border: 1px solid;
-    border-radius: 20px;
-    border-color: #0000001a;
-    box-shadow: inset;
-    
-    &__elements {
-        display: flex;
-        margin-left: 25px;
-        padding-top: 3vh;
+  background-color: #f9fafb;
+  margin-left: 5vw;
+  width: 17vw;
+  //   height: 22vh;
+  margin-top: 3vh;
+  border: 1px solid;
+  border-radius: 20px;
+  border-color: #0000001a;
+  box-shadow: inset;
 
-        &--icon {
-            margin-top: 4px;
-        }
+  &__elements {
+    display: flex;
+    margin-left: 25px;
+    padding-top: 3vh;
 
-        p {
-            margin-left: 10px;
-            font-weight: 500;
-        }
+    &--add {
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding-left: 3rem;
+      padding-right: 3rem;
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      border-radius: 0.5rem;
+      color: rgba(39, 124, 165, 1);
+      background-color: rgba(185, 245, 255, 0.37);
     }
+
+    &--icon {
+      margin-top: 4px;
+    }
+
+    p {
+      margin-left: 10px;
+      font-weight: 500;
+    }
+  }
 }

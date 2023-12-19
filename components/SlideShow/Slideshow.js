@@ -42,9 +42,8 @@ const Slideshow = ({ imageURL }) => {
         }
 
         img {
-            border-radius: 1rem;
-            width: 100%;
-            height: auto;
+            width: 15vw;
+            height:15vw;
         }
       `}</style>
         </div>

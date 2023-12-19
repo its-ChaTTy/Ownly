@@ -9,8 +9,22 @@
     &_main {
         display: flex;
         flex-direction: row;
-
-
+        &--elements{
+            &__listings {
+                display: flex;
+                flex-wrap: wrap;
+                margin-left: 2rem;
+                margin-top: 1.5rem;
+                &--card {
+                    margin-right: 2.5rem;
+                    margin-bottom: 1rem;
+                }
+            }
+            &__history {
+                margin-left: 2rem;
+                margin-top: 1.5rem;
+            }
+        }
     }
 
 }

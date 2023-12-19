@@ -2,24 +2,27 @@ import React from 'react';
 import './ProfileNavList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseUser, faCompass, faSquarePollVertical } from '@fortawesome/free-solid-svg-icons';
+import useAuth from '@/hooks/useAuth';
 
 function ProfileNavList() {
-
+    const { setPage, setAddModal, addModal } = useAuth()
     return (
         <div className='navList'>
-            <div className='navList__elements'>
+            <div style={{ cursor: "pointer" }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faHouseUser} />
-                <p>My Profile</p>
+                <p onClick={() => { setPage("profile") }}>My Profile</p>
             </div>
-            <div className='navList__elements'>
+            <div style={{ cursor: "pointer" }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faCompass} />
-                <p>My Listings</p>
+                <p onClick={() => { setPage("listings") }}>My Listings</p>
             </div>
-            <div className='navList__elements'>
+            <div style={{ cursor: "pointer" }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
-                <p>Rental History</p>
+                <p onClick={() => { setPage("history") }}>Rental History</p>
             </div>
-            
+            <div onClick={() => { setAddModal(!addModal) }} className='navList__elements'>
+                <p className='navList__elements--add'>+ Add Item</p>
+            </div>
         </div>
     );
 };

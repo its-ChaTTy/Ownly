@@ -12,6 +12,8 @@ import {
 import ListItem from '@/components/ListItem/ListItem';
 import PaymentConfirmationCard from '@/components/PaymentConfirmationCard/PaymentConfirmationCard';
 import RentalHistory from '@/components/RentalHistory/RentalHistory';
+import { logout } from '@/operations/auth.fetch';
+import ProfileNavList from '@/components/ProfileNavList/ProfileNavList';
 
 export async function getServerSideProps(context) {
 
@@ -25,7 +27,7 @@ export async function getServerSideProps(context) {
     }
 
     const user = context.req.session.user;
-    
+
     // fetch user profile
     // fetch user history
     // fetch user listings
@@ -49,103 +51,14 @@ export default function listingDashboard({ usr }) {
         totalEarned: "totalEarned",
     })
 
-    const history_items = [
-        {
-            'id': 'abcdefg',
-            'order_placed': '2nd June, 23',
-            'total': '600',
-            'duration': '2',
-            'delivered_date': '5th June, 23',
-            'item_name': 'Speaker',
-            'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
-        },
-        {
-            'id': 'abcdefg',
-            'order_placed': '2nd June, 23',
-            'total': '600',
-            'duration': '2',
-            'delivered_date': '5th June, 23',
-            'item_name': 'Speaker',
-            'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
-        },
-        {
-            'id': 'abcdefg',
-            'order_placed': '2nd June, 23',
-            'total': '600',
-            'duration': '2',
-            'delivered_date': '5th June, 23',
-            'item_name': 'Speaker',
-            'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
-        },
-        {
-            'id': 'abcdefg',
-            'order_placed': '2nd June, 23',
-            'total': '600',
-            'duration': '2',
-            'delivered_date': '5th June, 23',
-            'item_name': 'Speaker',
-            'item_desc': 'The Oyster Perpetual GMT-Master II in 18 ct yellow gold with a black dial and a Jubilee bracelet.',
-            'item_image': '/Images/Store/temp.png'
-        },
-        {
-            'id': 'abcdefg',
-            'order_placed': '2nd June, 23',
-            'total': '600',
-            'duration': '2',
-            'delivered_date': '5th June, 23',
-            'item_name': 'Speaker',
-            'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
-        },
-    ]
-
-    const items = [
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-    ]
+    const handleLogout = async () => {
+        const res = await logout();
+        if (res.status === 200) {
+            window.location.href = '/';
+        } else {
+            alert("Something went wrong");
+        }
+    }
 
 
     return (
@@ -162,7 +75,7 @@ export default function listingDashboard({ usr }) {
             {/* <PaymentConfirmationCard isOpen={paymentModal} onClose={() => showPaymentModal(!paymentModal)} /> */}
             <div className='Listing'>
                 <div className='Listing__sidebar'>
-                    <span
+                    {/* <span
                         className='Listing__sidebar--item'
                         onClick={() => {
                             setPage('profile');
@@ -195,7 +108,8 @@ export default function listingDashboard({ usr }) {
                         showUpdateModal(!updateModal)
                     }} className='Listing__sidebar--item'>
                         <p className='Listing__sidebar--item__text'>+ Add Item</p>
-                    </span>
+                    </span> */}
+                    <ProfileNavList />
                 </div>
 
                 <div className='Listing__main'>
@@ -209,6 +123,7 @@ export default function listingDashboard({ usr }) {
                                     <p>{user.phone}</p>
                                     <p>{user.address}</p>
                                     <p>{user.totalEarned}</p>
+                                    <p onClick={() => {handleLogout()}}>Logout</p>
                                 </div>
                             </div>
                             : null
