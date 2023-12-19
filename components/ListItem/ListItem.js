@@ -34,15 +34,27 @@ function ListItem({ user, setDiscard }) {
 
 	const uploadImages = async (file) => {
 		const file_path = generate();
-		if (file.size > 1024 * 3) {
+		if (file.size > 1024 * 1024 * 3) {
+			console.log(file.size)
 			alert('File is larger than 3MB');
 			return;
 		}
 		await uploadFile(file, file_path);
 	}
 
-	const removeImage = (index) => {
+	const removeImage = async (index) => {
 		const imageUrlsCopy = [...imageUrls];
+		const imageUrl = imageUrlsCopy[index];
+		const match = imageUrl.match(/\/([^\/]+)$/);
+		console.log(match[1])
+
+		// dont know why this is not deleting
+		const {data, error} = await supabase.storage.from('ownly-images').remove([`${match[1]}.png`])
+		if (error) {
+			console.log(error)
+		} else {
+			console.log("Image removed successfully");
+		}
 		imageUrlsCopy.splice(index, 1);
 		setImageUrls(imageUrlsCopy);
 	}
@@ -57,7 +69,7 @@ function ListItem({ user, setDiscard }) {
 		e.preventDefault();
 
 
-		if (!name || !description || !category || !price || !images) {
+		if (!name || !description || !category || !price || !imageUrls) {
 			alert("Please fill all the fields");
 			return;
 		}
@@ -120,6 +132,10 @@ function ListItem({ user, setDiscard }) {
 								<option value="ELECTRONICS">Electronics</option>
 								<option value="FURNITURE">Furniture</option>
 								<option value="CLOTHING">Clothing</option>
+								<option value="STATIONARY">Stationary</option>
+								<option value="FITNESS">Fitness</option>
+								<option value="FASHION">Fashion</option>
+								<option value="APPAREL">Apparel</option>
 								<option value="OTHER">Other</option>
 							</Select>
 						</FormControl>

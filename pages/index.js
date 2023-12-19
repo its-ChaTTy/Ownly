@@ -22,23 +22,25 @@ export default function Home({ allItems }) {
       <div className="section_navbar">
         <Navbar />
       </div>
-      {/* <Cart /> */}
-      <div className="section">
+      <div id="heroBrowse" className="section">
+        <HeroBrowse />
+      </div>
+      <div id="about" className="section">
         <About />
       </div>
-      <div className="section">
+      <div id="store" className="section">
         <Store allItems={allItems} />
       </div>
-      <div className="section">
+      <div id="how" className="section">
         <How />
       </div>
-      <div className="section">
+      <div id="earning" className="section">
         <Earning />
       </div>
-      <div className="section">
+      <div id="howItWorks" className="section">
         <How_it_works />
       </div>
-      <div className="section">
+      <div id="footer" className="section">
         <Footer />
       </div>
     </>

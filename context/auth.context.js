@@ -15,8 +15,14 @@ export const getUserFromSession = withIronSessionSsr(async ({ req }) => {
 
 export function AuthProvider({ children, ssrUser, ...props }) {
     const [user, setUser] = useState(ssrUser);
+    const [page, setPage] = useState("profile");
+    const [addModal, setAddModal] = useState(false);
     const auth = {
         user,
+        page,
+        setPage,
+        addModal,
+        setAddModal,
         ...props
     }
     return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
