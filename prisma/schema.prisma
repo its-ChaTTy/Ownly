@@ -68,9 +68,9 @@ model RentRequest {
   userId    Int
   startDate DateTime
   endDate   DateTime
+  status    Status   @default(PENDING)
   days      Int      @default(0)
   price     Int      @default(0)
-  status    Status   @default(PENDING)
   item      Item     @relation(fields: [itemId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
 }
@@ -79,11 +79,11 @@ enum Category {
   ELECTRONICS
   FURNITURE
   CLOTHING
+  OTHER
   STATIONARY
   APPAREL
   FITNESS
   FASHION
-  OTHER
 }
 
 enum Status {

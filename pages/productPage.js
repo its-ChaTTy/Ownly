@@ -27,7 +27,12 @@ export default function ProductPage({ allItems, user }) {
   const [itemsArray, setItems] = useState(allItems);
 
   const sortProducts = (sortOrder) => {
-    if (sortOrder === 1) {
+    // 0 = default, 1 = low to high, 2 = high to low
+    // but idk why its displaying in reverse order
+    // so for now i'm just changing 1 to 2 // we'll fix it later
+  
+    // need to test
+    if (sortOrder === 2) {
       allItems.sort((a, b) => {
         return a.price - b.price;
       })

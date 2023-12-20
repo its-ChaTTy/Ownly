@@ -3,7 +3,7 @@ import './ProductPageCards.scss';
 import Slideshow from "../SlideShow/Slideshow";
 
 function ProductPageCards({ items }) {
-    
+
     return (
         <div className="Product__Cards">
             {items.map((item, index) => {
