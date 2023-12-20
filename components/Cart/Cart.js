@@ -1,18 +1,14 @@
-import React from "react";
 import "./Cart.scss";
 import {
   Card,
-  Select,
   Button,
   FormControl,
-  FormLabel,
   Input,
-  Textarea,
   Image,
 } from "@chakra-ui/react";
-import { color } from "framer-motion";
 
 function Cart() {
+  
   return (
     <div className="Cart">
       <div className="Cart__left">

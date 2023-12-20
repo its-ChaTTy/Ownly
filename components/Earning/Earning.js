@@ -1,7 +1,7 @@
-import React from 'react'
 import './Earning.scss'
 
 const Earning = () => {
+    
     return (
         <div className='Earning'>
             <div className='Earning__left'>

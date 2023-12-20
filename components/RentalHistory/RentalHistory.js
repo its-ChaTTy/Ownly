@@ -1,6 +1,6 @@
-import React from 'react'
 import './RentalHistory.scss'
 import Image from 'next/image'
+
 const RentalHistory = ({ item }) => {
     return (
         <div className='RentalHistory'>

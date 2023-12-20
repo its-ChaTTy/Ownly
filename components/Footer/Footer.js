@@ -3,8 +3,8 @@ import Image from 'next/image'
 import { FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { MdOutlineMailOutline } from "react-icons/md";
 
-
 function Footer() {
+
     return (
         <>
             <div className="Footer">

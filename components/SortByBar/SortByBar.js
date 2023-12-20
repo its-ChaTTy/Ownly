@@ -1,8 +1,8 @@
 import './SortByBar.scss';
 
 function SortbyBar({setSortOrder}) {
+  
   return (
-
     <div className="SortByBar">
       <div className='SortByBar__new'>
         <p>New (584)</p>

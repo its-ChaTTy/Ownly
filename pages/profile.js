@@ -93,9 +93,6 @@ export default function Profile({ user, allItems }) {
     useEffect(() => {
         if(!addModal)
             setEditItem(null);
-
-            console.log(editItem);
-
     }, [addModal, editItem])
 
     return (

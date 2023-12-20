@@ -6,15 +6,9 @@ import Store from "@/components/Store/Store";
 import How from "@/components/How/How";
 import Earning from "@/components/Earning/Earning";
 import How_it_works from "@/components/How_it_works/How_it_works";
-import "@/styles/routes/index.scss";
 import { fetchAvailableItems } from "@/services/items.service";
-import Cart from "@/components/Cart/Cart";
-import useAuth from "@/hooks/useAuth";
-import {
-  Modal, ModalOverlay,
-  ModalContent,
-} from '@chakra-ui/react';
-import ListItem from '@/components/ListItem/ListItem';
+import "@/styles/routes/index.scss";
+
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
   const user = context.req.session.user;
@@ -31,20 +25,14 @@ export async function getServerSideProps(context) {
 
 
 export default function Home({ allItems, user }) {
-  const { addModal, setAddModal } = useAuth()
+
   return (
     <>
-      <Modal isOpen={addModal} onClose={() => setAddModal(!addModal)} size={'xxl'}>
-        <ModalOverlay />
-        <ModalContent w={'90%'} h={'80%'} >
-          <ListItem user={user} setDiscard={() => setAddModal(!addModal)} />
-        </ModalContent>
-      </Modal>
       <div className="section_navbar">
         <Navbar />
       </div>
       <div id="heroBrowse" className="section">
-        <HeroBrowse user={user} />
+        <HeroBrowse />
       </div>
       <div id="about" className="section">
         <About />

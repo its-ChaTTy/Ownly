@@ -1,6 +1,5 @@
-import React from "react";
 import './ProductPageCards.scss';
-import Slideshow from "../SlideShow/Slideshow";
+import Slideshow from '@/components/SlideShow/Slideshow';
 
 function ProductPageCards({ items }) {
 

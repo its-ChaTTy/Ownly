@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Store.scss'
-import Slideshow from '../SlideShow/Slideshow'
+import Slideshow from '@/components/SlideShow/Slideshow';
 import { useRouter } from 'next/router'
 
-const Store = ({ allItems, user }) => {
+const Store = ({ allItems }) => {
+    
     const router = useRouter();
     const pills = ['ALL', 'ELECTRONICS', 'STATIONARY', 'APPAREL', 'FITNESS', 'FASHION']
     const [selectedPill, setSelectedPill] = useState('ALL')
@@ -50,11 +51,7 @@ const Store = ({ allItems, user }) => {
             </div>
             <div className='Store__button'>
                 <button onClick={() => {
-                    if (user === null) {
-                        router.push('/login')
-                    } else {
-                        router.push('/productPage')
-                    }
+                    router.push('/productPage')
                 }}>Load More</button>
             </div>
         </div>

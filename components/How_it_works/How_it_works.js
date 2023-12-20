@@ -1,4 +1,3 @@
-import React from 'react'
 import './How_it-works.scss'
 
 const How_it_works = () => {

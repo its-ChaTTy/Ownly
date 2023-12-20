@@ -8,14 +8,23 @@ import { fetchAvailableItems } from "@/services/items.service";
 import '@/styles/routes/productPage.scss'
 
 export async function getServerSideProps(context) {
-  let allItems = await fetchAvailableItems();
+  
   const user = context.req.session.user;
-  var userProp;
+  var userProp = null;
+
   if (user === undefined) {
-    userProp = null;
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/auth/login",
+      },
+    };
   } else {
     userProp = user;
   }
+
+  let allItems = await fetchAvailableItems();
+
   return {
     props: { allItems: allItems, user: userProp },
   };
@@ -30,7 +39,7 @@ export default function ProductPage({ allItems, user }) {
     // 0 = default, 1 = low to high, 2 = high to low
     // but idk why its displaying in reverse order
     // so for now i'm just changing 1 to 2 // we'll fix it later
-  
+
     // need to test
     if (sortOrder === 2) {
       allItems.sort((a, b) => {

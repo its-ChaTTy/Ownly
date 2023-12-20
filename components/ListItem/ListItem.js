@@ -9,7 +9,7 @@ import {
 	Textarea,
 	Image,
 } from "@chakra-ui/react";
-import { generate, count } from "random-words";
+import { generate } from "random-words";
 import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { listItem, updateItem } from "@/operations/items.fetch";

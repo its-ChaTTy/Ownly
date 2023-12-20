@@ -1,4 +1,3 @@
-import React from "react";
 import './ProductPageFilter.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';

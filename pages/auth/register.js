@@ -5,9 +5,6 @@ import { useState } from "react"
 import '@/styles/routes/auth/register.scss'
 import { FaArrowLeft } from "react-icons/fa";
 
-
-
-
 function Register() {
 
     const [email, setEmail] = useState('')
@@ -24,10 +21,10 @@ function Register() {
             alert('Please enter a valid name')
             return
         }
-        // if (!isPassword(password)) {
-        //     alert('Password must be at least 8 characters')
-        //     return
-        // }
+        if (!isPassword(password)) {
+            alert('Password must be at least 8 characters')
+            return
+        }
         if (password !== confirmPassword) {
             alert('Passwords do not match')
             return

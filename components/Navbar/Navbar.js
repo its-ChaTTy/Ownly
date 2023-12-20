@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.scss";
@@ -11,21 +11,13 @@ function Navbar() {
 
 	function scrollToSection(sectionId) {
 		const section = document.getElementById(sectionId);
-	
+
 		if (section) {
 			section.scrollIntoView({ behavior: 'smooth' });
 		} else {
 			console.error(`Section with ID ${sectionId} not found.`);
 		}
 	}
-
-	const handleLogin = () => {
-		router.push("/auth/login");
-	};
-
-	const handleSignup = () => {
-		router.push("/auth/register");
-	};
 
 	const handleUser = () => {
 		router.push("/profile");
@@ -45,11 +37,11 @@ function Navbar() {
 						/>
 					</div>
 					<div className="Navbar__container--pages">
-						<p onClick={() => {router.push('/')}}>Home</p>
+						<p onClick={() => { router.push('/') }}>Home</p>
 						<p onClick={() => scrollToSection('how')}>Features</p>
-						<p onClick={() => {scrollToSection('howItWorks')}}>How it works</p>
-						<p onClick={() => {scrollToSection('about')}}>About us</p>
-						<p onClick={() => {scrollToSection('footer')}}>Contact</p>
+						<p onClick={() => { scrollToSection('howItWorks') }}>How it works</p>
+						<p onClick={() => { scrollToSection('about') }}>About us</p>
+						<p onClick={() => { scrollToSection('footer') }}>Contact</p>
 					</div>
 				</div>
 				<div className="Navbar__rightside">
@@ -60,15 +52,15 @@ function Navbar() {
 							placeholder="Search for items to rent"
 						/>
 					</div>
-					
+
 					<div onClick={handleUser} >
 						<Link href="/profile">
-							<Image style={{cursor: "pointer"}} src={'/Images/Assets/profile.png'} width={43} height={43} />
+							<Image style={{ cursor: "pointer" }} src={'/Images/Assets/profile.png'} width={43} height={43} />
 						</Link>
 					</div>
-					
+
 					<div>
-						<Image style={{cursor: "pointer"}} src={'/Images/Assets/cart.png'} width={43} height={43} />
+						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/cart.png'} width={43} height={43} />
 
 					</div>
 				</div>

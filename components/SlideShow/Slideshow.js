@@ -1,5 +1,3 @@
-// components/Slideshow.js
-
 import { useState, useEffect } from 'react';
 
 const Slideshow = ({ imageURL }) => {
