@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 import { generate, count } from "random-words";
 import { useEffect, useState } from "react";
-import Images from "next/image";
 import { listItem } from "@/operations/items.fetch";
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
@@ -35,7 +34,6 @@ function ListItem({ user, setDiscard }) {
 	const uploadImages = async (file) => {
 		const file_path = generate();
 		if (file.size > 1024 * 1024 * 3) {
-			console.log(file.size)
 			alert('File is larger than 3MB');
 			return;
 		}
@@ -46,10 +44,8 @@ function ListItem({ user, setDiscard }) {
 		const imageUrlsCopy = [...imageUrls];
 		const imageUrl = imageUrlsCopy[index];
 		const match = imageUrl.match(/\/([^\/]+)$/);
-		console.log(match[1])
 
-		// dont know why this is not deleting
-		const {data, error} = await supabase.storage.from('ownly-images').remove([`${match[1]}.png`])
+		const { data, error } = await supabase.storage.from('ownly-images').remove([`${match[1]}`])
 		if (error) {
 			console.log(error)
 		} else {
