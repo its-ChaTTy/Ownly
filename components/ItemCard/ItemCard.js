@@ -1,30 +1,24 @@
-import React from 'react'
 import './ItemCard.scss'
-import { useEffect, useState } from 'react'
-import Image from 'next/image'
+import { useState } from 'react'
 import {
-    Modal, ModalOverlay,
-    ModalContent,
+    Image
 } from '@chakra-ui/react';
-import ListItem from '@/components/ListItem/ListItem';
+import useAuth from '@/hooks/useAuth';
+
 function ItemCard({ item }) {
 
-    const [image, setImage] = useState(item.imageURL)
+    const [image, setImage] = item.imageURL.length !== 0 ? useState(item.imageURL[0]) : useState('/Images/Store/temp.png')
     const [name, setName] = useState(item.name)
     const [price, setPrice] = useState(item.price)
     const [category, setCategory] = useState(item.category)
-    const [updateModal, showUpdateModal] = useState(false)
+    
+    const { setEditItem, addModal, setAddModal } = useAuth()
+
     return (
         <>
-            <Modal isOpen={updateModal} onClose={() => showUpdateModal(!updateModal)} size='xxl'>
-                <ModalOverlay />
-                <ModalContent w={'90%'} h={'80%'}>
-                    <ListItem />
-                </ModalContent>
-            </Modal>
             <div className='ItemCard'>
                 <div className='ItemCard__image'>
-                    <Image src={image} height={200} width={200} alt='image' />
+                    <Image src={image} height={200} width={200} alt='image' {...(item && { defaultValue: item.imageURL[0] })} />
                 </div>
                 <div className='ItemCard__content'>
                     <div className='ItemCard__content--text'>
@@ -33,7 +27,8 @@ function ItemCard({ item }) {
                         <p className='ItemCard__content--text__price'>INR {price}/day</p>
                     </div>
                     <div className='ItemCard__content--button'>
-                        <button onClick={() => showUpdateModal(!updateModal)} className='ItemCard__content--button__button'>Edit</button>
+                        <button onClick={() => { setEditItem(item); setAddModal(!addModal) }}
+                        className='ItemCard__content--button__button'>Edit</button>
                     </div>
                 </div>
             </div>

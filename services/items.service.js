@@ -106,3 +106,12 @@ export async function getActiveRent(id) {
         }
     })
 }
+
+
+export async function getAllItemsByUser(userId) {
+    return await db.item.findMany({
+        where: {
+            userId,
+        }
+    })
+}

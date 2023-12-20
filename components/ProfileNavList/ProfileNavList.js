@@ -1,4 +1,3 @@
-import React from 'react';
 import './ProfileNavList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouseUser, faCompass, faSquarePollVertical, faSignOut } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +6,7 @@ import { logout } from '@/operations/auth.fetch';
 
 function ProfileNavList() {
     const { setPage, setAddModal, addModal } = useAuth()
+
     const handleLogout = async () => {
         const res = await logout();
         if (res.status === 200) {
@@ -15,6 +15,7 @@ function ProfileNavList() {
             alert("Something went wrong");
         }
     }
+
     return (
         <div className='navList'>
             <div style={{ cursor: "pointer" }} className='navList__elements'>

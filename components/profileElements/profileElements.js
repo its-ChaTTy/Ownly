@@ -37,7 +37,7 @@ function ProfileElements({ user }) {
         const response = await updateUser(data);
         if (response.status === 200) {
             alert(response.message);
-            const logoutResponse = await logout();
+            await logout();
         }
         else {
             alert(response.error);

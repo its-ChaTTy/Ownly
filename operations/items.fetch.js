@@ -12,3 +12,20 @@ export async function listItem(data) {
         console.log(err)
     });
 }
+
+
+export async function updateItem(data) {
+    return await fetch('/api/items/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: "include"
+    }).then((res) => {
+        return res.json()
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+

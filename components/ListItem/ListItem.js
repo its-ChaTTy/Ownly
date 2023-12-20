@@ -10,16 +10,30 @@ import {
 	Image,
 } from "@chakra-ui/react";
 import { generate, count } from "random-words";
+import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
-import { listItem } from "@/operations/items.fetch";
+import { listItem, updateItem } from "@/operations/items.fetch";
+
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
-function ListItem({ user, setDiscard }) {
+function ListItem({ user }) {
+
+    const { setAddModal, editItem } = useAuth();
+	const [item, setItem] = useState(editItem);
+
+	useEffect(() => {
+		setItem(editItem);
+	}, [editItem])
+
+	const [imageUrls, setImageUrls] = item ? useState(item.imageURL) : useState([]);
+	const [name, setName] = item ? useState(item.name) : useState("");
+	const [description, setDescription] = item ? useState(item.description) : useState("");
+	const [category, setCategory] = item ? useState(item.category) : useState("");
+	const [price, setPrice] = item ? useState(item.price) : useState("");
 
 	const supabase = createClient(supabaseUrl, supabaseKey)
-	const [imageUrls, setImageUrls] = useState([])
 
 	async function uploadFile(file, file_path) {
 		const { data, error } = await supabase.storage.from('ownly-images').upload(file_path, file)
@@ -55,13 +69,7 @@ function ListItem({ user, setDiscard }) {
 		setImageUrls(imageUrlsCopy);
 	}
 
-
-	const [name, setName] = useState("");
-	const [description, setDescription] = useState("");
-	const [category, setCategory] = useState("");
-	const [price, setPrice] = useState(0);
-
-	const handleSubmit = async (e) => {
+	const handleCreate = async (e) => {
 		e.preventDefault();
 
 
@@ -95,6 +103,44 @@ function ListItem({ user, setDiscard }) {
 
 	}
 
+
+	const handleUpdate = async (e) => {
+		e.preventDefault();
+
+		if (!name || !description || !category || !price || !imageUrls) {
+			alert("Please fill all the fields");
+			return;
+		}
+
+		if (isNaN(price)) {
+			alert("Price must be a number");
+			return;
+		}
+
+		const product = {
+			name,
+			description,
+			category,
+			price: parseInt(price),
+			imageURL: imageUrls,
+			userId: user.id,
+			id: item.id
+		};
+
+		const response = await updateItem(product);
+		if (response.status === 200) {
+			alert("Product updated successfully");
+			window.location.reload();
+		}
+		else {
+			alert("Error updating product, please try again");
+		}
+
+	}
+
+
+
+
 	return (
 		<>
 			<div className="ListItem">
@@ -109,7 +155,7 @@ function ListItem({ user, setDiscard }) {
 					>
 						<FormControl id="title" className="form_label">
 							<FormLabel>Product Name</FormLabel>
-							<Input placeholder="Enter title" onChange={(e) => setName(e.target.value)} required />
+							<Input placeholder="Enter title" onChange={(e) => setName(e.target.value)} required {...(item && { defaultValue: item.name })} />
 						</FormControl>
 						<FormControl id="description" className="form_label">
 							<FormLabel>Product Description</FormLabel>
@@ -120,11 +166,13 @@ function ListItem({ user, setDiscard }) {
 									height: "20vh",
 								}}
 								onChange={(e) => setDescription(e.target.value)}
+								required
+								{...(item && { defaultValue: item.description })}
 							/>
 						</FormControl>
 						<FormControl id="category" className="form_label">
 							<FormLabel>Product Category</FormLabel>
-							<Select placeholder="Select category" onChange={(e) => setCategory(e.target.value)} required>
+							<Select placeholder="Select category" onChange={(e) => setCategory(e.target.value)} required {...(item && { defaultValue: item.category })}>
 								<option value="ELECTRONICS">Electronics</option>
 								<option value="FURNITURE">Furniture</option>
 								<option value="CLOTHING">Clothing</option>
@@ -221,7 +269,7 @@ function ListItem({ user, setDiscard }) {
 					>
 						<FormControl id="price">
 							<FormLabel color={"#636363"}>Price</FormLabel>
-							<Input placeholder="Enter price" onChange={(e) => setPrice(e.target.value)} required />
+							<Input placeholder="Enter price" onChange={(e) => setPrice(e.target.value)} required {...(item && { defaultValue: item.price })} />
 						</FormControl>
 						<div className="ListItem__pricing--card--buttons">
 							<Button
@@ -231,14 +279,22 @@ function ListItem({ user, setDiscard }) {
 								// background="rgba(39, 124, 165, 0.10)"
 								onClick={
 									() => {
-										setDiscard(false);
+										setAddModal(false);
 									}
 								}>
 								Discard
 							</Button>
-							<Button variant="solid" id="submit" onClick={handleSubmit}>
-								Submit
-							</Button>
+							{
+								item ?
+									<Button variant="solid" id="submit" onClick={handleUpdate}>
+										Update
+									</Button>
+									:
+									<Button variant="solid" id="submit" onClick={handleCreate}>
+										Submit
+									</Button>
+							}
+
 						</div>
 					</Card>
 				</div >

@@ -10,6 +10,9 @@ import {
     ModalContent,
 } from '@chakra-ui/react';
 import ListItem from '@/components/ListItem/ListItem';
+import { getAllItemsByUser } from "@/services/items.service";
+import { useEffect, useState } from "react";
+
 export async function getServerSideProps(context) {
 
     if (context.req.session.user === undefined) {
@@ -21,14 +24,16 @@ export async function getServerSideProps(context) {
         };
     }
 
+    const allItems = await getAllItemsByUser(context.req.session.user.id);
+
     const user = context.req.session.user;
     return {
-        props: { user: user },
+        props: { user: user, allItems: allItems },
     }
 
 }
 
-export default function Profile({ user }) {
+export default function Profile({ user, allItems }) {
 
     const history_items = [
         {
@@ -83,59 +88,22 @@ export default function Profile({ user }) {
         },
     ]
 
-    const items = [
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-        {
-            name: "Speaker",
-            price: "20",
-            category: "Electronics",
-            imageURL: "/Images/Store/temp.png"
-        },
-    ]
+    const { page, addModal, setAddModal, editItem, setEditItem } = useAuth();
 
-    const { page, addModal, setAddModal } = useAuth();
+    useEffect(() => {
+        if(!addModal)
+            setEditItem(null);
+
+            console.log(editItem);
+
+    }, [addModal, editItem])
 
     return (
         <>
             <Modal isOpen={addModal} onClose={() => setAddModal(!addModal)} size={'xxl'}>
                 <ModalOverlay />
                 <ModalContent w={'90%'} h={'80%'} >
-                    <ListItem user={user} setDiscard={() => setAddModal(!addModal)} />
+                    <ListItem user={user} item={editItem} />
                 </ModalContent>
             </Modal>
             <div className="profile">
@@ -155,7 +123,7 @@ export default function Profile({ user }) {
                         {
                             page === 'listings' ?
                                 <div className="profile_main--elements__listings">
-                                    {items.map((item, index) => (
+                                    {allItems.map((item, index) => (
                                         <div className="profile_main--elements__listings--card" key={index}>
                                             <ItemCard item={item} key={index} />
                                         </div>
