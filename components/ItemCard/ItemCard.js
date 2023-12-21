@@ -7,7 +7,7 @@ import useAuth from '@/hooks/useAuth';
 
 function ItemCard({ item }) {
 
-    const [image, setImage] = item.imageURL.length !== 0 ? useState(item.imageURL[0]) : useState('/Images/Store/temp.png')
+    const [image, setImage] = item.imageURL.length !== 0 ? useState(item.imageURL[0]) : useState('/Images/Store/temp.webp')
     const [name, setName] = useState(item.name)
     const [price, setPrice] = useState(item.price)
     const [category, setCategory] = useState(item.category)

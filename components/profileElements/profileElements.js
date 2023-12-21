@@ -49,7 +49,7 @@ function ProfileElements({ user }) {
             <div className='profileElements__profilePicture'>
                 <div className='profileElements__profilePicture--text'>My Profile</div>
                 <div className='profileElements__profilePicture--workspaceAdmin'>
-                    <Image className='profileElements__profilePicture--workspaceAdmin--img' src={'/Images/Assets/profile.png'} width={70} height={50} />
+                    <Image className='profileElements__profilePicture--workspaceAdmin--img' src={'/Images/Assets/profile.webp'} width={70} height={50} />
                     <div className="profileElements__profilePicture--workspaceAdmin--textWrapper">
                         <div className="profileElements__profilePicture--workspaceAdmin--textWrapper--text1">{user.name}</div>
                         <div className="profileElements__profilePicture--workspaceAdmin--textWrapper--text2">{user.email}</div>

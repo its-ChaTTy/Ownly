@@ -221,7 +221,7 @@ function ListItem({ user }) {
 										<Image
 											boxSize="50px"
 											objectFit="cover"
-											src="/Images/Logos/image-upload.png"
+											src="/Images/Logos/image-upload.webp"
 											alt="Upload Image"
 										/>
 									</div>

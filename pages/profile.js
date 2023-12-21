@@ -44,7 +44,7 @@ export default function Profile({ user, allItems }) {
             'delivered_date': '5th June, 23',
             'item_name': 'Speaker',
             'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
+            'item_image': '/Images/Store/temp.webp'
         },
         {
             'id': 'abcdefg',
@@ -54,7 +54,7 @@ export default function Profile({ user, allItems }) {
             'delivered_date': '5th June, 23',
             'item_name': 'Speaker',
             'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
+            'item_image': '/Images/Store/temp.webp'
         },
         {
             'id': 'abcdefg',
@@ -64,7 +64,7 @@ export default function Profile({ user, allItems }) {
             'delivered_date': '5th June, 23',
             'item_name': 'Speaker',
             'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
+            'item_image': '/Images/Store/temp.webp'
         },
         {
             'id': 'abcdefg',
@@ -74,7 +74,7 @@ export default function Profile({ user, allItems }) {
             'delivered_date': '5th June, 23',
             'item_name': 'Speaker',
             'item_desc': 'The Oyster Perpetual GMT-Master II in 18 ct yellow gold with a black dial and a Jubilee bracelet.',
-            'item_image': '/Images/Store/temp.png'
+            'item_image': '/Images/Store/temp.webp'
         },
         {
             'id': 'abcdefg',
@@ -84,7 +84,7 @@ export default function Profile({ user, allItems }) {
             'delivered_date': '5th June, 23',
             'item_name': 'Speaker',
             'item_desc': 'Sound wonderful, just looking like a wow',
-            'item_image': '/Images/Store/temp.png'
+            'item_image': '/Images/Store/temp.webp'
         },
     ]
 

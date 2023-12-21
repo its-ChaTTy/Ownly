@@ -10,7 +10,7 @@ function Footer() {
             <div className="Footer">
                 <div className="Footer__container">
                     <div className="Footer__container--description">
-                        <Image src="/Images/Logos/ownly_footer_logo.png" alt="Ownly Logo" width={100} height={100} />
+                        <Image src="/Images/Logos/ownly_footer_logo.webp" alt="Ownly Logo" width={100} height={100} />
                         <p>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco</p>
                         <div className="Footer__container--description--socials">
                             <div className="Footer__container--description--socials--icon">

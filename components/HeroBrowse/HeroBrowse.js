@@ -32,14 +32,14 @@ function HeroBrowse() {
           }} className="HeroBrowse__left__search__btn">List an Item</button>
         </div>
         <div className="HeroBrowse__left__Button">
-          <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.png" />
+          <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.webp" />
           <Link href="/productPage">
-            <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.png" />
+            <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.webp" />
           </Link>
         </div>
       </div>
       <div className="HeroBrowse__right">
-        <img src="/Images/Home_page/home_page.png" alt="Hero Browse" />
+        <img src="/Images/Home_page/home_page.webp" alt="Hero Browse" />
       </div>
     </div>
   );
