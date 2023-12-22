@@ -78,6 +78,14 @@ model RentRequest {
   user      User     @relation(fields: [userId], references: [id])
 }
 
+model Cart {
+  id       Int        @id @default(autoincrement())
+  userId   Int
+  value    Int
+  user     User       @relation(fields: [userId], references: [id])
+  CartItem CartItem[]
+}
+
 model CartItem {
   id        Int      @id @default(autoincrement())
   itemId    Int
@@ -86,16 +94,8 @@ model CartItem {
   endDate   DateTime
   days      Int      @default(0)
   price     Int      @default(0)
-  cart      Cart     @relation(fields: [cartId], references: [id])
-  item      Item     @relation(fields: [itemId], references: [id])
-}
-
-model Cart {
-  id     Int        @id @default(autoincrement())
-  userId Int
-  value  Int
-  User   User       @relation(fields: [userId], references: [id])
-  items  CartItem[]
+  Cart      Cart     @relation(fields: [cartId], references: [id])
+  Item      Item     @relation(fields: [itemId], references: [id])
 }
 
 enum Category {
