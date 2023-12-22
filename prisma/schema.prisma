@@ -18,6 +18,7 @@ model User {
   isVerified  Boolean       @default(false)
   totalEarned Int           @default(0)
   ActiveRent  ActiveRent[]
+  Cart        Cart[]
   items       Item[]
   OverRent    OverRent[]
   RentRequest RentRequest[]
@@ -33,10 +34,10 @@ model Item {
   userId      Int
   isAvailable Boolean       @default(true)
   ActiveRent  ActiveRent[]
+  CartItem    CartItem[]
   user        User          @relation(fields: [userId], references: [id])
   OverRent    OverRent[]
   RentRequest RentRequest[]
-  CartItem    CartItem[]
 }
 
 model ActiveRent {
@@ -72,9 +73,9 @@ model RentRequest {
   status    Status   @default(PENDING)
   days      Int      @default(0)
   price     Int      @default(0)
+  cartId    Int?
   item      Item     @relation(fields: [itemId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
-  cartId    Int?
 }
 
 model CartItem {
@@ -85,15 +86,16 @@ model CartItem {
   endDate   DateTime
   days      Int      @default(0)
   price     Int      @default(0)
-  item      Item     @relation(fields: [itemId], references: [id])
   cart      Cart     @relation(fields: [cartId], references: [id])
+  item      Item     @relation(fields: [itemId], references: [id])
 }
 
 model Cart {
   id     Int        @id @default(autoincrement())
   userId Int
-  items  CartItem[]
   value  Int
+  User   User       @relation(fields: [userId], references: [id])
+  items  CartItem[]
 }
 
 enum Category {
