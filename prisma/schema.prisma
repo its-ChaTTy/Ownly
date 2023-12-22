@@ -18,10 +18,10 @@ model User {
   isVerified  Boolean       @default(false)
   totalEarned Int           @default(0)
   ActiveRent  ActiveRent[]
+  Cart        Cart[]
   items       Item[]
   OverRent    OverRent[]
   RentRequest RentRequest[]
-  Cart        Cart[]
 }
 
 model Item {
@@ -82,8 +82,8 @@ model Cart {
   id       Int        @id @default(autoincrement())
   userId   Int
   value    Int
-  CartItem CartItem[]
   user     User       @relation(fields: [userId], references: [id])
+  CartItem CartItem[]
 }
 
 model CartItem {
