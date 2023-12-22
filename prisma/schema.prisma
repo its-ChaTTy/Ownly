@@ -21,6 +21,7 @@ model User {
   items       Item[]
   OverRent    OverRent[]
   RentRequest RentRequest[]
+  Cart        Cart[]
 }
 
 model Item {
@@ -33,6 +34,7 @@ model Item {
   userId      Int
   isAvailable Boolean       @default(true)
   ActiveRent  ActiveRent[]
+  CartItem    CartItem[]
   user        User          @relation(fields: [userId], references: [id])
   OverRent    OverRent[]
   RentRequest RentRequest[]
@@ -71,8 +73,29 @@ model RentRequest {
   status    Status   @default(PENDING)
   days      Int      @default(0)
   price     Int      @default(0)
+  cartId    Int?
   item      Item     @relation(fields: [itemId], references: [id])
   user      User     @relation(fields: [userId], references: [id])
+}
+
+model Cart {
+  id       Int        @id @default(autoincrement())
+  userId   Int
+  value    Int
+  CartItem CartItem[]
+  user     User       @relation(fields: [userId], references: [id])
+}
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  itemId    Int
+  cartId    Int
+  startDate DateTime
+  endDate   DateTime
+  days      Int      @default(0)
+  price     Int      @default(0)
+  Cart      Cart     @relation(fields: [cartId], references: [id])
+  Item      Item     @relation(fields: [itemId], references: [id])
 }
 
 enum Category {
