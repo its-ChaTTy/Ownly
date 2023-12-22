@@ -88,3 +88,22 @@ FOR EACH ROW
 EXECUTE FUNCTION checkItemAvailability();
 
 ```
+
+4. As soon as User Created we need to initialize empty cart
+```sql
+
+CREATE OR REPLACE FUNCTION createCartForNewUser()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO "Cart" ("userId", "value")
+  VALUES (NEW.id, 0);
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER create_cart_after_user_insert
+AFTER INSERT ON "User"
+FOR EACH ROW
+EXECUTE FUNCTION createCartForNewUser();
+```
