@@ -3,7 +3,16 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react'
 import './DatePicker.scss'
-const DatePicker = () => {
+import useAuth from '@/hooks/useAuth';
+const DatePicker = ({ id }) => {
+    const { itemStartDate,
+        setItemStartDate,
+        itemEndDate,
+        setItemEndDate,
+        itemPrice,
+        setItemPrice,
+        itemDays,
+        setItemDays } = useAuth()
     const [startValue, setStartValue] = useState(new Date());
     const onChangeStart = (date) => {
         setStartValue(date)
@@ -20,7 +29,7 @@ const DatePicker = () => {
     };
 
     const calculateTotalPrice = () => {
-        const pricePerDay = 100; // Adjust this value as needed
+        const pricePerDay = 100;
         const totalDays = calculateTotalDays();
         const totalPrice = pricePerDay * totalDays;
         return totalPrice;
@@ -49,6 +58,20 @@ const DatePicker = () => {
 
         return formattedDate;
     }
+
+    const addToCart = () => {
+        setItemStartDate(startValue)
+        setItemEndDate(endValue)
+        setItemPrice(calculateTotalPrice())
+        setItemDays(calculateTotalDays())
+        const data = {
+            'itemId' : id,
+            'startDate' : startValue,
+            'endDate' : endValue,
+            'price' : calculateTotalPrice(),
+            'days' : calculateTotalDays()
+        }
+    }
     return (
         <div className='DatePicker'>
             <div className='DatePicker__picker'>
@@ -74,7 +97,7 @@ const DatePicker = () => {
                     <p className='DatePicker__values--content__days'>Total Days = {calculateTotalDays()} days</p>
                     <p className='DatePicker__values--content__price'>Total Price = Rs. {calculateTotalPrice()}</p>
                 </div>
-                <button>Add to Cart</button>
+                <button onClick={() => { }}>Add to Cart</button>
             </div>
         </div>
     )

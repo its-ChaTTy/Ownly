@@ -13,7 +13,7 @@ const Store = ({ allItems }) => {
     const router = useRouter();
     const pills = ['ALL', 'ELECTRONICS', 'STATIONARY', 'APPAREL', 'FITNESS', 'FASHION']
     const [selectedPill, setSelectedPill] = useState('ALL')
-    
+    const [itemId, setItemId] = useState(null);
     const first10Items = allItems.slice(0, 10);
 
     return (
@@ -21,7 +21,7 @@ const Store = ({ allItems }) => {
             <Modal isOpen={showCalender} onClose={() => setShowCalender(false)} isCentered size={'xxl'}>
                 <ModalOverlay />
                 <ModalContent h={'65%'} width={'60%'} >
-                    <DatePicker />
+                    <DatePicker id={itemId} />
                 </ModalContent>
             </Modal>
             <div className='Store'>
@@ -44,8 +44,7 @@ const Store = ({ allItems }) => {
                                 // Add a on hover view which displays 2 buttons over the card
                                 <div className='Store__items--item' key={index}>
                                     <div className='Store__items--item__overlay'>
-                                        <button className='Store__items--item__overlay--button1' onClick={() => setShowCalender(true)}>Buy Now</button>
-                                        <button className='Store__items--item__overlay--button2'>Add to Cart</button>
+                                        <button className='Store__items--item__overlay--button1' onClick={() => {setShowCalender(true), setItemId(item.id)}}>Buy Now</button>
                                     </div>
                                     <div className='Store__items--item__image'>
                                         {/* <img src={item.imageURL[0]} alt='item' /> */}
