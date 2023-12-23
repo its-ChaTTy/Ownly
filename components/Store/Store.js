@@ -2,28 +2,15 @@ import { useState } from 'react'
 import './Store.scss'
 import Slideshow from '@/components/SlideShow/Slideshow';
 import { useRouter } from 'next/router'
-import {
-    Modal, ModalOverlay,
-    ModalContent,
-} from '@chakra-ui/react';
-import DatePicker from '../DatePicker/DatePicker';
 
 const Store = ({ allItems }) => {
-    const [showCalender, setShowCalender] = useState(false)
     const router = useRouter();
     const pills = ['ALL', 'ELECTRONICS', 'STATIONARY', 'APPAREL', 'FITNESS', 'FASHION']
     const [selectedPill, setSelectedPill] = useState('ALL')
-    const [itemId, setItemId] = useState(null);
     const first10Items = allItems.slice(0, 10);
 
     return (
         <>
-            <Modal isOpen={showCalender} onClose={() => setShowCalender(false)} isCentered size={'xxl'}>
-                <ModalOverlay />
-                <ModalContent h={'65%'} width={'60%'} >
-                    <DatePicker id={itemId} />
-                </ModalContent>
-            </Modal>
             <div className='Store'>
                 <div className='Store__header'>
                     <p className='Store__header--text1'>What sets us apart</p>
@@ -44,7 +31,7 @@ const Store = ({ allItems }) => {
                                 // Add a on hover view which displays 2 buttons over the card
                                 <div className='Store__items--item' key={index}>
                                     <div className='Store__items--item__overlay'>
-                                        <button className='Store__items--item__overlay--button1' onClick={() => {setShowCalender(true), setItemId(item.id)}}>Buy Now</button>
+                                        <button className='Store__items--item__overlay--button1' onClick={() => {router.push('/productPage')}}>Buy Now</button>
                                     </div>
                                     <div className='Store__items--item__image'>
                                         {/* <img src={item.imageURL[0]} alt='item' /> */}

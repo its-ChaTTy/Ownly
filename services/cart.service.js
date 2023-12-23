@@ -22,3 +22,12 @@ export async function addCartItem(data) {
         data
     })
 }
+
+export async function fetchCartId(userId) {
+    const cart = await db.cart.findFirst({
+        where: {
+            userId
+        }
+    })
+    return cart.id;
+}

@@ -4,26 +4,33 @@ import {
     Modal, ModalOverlay,
     ModalContent,
 } from '@chakra-ui/react';
-import { useState } from 'react'
+import {  useState } from 'react'
+
 import DatePicker from '../DatePicker/DatePicker';
-function ProductPageCards({ items }) {
+
+function ProductPageCards({ items, userId }) {
     const [showCalender, setShowCalender] = useState(false)
+    const [itemId, setItemId] = useState(items[0].id);
+    const [price, setPrice] = useState(items[0].price);
 
     return (
         <>
             <Modal isOpen={showCalender} onClose={() => setShowCalender(false)} isCentered size={'xxl'}>
                 <ModalOverlay />
                 <ModalContent h={'65%'} width={'60%'} >
-                    <DatePicker />
+                    <DatePicker id={itemId} userId={userId} price={price} />
                 </ModalContent>
             </Modal>
             <div className="Product__Cards">
                 {items.map((item, index) => {
                     return (
-                        // Add a on hover view which displays 2 buttons over the card
                         <div className='Product__Cards--item' key={index}>
                             <div className='Product__Cards--item__overlay'>
-                                <button onClick={() => setShowCalender(true)} className='Product__Cards--item__overlay--button1'>Buy Now</button>
+                                <button onClick={() => {
+                                    setItemId(item.id);
+                                    setPrice(item.price);
+                                    setShowCalender(true);
+                                }} className='Product__Cards--item__overlay--button1'>Buy Now</button>
                             </div>
                             <div className='Product__Cards--item__image'>
                                 <Slideshow imageURL={item.imageURL} />
