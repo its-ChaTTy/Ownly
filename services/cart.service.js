@@ -1,3 +1,4 @@
+import Cart from '@/components/Cart/Cart'
 import db from '@/lib/prisma'
 
 export async function initializeCart(data) {
@@ -6,13 +7,13 @@ export async function initializeCart(data) {
     })
 }
 
-export async function fetchCart(id) {
-    return db.cart.findUnique({
+export async function fetchCart(userId) {
+    return db.cart.findFirst({
         where: {
-            id
+            userId
         },
         include: {
-            items: true
+            CartItem: true,
         }
     })
 }
