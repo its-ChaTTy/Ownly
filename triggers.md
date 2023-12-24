@@ -107,3 +107,54 @@ AFTER INSERT ON "User"
 FOR EACH ROW
 EXECUTE FUNCTION createCartForNewUser();
 ```
+
+5. On Update, Add or Delete of CartItem, update the cart value
+```sql
+CREATE OR REPLACE FUNCTION updateCartOnCartItemInsert()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Cart"
+  SET "value" = "value" + NEW."price"
+  WHERE "id" = NEW."cartId";
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateCartOnCartItemDelete()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Cart"
+  SET "value" = "value" - OLD."price"
+  WHERE "id" = OLD."cartId";
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateCartOnCartItemUpdate()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Cart"
+  SET "value" = "value" - OLD."price" + NEW."price"
+  WHERE "id" = NEW."cartId";
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_cart_on_cartitem_insert
+AFTER INSERT ON "CartItem"
+FOR EACH ROW
+EXECUTE FUNCTION updateCartOnCartItemInsert();
+
+CREATE TRIGGER update_cart_on_cartitem_delete
+AFTER DELETE ON "CartItem"
+FOR EACH ROW
+EXECUTE FUNCTION updateCartOnCartItemDelete();
+
+CREATE TRIGGER update_cart_on_cartitem_update
+AFTER UPDATE ON "CartItem"
+FOR EACH ROW
+EXECUTE FUNCTION updateCartOnCartItemUpdate();
+```
