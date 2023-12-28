@@ -38,8 +38,7 @@ export default function ProductPage({ allItems, user }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const sortProducts = (sortOrder) => {
-    console.log('sortOrder:', sortOrder); // Add this line
-  
+    setIsLoading(true);
     let sortedItems = [...itemsArray];
   
     if (sortOrder === 1) {
@@ -48,9 +47,8 @@ export default function ProductPage({ allItems, user }) {
       sortedItems.sort((a, b) => Number(b.price) - Number(a.price));
     }
   
-    console.log('sortedItems:', sortedItems); // Add this line
-  
     setItems(sortedItems);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -61,7 +59,7 @@ export default function ProductPage({ allItems, user }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds
+    }, 500); // 1 seconds
 
     return () => clearTimeout(timer);
   }, []);

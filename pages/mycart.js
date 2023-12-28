@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
 function mycart({ user, items, userCart }) {
   const [isLoading, setIsLoading] = useState(true);
   const handleCheckout = async () => {
-
+    setIsLoading(true);
     try {
 
       const requests = items.map(async (item) => {
@@ -101,13 +101,14 @@ function mycart({ user, items, userCart }) {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   }
 
   // Simulate loading
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000); // 2 seconds
+    }, 500); // 2 seconds
 
     return () => clearTimeout(timer);
   }, []);
