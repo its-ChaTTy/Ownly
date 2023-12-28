@@ -13,7 +13,7 @@ import ListItem from '@/components/ListItem/ListItem';
 import { getAllItemsByUser } from "@/services/items.service";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { fetchAllCompletedLending } from "@/services/rent.service";
+import { fetchAllCompletedBorrowing } from "@/services/rent.service";
 
 export async function getServerSideProps(context) {
 
@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
     }
 
     const allItems = await getAllItemsByUser(context.req.session.user.id);
-    const lent = await fetchAllCompletedLending(context.req.session.user.id);
+    const lent = await fetchAllCompletedBorrowing(context.req.session.user.id);
 
     const history = lent.map((rent) => {
         return {
