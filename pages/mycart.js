@@ -4,6 +4,8 @@ import Navbar from "@/components/Navbar/Navbar";
 import { fetchAvailableItems } from '@/services/items.service';
 import CartCard from '@/components/CartCard/CartCard';
 import '../styles/routes/mycart.scss'
+import { createRentRequest } from '@/operations/request.fetch';
+import { removeCartItem } from '@/operations/cart.fetch';
 export async function getServerSideProps(context) {
   const user = context.req.session.user;
 
@@ -26,6 +28,7 @@ export async function getServerSideProps(context) {
   cart = cart.CartItem.map((item) => {
     return {
       ...item,
+      cartItemId: item.id,
       startDate: JSON.stringify(item.startDate),
       endDate: JSON.stringify(item.endDate),
     }
@@ -53,6 +56,50 @@ function mycart({ user, items, userCart }) {
   useEffect(() => {
     console.log(items);
   }, [])
+
+  const handleCehckout = async () => {
+    try {
+      const requests = items.map(async (item) => {
+        const rentreq = {
+          itemId: item.itemId,
+          userId: item.userId,
+          startDate: item.startDate.slice(1, -1),
+          endDate: item.endDate.slice(1, -1),
+          price: item.price,
+          cartId: item.cartId,
+        };
+
+        const response = await createRentRequest(rentreq);
+
+        if (response.status === 200) {
+          console.log(response);
+        } else {
+          console.log(response);
+          throw new Error('Failed to create rent request');
+        }
+      });
+
+      await Promise.all(requests);
+
+      const cartItems = items.map(async (item) => {
+        const data = {
+          cartItemId: item.cartItemId
+        }
+        const response = await removeCartItem(data);
+        if (response.status === 200) {
+          console.log(response);
+        } else {
+          console.log(response);
+          throw new Error('Failed to remove cart item');
+        }
+      })
+      await Promise.all(cartItems)
+
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <>
       <div className="section_navbar">
@@ -64,7 +111,7 @@ function mycart({ user, items, userCart }) {
           <p className='CartSection__value--value'>Rs. {userCart.value}</p>
         </div>
         <div className='CartSection__cards'>
-          {items.map((item,index) => {
+          {items.map((item, index) => {
             return (
               <div className='CartSection__cards--item' key={index}>
                 <CartCard item={item} />
@@ -73,7 +120,7 @@ function mycart({ user, items, userCart }) {
           })}
         </div>
         <div className='CartSection__buttons'>
-          <button className='CartSection__buttons--checkout'>Checkout</button>
+          <button onClick={() => { handleCehckout() }} className='CartSection__buttons--checkout'>Checkout</button>
           <button className='CartSection__buttons--clear'>Clear Cart</button>
         </div>
       </div>

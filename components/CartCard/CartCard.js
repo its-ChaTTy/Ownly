@@ -1,52 +1,9 @@
 import './CartCard.scss'
 import Image from 'next/image'
 
-// cartId
-// : 
-// 1
-// category
-// : 
-// "FITNESS"
-// days
-// : 
-// 1
-// description
-// : 
-// "Testing Product Add"
-// endDate
-// : 
-// "\"2023-12-28T18:30:00.000Z\""
-// id
-// : 
-// 8
-// imageURL
-// : 
-// ['https://aniaodrkdkwrtfkhpjgp.supabase.co/storage/v1/object/public/ownly-images/level']
-// isAvailable
-// : 
-// true
-// itemId
-// : 
-// 8
-// name
-// : 
-// "Tesing Product"
-// price
-// : 
-// 40
-// startDate
-// : 
-// "\"2023-12-27T18:30:00.000Z\""
-// userId
-// : 
-// 3
-
 const CartCard = ({ item }) => {
     function formatDateString(inputDateString) {
         const dateString = inputDateString.slice(1, -1);
-
-        // Alternatively, you can use regular expression to remove double quotes
-        // const dateString = inputDateString.replace(/^"(.*)"$/, '$1');
 
         const date = new Date(dateString);
 
