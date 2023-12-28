@@ -1,14 +1,28 @@
-import React from 'react'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react'
 import './DatePicker.scss'
-const DatePicker = () => {
+import useAuth from '@/hooks/useAuth';
+import { addCart } from '@/operations/user.fetch';
+
+const DatePicker = ({ id, userId = 0, price }) => {
+
+    const { itemStartDate,
+        setItemStartDate,
+        itemEndDate,
+        setItemEndDate,
+        itemPrice,
+        setItemPrice,
+        itemDays,
+        setItemDays } = useAuth()
+
     const [startValue, setStartValue] = useState(new Date());
     const onChangeStart = (date) => {
         setStartValue(date)
     }
+
     const [endValue, setEndValue] = useState(new Date());
+
     const onChangeEnd = (date) => {
         setEndValue(date)
     }
@@ -20,7 +34,7 @@ const DatePicker = () => {
     };
 
     const calculateTotalPrice = () => {
-        const pricePerDay = 100; // Adjust this value as needed
+        const pricePerDay = price;
         const totalDays = calculateTotalDays();
         const totalPrice = pricePerDay * totalDays;
         return totalPrice;
@@ -49,6 +63,42 @@ const DatePicker = () => {
 
         return formattedDate;
     }
+
+    const addToCart = () => {
+        if (startValue > endValue) {
+            alert('Start Date should be less than End Date')
+            return
+        }
+
+        setItemStartDate(startValue)
+        setItemEndDate(endValue)
+        setItemPrice(calculateTotalPrice())
+        setItemDays(calculateTotalDays())
+
+        const data = {
+            'itemId': id,
+            'startDate': startValue,
+            'endDate': endValue,
+            'price': calculateTotalPrice(),
+            'days': calculateTotalDays(),
+            'userId': userId
+        }
+
+        addCart(data).then((res) => {
+            if (res.status === 200) {
+                alert('Item added to cart')
+                window.location.reload()
+            }
+            else {
+                alert('Error adding item to cart')
+                window.location.reload()
+            }
+        }).catch((err) => {
+            console.log(err)
+        });
+
+    }
+
     return (
         <div className='DatePicker'>
             <div className='DatePicker__picker'>
@@ -74,7 +124,7 @@ const DatePicker = () => {
                     <p className='DatePicker__values--content__days'>Total Days = {calculateTotalDays()} days</p>
                     <p className='DatePicker__values--content__price'>Total Price = Rs. {calculateTotalPrice()}</p>
                 </div>
-                <button>Add to Cart</button>
+                <button onClick={() => { addToCart() }} className='DatePicker__values--button'>Add to Cart</button>
             </div>
         </div>
     )

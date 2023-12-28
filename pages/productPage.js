@@ -80,7 +80,7 @@ export default function ProductPage({ allItems, user }) {
           <ProductPageFilter />
         </div>
         <div className="section_main__cards">
-          <ProductPageCards items={itemsArray} />
+          <ProductPageCards items={itemsArray} userId={user.id} />
         </div>
       </div>
       <div className="section">

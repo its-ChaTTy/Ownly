@@ -1,6 +1,7 @@
 # Database Triggers and Functions
 
 1. After a RentRequest is accepted then reject all other requests for that property during that tenure
+
 ```sql
 CREATE OR REPLACE FUNCTION updateRentRequests(
   i INT,
@@ -41,6 +42,7 @@ EXECUTE FUNCTION request_accepted();
 ```
 
 2. If an Item is deleted i.e. userId is set to 0, then 'REJECT' all the requests for that item and update user to 0 which is pointing to NULL user to avoid foreign key constraint and deleting user renting history
+
 ```sql
 CREATE OR REPLACE FUNCTION rejectRentRequestsOnUserUpdate()
 RETURNS TRIGGER AS $$
@@ -65,6 +67,7 @@ EXECUTE FUNCTION rejectRentRequestsOnUserUpdate();
 ```
 
 3. If a property is made unavailable then you can't create any more new requests for that property
+
 ```sql
 CREATE OR REPLACE FUNCTION checkItemAvailability()
 RETURNS TRIGGER AS $$
@@ -86,5 +89,98 @@ CREATE TRIGGER check_item_availability_trigger
 BEFORE INSERT ON "RentRequest"
 FOR EACH ROW
 EXECUTE FUNCTION checkItemAvailability();
+
+```
+
+4. As soon as User Created we need to initialize empty cart
+
+```sql
+
+CREATE OR REPLACE FUNCTION createCartForNewUser()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO "Cart" ("userId", "value")
+  VALUES (NEW.id, 0);
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER create_cart_after_user_insert
+AFTER INSERT ON "User"
+FOR EACH ROW
+EXECUTE FUNCTION createCartForNewUser();
+```
+
+5. On Update, Add or Delete of CartItem, update the cart value
+
+```sql
+CREATE OR REPLACE FUNCTION updateCartOnCartItemInsert()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Cart"
+  SET "value" = "value" + NEW."price"
+  WHERE "id" = NEW."cartId";
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateCartOnCartItemDelete()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Cart"
+  SET "value" = "value" - OLD."price"
+  WHERE "id" = OLD."cartId";
+
+  RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION updateCartOnCartItemUpdate()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "Cart"
+  SET "value" = "value" - OLD."price" + NEW."price"
+  WHERE "id" = NEW."cartId";
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_cart_on_cartitem_insert
+AFTER INSERT ON "CartItem"
+FOR EACH ROW
+EXECUTE FUNCTION updateCartOnCartItemInsert();
+
+CREATE TRIGGER update_cart_on_cartitem_delete
+AFTER DELETE ON "CartItem"
+FOR EACH ROW
+EXECUTE FUNCTION updateCartOnCartItemDelete();
+
+CREATE TRIGGER update_cart_on_cartitem_update
+AFTER UPDATE ON "CartItem"
+FOR EACH ROW
+EXECUTE FUNCTION updateCartOnCartItemUpdate();
+```
+
+5. After user create, automatically update his profile pic
+
+```sql
+CREATE OR REPLACE FUNCTION updateUserProfilePic()
+RETURNS TRIGGER AS $$
+BEGIN
+  UPDATE "User"
+  SET "profilePic" = 'https://aniaodrkdkwrtfkhpjgp.supabase.co/storage/v1/object/public/profile-photos/' || NEW."id" || '/profile'
+  WHERE "id" = NEW."id";
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_user_profile_pic
+AFTER INSERT ON "User"
+FOR EACH ROW
+EXECUTE FUNCTION updateUserProfilePic();
 
 ```
