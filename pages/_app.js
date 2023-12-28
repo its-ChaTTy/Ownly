@@ -7,22 +7,20 @@ import Head from 'next/head';
 
 function MyApp({ Component, pageProps, user }) {
   return (
-    <AuthProvider user={user}>
-         <Head>
-            <title>Ownly</title>
-            <meta
-              name="description"
-              content="A new age renting platform where you can rent anything and everything as long as it is just a thing ;)"
-            />
-            <link
-              rel="icon"
-              href="/favicon.ico"
-            />
-          </Head>
-      <ChakraProvider>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </AuthProvider>
+    <>
+      <Head>
+        <title>Ownly</title>
+        <meta
+          name="description"
+          content="A new age renting platform where you can rent anything and everything as long as it is just a thing ;)"
+        />
+      </Head>
+      <AuthProvider user={user}>
+        <ChakraProvider>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </AuthProvider>
+    </>
   );
 }
 
