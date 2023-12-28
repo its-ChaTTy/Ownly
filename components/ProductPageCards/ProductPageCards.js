@@ -4,8 +4,7 @@ import {
     Modal, ModalOverlay,
     ModalContent,
 } from '@chakra-ui/react';
-import {  useState } from 'react'
-
+import { useState } from 'react'
 import DatePicker from '@/components/DatePicker/DatePicker';
 
 function ProductPageCards({ items, userId }) {
@@ -30,7 +29,11 @@ function ProductPageCards({ items, userId }) {
                                     setItemId(item.id);
                                     setPrice(item.price);
                                     setShowCalender(true);
-                                }} className='Product__Cards--item__overlay--button1'>Buy Now</button>
+                                }} className='Product__Cards--item__overlay--button1'
+                                    style={{
+                                        display: item.userId === userId ? 'none' : ''
+                                    }}
+                                >Buy Now</button>
                             </div>
                             <div className='Product__Cards--item__image'>
                                 <Slideshow imageURL={item.imageURL} />
