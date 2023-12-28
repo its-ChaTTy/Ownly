@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react';
 import {  useState } from 'react'
 
-import DatePicker from '../DatePicker/DatePicker';
+import DatePicker from '@/components/DatePicker/DatePicker';
 
 function ProductPageCards({ items, userId }) {
     const [showCalender, setShowCalender] = useState(false)

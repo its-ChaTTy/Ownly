@@ -3,9 +3,10 @@ import { useEffect } from 'react';
 import Navbar from "@/components/Navbar/Navbar";
 import { fetchAvailableItems } from '@/services/items.service';
 import CartCard from '@/components/CartCard/CartCard';
-import '../styles/routes/mycart.scss'
+import '@/styles/routes/mycart.scss'
 import { createRentRequest } from '@/operations/request.fetch';
 import { removeCartItem } from '@/operations/cart.fetch';
+
 export async function getServerSideProps(context) {
   const user = context.req.session.user;
 
@@ -53,13 +54,13 @@ export async function getServerSideProps(context) {
 
 
 function mycart({ user, items, userCart }) {
-  useEffect(() => {
-    console.log(items);
-  }, [])
 
-  const handleCehckout = async () => {
+  const handleCheckout = async () => {
+
     try {
+
       const requests = items.map(async (item) => {
+
         const rentreq = {
           itemId: item.itemId,
           userId: item.userId,
@@ -83,7 +84,8 @@ function mycart({ user, items, userCart }) {
 
       const cartItems = items.map(async (item) => {
         const data = {
-          cartItemId: item.cartItemId
+          cartItemId: item.cartItemId,
+          cartId: item.cartId,
         }
         const response = await removeCartItem(data);
         if (response.status === 200) {
@@ -100,30 +102,39 @@ function mycart({ user, items, userCart }) {
       console.error(error);
     }
   }
+
   return (
     <>
       <div className="section_navbar">
         <Navbar />
       </div>
-      <div className='CartSection'>
-        <div className='CartSection__value'>
-          <p className='CartSection__value--text'>Total Cart Value - </p>
-          <p className='CartSection__value--value'>Rs. {userCart.value}</p>
-        </div>
-        <div className='CartSection__cards'>
-          {items.map((item, index) => {
-            return (
-              <div className='CartSection__cards--item' key={index}>
-                <CartCard item={item} />
-              </div>
-            )
-          })}
-        </div>
-        <div className='CartSection__buttons'>
-          <button onClick={() => { handleCehckout() }} className='CartSection__buttons--checkout'>Checkout</button>
-          <button className='CartSection__buttons--clear'>Clear Cart</button>
-        </div>
-      </div>
+      {
+        userCart.value === 0 ?
+          <div className='CartSection__empty'>
+            <p className='CartSection__empty--text'>Your Cart is Empty, Add some items to cart</p>
+          </div>
+          :
+          <div className='CartSection'>
+            <div className='CartSection__value'>
+              <p className='CartSection__value--text'>Total Cart Value - </p>
+              <p className='CartSection__value--value'>Rs. {userCart.value}</p>
+            </div>
+            <div className='CartSection__cards'>
+              {items.map((item, index) => {
+                return (
+                  <div className='CartSection__cards--item' key={index}>
+                    <CartCard item={item} />
+                  </div>
+                )
+              })}
+            </div>
+            <div className='CartSection__buttons'>
+              <button onClick={() => { handleCheckout() }} className='CartSection__buttons--checkout'>Checkout</button>
+              <button className='CartSection__buttons--clear'>Clear Cart</button>
+            </div>
+          </div>
+      }
+
     </>
   )
 }

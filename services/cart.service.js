@@ -33,10 +33,11 @@ export async function fetchCartId(userId) {
     return cart.id;
 }
 
-export async function deleteCartItem(id) {
+export async function deleteCartItem(id, cartId) {
     return db.cartItem.delete({
         where: {
-            id
+            id,
+            cartId
         }
     })
 }

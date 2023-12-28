@@ -1,5 +1,5 @@
 import './CartCard.scss'
-import Image from 'next/image'
+import { removeCartItem } from '@/operations/cart.fetch';
 
 const CartCard = ({ item }) => {
     function formatDateString(inputDateString) {
@@ -15,6 +15,27 @@ const CartCard = ({ item }) => {
 
         return date.toLocaleDateString('en-US', options);
     }
+
+    const handleDelete = async () => {
+        try {
+            const data = {
+                cartItemId: item.cartItemId,
+                cartId: item.cartId,
+            }
+
+            const cartItem = await removeCartItem(data);
+            if (cartItem.status === 200) {
+                alert('Cart item removed');
+                window.location.reload();
+            } else {
+                alert('Failed to remove cart item');
+            }
+        }
+        catch (error) {
+            alert('Failed to remove cart item');
+        }
+    }
+
     return (
         <div className='CartCard'>
             <div className='CartCard__top'>
@@ -43,8 +64,9 @@ const CartCard = ({ item }) => {
                         <p className='CartCard__bottom--details__content--item_name'>{item.name}</p>
                         <p className='CartCard__bottom--details__content--item_desc'>{item.description}</p>
                         <div className='CartCard__bottom--details__content--buttons'>
-                            {/* <button className='CartCard__bottom--details__content--buttons__again'>Rent it again</button> */}
-                            <button className='CartCard__bottom--details__content--buttons__view'>Delete</button>
+                            <button className='CartCard__bottom--details__content--buttons__view'
+                                onClick={() => { handleDelete() }}
+                            >Delete</button>
                         </div>
                     </div>
                 </div>
