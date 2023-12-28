@@ -12,6 +12,7 @@ import {
 import ListItem from '@/components/ListItem/ListItem';
 import { getAllItemsByUser } from "@/services/items.service";
 import { useEffect, useState } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export async function getServerSideProps(context) {
 
@@ -35,6 +36,7 @@ export async function getServerSideProps(context) {
 
 export default function Profile({ user, allItems }) {
 
+    const [isLoading, setIsLoading] = useState(true);
     const history_items = [
         {
             'id': 'abcdefg',
@@ -95,8 +97,17 @@ export default function Profile({ user, allItems }) {
             setEditItem(null);
     }, [addModal, editItem])
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+        }, 2000); // 2 seconds
+    
+        return () => clearTimeout(timer);
+      }, []);
+
     return (
         <>
+            {isLoading && <LoadingSpinner />}
             <Modal isOpen={addModal} onClose={() => setAddModal(!addModal)} size={'xxl'}>
                 <ModalOverlay />
                 <ModalContent w={'90%'} h={'80%'} >

@@ -8,6 +8,8 @@ import Earning from "@/components/Earning/Earning";
 import How_it_works from "@/components/How_it_works/How_it_works";
 import { fetchAvailableItems } from "@/services/items.service";
 import "@/styles/routes/index.scss";
+import { useState, useEffect } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
@@ -25,9 +27,20 @@ export async function getServerSideProps(context) {
 
 
 export default function Home({ allItems, user }) {
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Simulate loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+  
   return (
     <>
+      {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
         <Navbar />
       </div>

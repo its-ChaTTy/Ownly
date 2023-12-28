@@ -6,6 +6,7 @@ import ProductPageCards from "@/components/ProductPageCards/ProductPageCards";
 import { useState, useEffect } from "react";
 import { fetchAvailableItems } from "@/services/items.service";
 import '@/styles/routes/productPage.scss'
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export async function getServerSideProps(context) {
   
@@ -34,6 +35,7 @@ export default function ProductPage({ allItems, user }) {
 
   const [sortOrder, setSortOrder] = useState(0);
   const [itemsArray, setItems] = useState(allItems);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sortProducts = (sortOrder) => {
     console.log('sortOrder:', sortOrder); // Add this line
@@ -55,8 +57,18 @@ export default function ProductPage({ allItems, user }) {
     sortProducts(sortOrder);
   }, [sortOrder, allItems]);
 
+  // Simulate loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
+      {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
         <Navbar />
       </div>

@@ -12,6 +12,7 @@ model User {
   email       String        @unique
   password    String
   name        String
+  profilePic  String        @default("")
   address     String        @default("")
   phone       Int           @default(0)
   location    String        @default("")
