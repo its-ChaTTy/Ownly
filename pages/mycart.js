@@ -1,11 +1,13 @@
 import { fetchCart } from '@/services/cart.service';
-import { useEffect } from 'react';
 import Navbar from "@/components/Navbar/Navbar";
 import { fetchAvailableItems } from '@/services/items.service';
 import CartCard from '@/components/CartCard/CartCard';
 import '@/styles/routes/mycart.scss'
 import { createRentRequest } from '@/operations/request.fetch';
 import { removeCartItem } from '@/operations/cart.fetch';
+import Cart from '@/components/Cart/Cart'
+import { useState, useEffect } from "react";
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export async function getServerSideProps(context) {
   const user = context.req.session.user;
@@ -52,9 +54,8 @@ export async function getServerSideProps(context) {
 
 }
 
-
 function mycart({ user, items, userCart }) {
-
+  const [isLoading, setIsLoading] = useState(true);
   const handleCheckout = async () => {
 
     try {
@@ -102,9 +103,19 @@ function mycart({ user, items, userCart }) {
       console.error(error);
     }
   }
+  
+  // Simulate loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000); // 2 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
+      {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
         <Navbar />
       </div>
@@ -134,7 +145,6 @@ function mycart({ user, items, userCart }) {
             </div>
           </div>
       }
-
     </>
   )
 }
