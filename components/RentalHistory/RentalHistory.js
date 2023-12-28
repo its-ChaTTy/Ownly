@@ -2,12 +2,27 @@ import './RentalHistory.scss'
 import Image from 'next/image'
 
 const RentalHistory = ({ item }) => {
+
+    function formatDateString(inputDateString) {
+        const dateString = inputDateString.slice(1, -1);
+
+        const date = new Date(dateString);
+
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        };
+
+        return date.toLocaleDateString('en-US', options);
+    }
+
     return (
         <div className='RentalHistory'>
             <div className='RentalHistory__top'>
                 <div className='RentalHistory__top--placed'>
                     <p className='RentalHistory__top--placed__text'>Order Placed</p>
-                    <p className='RentalHistory__top--placed__value'>{item.order_placed}</p>
+                    <p className='RentalHistory__top--placed__value'>{formatDateString(item.order_placed)}</p>
                 </div>
                 <div className='RentalHistory__top--total'>
                     <p className='RentalHistory__top--total__text'>Total</p>
@@ -23,7 +38,7 @@ const RentalHistory = ({ item }) => {
                 </div>
             </div>
             <div className='RentalHistory__bottom'>
-                <div className='RentalHistory__bottom--delivered'>Delivered On {item.delivered_date}</div>
+                <div className='RentalHistory__bottom--delivered'>Delivered On {formatDateString(item.delivered_date)}</div>
                 <div className='RentalHistory__bottom--details'>
                     <Image width={140} height={140} src={item.item_image} />
                     <div className='RentalHistory__bottom--details__content'>

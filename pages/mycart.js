@@ -5,7 +5,6 @@ import CartCard from '@/components/CartCard/CartCard';
 import '@/styles/routes/mycart.scss'
 import { createRentRequest } from '@/operations/request.fetch';
 import { removeCartItem } from '@/operations/cart.fetch';
-import Cart from '@/components/Cart/Cart'
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
@@ -103,7 +102,7 @@ function mycart({ user, items, userCart }) {
       console.error(error);
     }
   }
-  
+
   // Simulate loading
   useEffect(() => {
     const timer = setTimeout(() => {
