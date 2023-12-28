@@ -13,11 +13,10 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 function ProfileElements({ user }) {
-
     const [phone, setPhone] = useState(user.phone);
     const [address, setAddress] = useState(user.address);
     const [location, setLocation] = useState(user.location);
-    const [profilePhotoUrl, setProfilePhotoUrl] = useState(user.profilePicture || "");
+    const [profilePhotoUrl, setProfilePhotoUrl] = useState(user.profilePic);
 
     const button = (phone === 0 || address === '' || location === '') ? true : false;
 
@@ -27,7 +26,9 @@ function ProfileElements({ user }) {
         fileInputRef.current.click();
     };
 
-    console.log(profilePhotoUrl);
+    const onImageError = (e) => {
+        setProfilePhotoUrl('/Images/Assets/profile.png');
+    };
 
     const uploadFile = async (file, file_path) => {
         const { data, error } = await supabase.storage.from('profile-photos').upload(file_path, file);
@@ -41,7 +42,7 @@ function ProfileElements({ user }) {
 
     const uploadProfilePhotoHandler = async (event) => {
         const file = event.target.files[0];
-        const file_path = `${user.id}/${file.name}`;
+        const file_path = `${user.id}/profile`;
         if (file.size > 1024 * 1024 * 3) {
             alert('File is larger than 3MB');
             return;
@@ -83,9 +84,7 @@ function ProfileElements({ user }) {
             <div className='profileElements__profilePicture'>
                 <div className='profileElements__profilePicture--text'>My Profile</div>
                 <div className='profileElements__profilePicture--workspaceAdmin'>
-                    {/* <img className='profileElements__profilePicture--workspaceAdmin--img' src={profilePhotoUrl || '/Images/Assets/profile.png'} width={70} height={50} /> */}
-                    {/* console.log(profilePhotoUrl || '/Images/Assets/profile.png'); */}
-                    <Image className='profileElements__profilePicture--workspaceAdmin--img' src={profilePhotoUrl || '/Images/Assets/profile.png'} width={70} height={50} />
+                    <Image className='profileElements__profilePicture--workspaceAdmin--img' src={profilePhotoUrl} onError={onImageError} width={70} height={50} alt="profile" />
                     <div className="profileElements__profilePicture--workspaceAdmin--textWrapper">
                         <div className="profileElements__profilePicture--workspaceAdmin--textWrapper--text1">{user.name}</div>
                         <div className="profileElements__profilePicture--workspaceAdmin--textWrapper--text2">{user.email}</div>
