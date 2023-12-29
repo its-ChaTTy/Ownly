@@ -22,7 +22,7 @@ function Register() {
             return
         }
         if (!isPassword(password)) {
-            alert('Password must be at least 8 characters')
+            alert('Password must be at least 8 characters, contain at least 1 letter and 1 number')
             return
         }
         if (password !== confirmPassword) {
