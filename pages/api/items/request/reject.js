@@ -1,11 +1,11 @@
 import { withSessionRoute } from "@/lib/ironOptions";
 import { isItemByUser } from "@/services/items.service";
 import { getActiveRent } from "@/services/items.service";
-import { acceptRequest } from "@/services/requests.service";
+import { rejectRequest } from "@/services/requests.service";
 
-export default withSessionRoute(requestAccept);
+export default withSessionRoute(requestReject);
 
-async function requestAccept(req, res) {
+async function requestReject(req, res) {
 
     // id is the id of the request
     // itemId is the id of the item, check if the user is the owner of the item and if the item is available
@@ -32,7 +32,7 @@ async function requestAccept(req, res) {
     }
 
     try {
-        const request = await acceptRequest(id);
+        const request = await rejectRequest(id);
         return res.json({ status: 200, message: "Request accepted", request });
     }
     catch (error) {

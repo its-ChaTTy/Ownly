@@ -4,12 +4,13 @@ import { FaArrowLeft } from "react-icons/fa";
 import '@/styles/routes/auth/login.scss'
 import { useState } from "react";
 import { Input, Button } from '@chakra-ui/react'
+import { useRouter } from "next/router";
 
 function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
+    const router = useRouter()
     const handleLogin = async () => {
         if (!isEmail(email)) {
             alert('Please enter a valid email')
@@ -55,7 +56,7 @@ function Login() {
                         marginTop: '1rem',
                         borderRadius: '7px'
                     }}>Login</Button>
-                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>Don't have an account? <span style={{ color: '#113447' }}>Sign Up</span></p>
+                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>Don't have an account? <span onClick={() => { router.push('/auth/register') }} style={{ color: '#113447', cursor: "pointer" }}>Sign Up</span></p>
                 </div>
 
             </div>

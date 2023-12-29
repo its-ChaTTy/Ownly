@@ -63,7 +63,7 @@ function mycart({ user, items, userCart }) {
 
         const rentreq = {
           itemId: item.itemId,
-          userId: item.userId,
+          userId: user.id,
           startDate: item.startDate.slice(1, -1),
           endDate: item.endDate.slice(1, -1),
           price: item.price,

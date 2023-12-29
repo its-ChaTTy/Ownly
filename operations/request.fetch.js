@@ -12,3 +12,33 @@ export async function createRentRequest(data) {
         console.log(err)
     });
 }
+
+export async function acceptRentRequest(data) {
+    return await fetch('/api/items/request/accept', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: "include"
+    }).then((res) => {
+        return res.json()
+    }).catch((err) => {
+        console.log(err)
+    });
+}
+
+export async function rejectRentRequest(data) {
+    return await fetch('/api/items/request/reject', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: "include"
+    }).then((res) => {
+        return res.json()
+    }).catch((err) => {
+        console.log(err)
+    });
+}

@@ -10,10 +10,12 @@ import {
     ModalContent,
 } from '@chakra-ui/react';
 import ListItem from '@/components/ListItem/ListItem';
-import { getAllItemsByUser } from "@/services/items.service";
+import { fetchAvailableItems, getAllItemsByUser } from "@/services/items.service";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { fetchAllCompletedBorrowing } from "@/services/rent.service";
+import { getAllRequests, getUserRequests } from "@/services/requests.service";
+import RentRequest from "@/components/RentRequest/RentRequest";
 
 export async function getServerSideProps(context) {
 
@@ -28,7 +30,7 @@ export async function getServerSideProps(context) {
 
     const allItems = await getAllItemsByUser(context.req.session.user.id);
     const lent = await fetchAllCompletedBorrowing(context.req.session.user.id);
-
+    const allAvailableItems = await fetchAvailableItems()
     const history = lent.map((rent) => {
         return {
             id: rent.id,
@@ -43,13 +45,39 @@ export async function getServerSideProps(context) {
     })
 
     const user = context.req.session.user;
+    const allRequests = await getAllRequests();
+    const userRequests = await getUserRequests(user.id);
+    let recievedRequests = [];
+    let sentRequests = [];
+
+    allRequests.forEach((request) => {
+        const item = allItems.find((item) => item.id === request.itemId);
+        if (item) {
+            recievedRequests.push({
+                ...item,
+                ...request,
+            });
+        }
+    })
+
+    userRequests.forEach((request) => {
+        const item = allAvailableItems.find((item) => item.id === request.itemId);
+        console.log(request.itemId)
+        if (item) {
+            sentRequests.push({
+                ...item,
+                ...request,
+            });
+        }
+    })
+
     return {
-        props: { user: user, allItems: allItems, history: history },
+        props: { user: user, allItems: allItems, history: history, sentRequests: JSON.parse(JSON.stringify(sentRequests)), recievedRequests: JSON.parse(JSON.stringify(recievedRequests)) },
     }
 
 }
 
-export default function Profile({ user, allItems, history }) {
+export default function Profile({ user, allItems, history, sentRequests, recievedRequests }) {
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -111,6 +139,32 @@ export default function Profile({ user, allItems, history }) {
                                                 <RentalHistory item={item} />
                                             </div>)
                                     })}
+                                </div> :
+                                null
+                        }
+                        {
+                            page === 'requests' ?
+                                <div className="profile_main--elements__requests">
+                                    <p className="profile_main--elements__requests--text">Recieved Requests</p>
+                                    {
+                                        recievedRequests.map((item, index) => {
+                                            if (item.status !== 'REJECTED') {
+                                                return (
+                                                    <div className='Listing__main--item' key={index}>
+                                                        <RentRequest item={item} sent={false} user={user} />
+                                                    </div>)
+                                            }
+                                        })
+                                    }
+                                    <p className="profile_main--elements__requests--text">Sent Requests</p>
+                                    {
+                                        sentRequests.map((item, index) => {
+                                            return (
+                                                <div className='Listing__main--item' key={index}>
+                                                    <RentRequest item={item} sent={true} user={user} />
+                                                </div>)
+                                        })
+                                    }
                                 </div> :
                                 null
                         }

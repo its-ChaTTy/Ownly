@@ -6,6 +6,10 @@ export async function createRequest(data) {
   })
 }
 
+export async function getAllRequests() {
+  return await db.rentRequest.findMany()
+}
+
 export async function getUserRequests(userId) {
   return await db.rentRequest.findMany({
     where: {
@@ -48,6 +52,17 @@ export async function acceptRequest(id) {
     },
     data: {
       status: 'ACCEPTED'
+    }
+  })
+}
+
+export async function rejectRequest(id) {
+  return await db.rentRequest.update({
+    where: {
+      id
+    },
+    data: {
+      status: 'REJECTED'
     }
   })
 }
