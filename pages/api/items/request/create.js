@@ -5,7 +5,7 @@ import { fetchItem } from "@/services/items.service";
 export default withSessionRoute(requestCreate);
 
 async function requestCreate(req, res) {
-    const { itemId, startDate, endDate, userId } = req.body;
+    const { itemId, startDate, endDate, userId, cartId } = req.body;
 
     const item = await fetchItem(itemId);
 
@@ -16,7 +16,8 @@ async function requestCreate(req, res) {
         endDate,
         userId,
         days: days,
-        price: days * item.price
+        price: days * item.price,
+        cartId,
     }
 
     try {

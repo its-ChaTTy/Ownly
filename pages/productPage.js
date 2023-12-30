@@ -6,6 +6,7 @@ import ProductPageCards from "@/components/ProductPageCards/ProductPageCards";
 import { useState, useEffect } from "react";
 import { fetchAvailableItems } from "@/services/items.service";
 import '@/styles/routes/productPage.scss'
+import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export async function getServerSideProps(context) {
   
@@ -34,32 +35,38 @@ export default function ProductPage({ allItems, user }) {
 
   const [sortOrder, setSortOrder] = useState(0);
   const [itemsArray, setItems] = useState(allItems);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sortProducts = (sortOrder) => {
-    // 0 = default, 1 = low to high, 2 = high to low
-    // but idk why its displaying in reverse order
-    // so for now i'm just changing 1 to 2 // we'll fix it later
-
-    // need to test
-    if (sortOrder === 2) {
-      allItems.sort((a, b) => {
-        return a.price - b.price;
-      })
-    } else {
-      allItems.sort((a, b) => {
-        return b.price - a.price;
-      })
+    setIsLoading(true);
+    let sortedItems = [...itemsArray];
+  
+    if (sortOrder === 1) {
+      sortedItems.sort((a, b) => Number(a.price) - Number(b.price));
+    } else if (sortOrder === 2) {
+      sortedItems.sort((a, b) => Number(b.price) - Number(a.price));
     }
+  
+    setItems(sortedItems);
+    setIsLoading(false);
   }
 
   useEffect(() => {
     sortProducts(sortOrder);
-    setItems(allItems);
-  }, [sortOrder])
+  }, [sortOrder, allItems]);
 
+  // Simulate loading
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 500); // 1 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <>
+      {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
         <Navbar />
       </div>
@@ -71,7 +78,7 @@ export default function ProductPage({ allItems, user }) {
           <ProductPageFilter />
         </div>
         <div className="section_main__cards">
-          <ProductPageCards items={itemsArray} />
+          <ProductPageCards items={itemsArray} userId={user.id} />
         </div>
       </div>
       <div className="section">

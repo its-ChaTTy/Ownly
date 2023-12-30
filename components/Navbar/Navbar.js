@@ -60,8 +60,9 @@ function Navbar() {
 					</div>
 
 					<div>
+						<Link href={'/mycart'}>
 						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/cart.webp'} width={43} height={43} />
-
+						</Link>
 					</div>
 				</div>
 			</div>

@@ -24,6 +24,16 @@
                 margin-left: 2rem;
                 margin-top: 1.5rem;
             }
+            &__requests {
+                margin-left: 2rem;
+                margin-top: 1.5rem;
+                &--text {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 1.2rem;
+                    font-weight: 500;
+                    margin-bottom: 1rem;
+                }
+            }
         }
     }
 

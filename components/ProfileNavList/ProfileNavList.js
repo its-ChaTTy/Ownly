@@ -1,6 +1,6 @@
 import './ProfileNavList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouseUser, faCompass, faSquarePollVertical, faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faHouseUser, faCompass, faSquarePollVertical, faSignOut, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
 import useAuth from '@/hooks/useAuth';
 import { logout } from '@/operations/auth.fetch';
 
@@ -29,6 +29,10 @@ function ProfileNavList() {
             <div style={{ cursor: "pointer" }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
                 <p onClick={() => { setPage("history") }}>Rental History</p>
+            </div>
+            <div style={{ cursor: "pointer" }} className='navList__elements'>
+                <FontAwesomeIcon className='navList__elements--icon' icon={faCodePullRequest} />
+                <p onClick={() => { setPage("requests") }}>Rent Requests</p>
             </div>
             <div style={{ cursor: "pointer" }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSignOut} />

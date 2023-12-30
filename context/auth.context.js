@@ -18,7 +18,11 @@ export function AuthProvider({ children, ssrUser, ...props }) {
     const [page, setPage] = useState("profile");
     const [addModal, setAddModal] = useState(false);
     const [editItem, setEditItem] = useState(null);
-
+    const [itemStartDate, setItemStartDate] = useState(null)
+    const [itemEndDate, setItemEndDate] = useState(null)
+    const [itemPrice, setItemPrice] = useState(null)
+    const [itemDays, setItemDays] = useState(null)
+    const [itemId, setItemId] = useState(null)
     const auth = {
         user,
         page,
@@ -27,6 +31,16 @@ export function AuthProvider({ children, ssrUser, ...props }) {
         setAddModal,
         editItem,
         setEditItem,
+        itemStartDate,
+        setItemStartDate,
+        itemEndDate,
+        setItemEndDate,
+        itemPrice,
+        setItemPrice,
+        itemDays,
+        setItemDays,
+        itemId,
+        setItemId,
         ...props
     }
     return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
