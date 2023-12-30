@@ -22,7 +22,7 @@ function Cart() {
           <div className="Cart__left__Card__Header">
             <Image
               className="Cart__left__Card__Header__Image"
-              src="Images/Assets/image59.png"
+              src="Images/Assets/image59.webp"
               alt="Dan Abramov"
             />
             <div className="Cart__left__Card__Header__Text">
@@ -68,7 +68,7 @@ function Cart() {
           <h1 id="payment">Payment of ₹714</h1>
           <Image
             className="Cart__right__Card__Image"
-            src="Images/Assets/qr.png"
+            src="Images/Assets/qr.webp"
             alt="Dan Abramov"
           />
           <h1 id="qr">Pay using the given QR code</h1>
@@ -84,7 +84,7 @@ function Cart() {
                   <Image
                     boxSize="50px"
                     objectFit="cover"
-                    src="/Images/Logos/image-upload.png"
+                    src="/Images/Logos/image-upload.webp"
                     alt="Upload Image"
                   />
                 </div>

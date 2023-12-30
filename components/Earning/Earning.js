@@ -11,10 +11,10 @@ const Earning = () => {
                     <p className='Earning__left--content__text3'>Make money lending your belongings to people in your area</p>
                     <button className='Earning__left--content__button'>List an Item</button>
                 </div>
-                <img src='/Images/Assets/earning_block.png' />
+                <img src='/Images/Assets/earning_block.webp' />
             </div>
             <div className='Earning__right'>
-                <img src='/Images/Assets/earning.png' />
+                <img src='/Images/Assets/earning.webp' />
             </div>
         </div>
     )

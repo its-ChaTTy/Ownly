@@ -31,7 +31,7 @@ const About = () => {
                     {cards.map((card, index) => (
                         <div style={{ backgroundColor: `${index == 0 ? "rgba(17, 52, 71, 1)" : (index == 1) ? "rgba(39, 124, 165, 1)" : "rgba(101, 194, 237, 1)"}` }} className='AboutSection__cards--card' key={index}>
                             <div className='AboutSection__cards--card__image'>
-                                <img src={`/Images/Home_page/card${index + 1}.png`} alt='card' />
+                                <img src={`/Images/Home_page/card${index + 1}.webp`} alt='card' />
                             </div>
                             <div className='AboutSection__cards--card__text'>
                                 <p className='AboutSection__cards--card__text--title'>{card.title}</p>

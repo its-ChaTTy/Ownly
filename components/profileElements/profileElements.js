@@ -27,7 +27,7 @@ function ProfileElements({ user }) {
     };
 
     const onImageError = (e) => {
-        setProfilePhotoUrl('/Images/Assets/profile.png');
+        setProfilePhotoUrl('/Images/Assets/profile.webp');
     };
 
     const uploadFile = async (file, file_path) => {

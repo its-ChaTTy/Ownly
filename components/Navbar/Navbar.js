@@ -30,7 +30,7 @@ function Navbar() {
 				<div className="Navbar__leftside">
 					<div className="Navbar__container--logo">
 						<Image
-							src="/Images/Logos/ownly_footer_logo.png"
+							src="/Images/Logos/ownly_footer_logo.webp"
 							alt="Your Logo"
 							width={100}
 							height={100}
@@ -55,13 +55,13 @@ function Navbar() {
 
 					<div onClick={handleUser} >
 						<Link href="/profile">
-							<Image style={{ cursor: "pointer" }} src={'/Images/Assets/profile.png'} width={43} height={43} />
+							<Image style={{ cursor: "pointer" }} src={'/Images/Assets/profile.webp'} width={43} height={43} />
 						</Link>
 					</div>
 
 					<div>
 						<Link href={'/mycart'}>
-						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/cart.png'} width={43} height={43} />
+						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/cart.webp'} width={43} height={43} />
 						</Link>
 					</div>
 				</div>
@@ -74,7 +74,7 @@ function Navbar() {
 					/>
 					<div className="Navbar__container--logo">
 						<Image
-							src="/Images/Logos/ownly_footer_logo.png"
+							src="/Images/Logos/ownly_footer_logo.webp"
 							alt="Your Logo"
 							width={100}
 							height={100}
