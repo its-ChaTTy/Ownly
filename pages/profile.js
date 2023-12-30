@@ -62,7 +62,7 @@ export async function getServerSideProps(context) {
 
     userRequests.forEach((request) => {
         const item = allAvailableItems.find((item) => item.id === request.itemId);
-        console.log(request.itemId)
+        
         if (item) {
             sentRequests.push({
                 ...item,

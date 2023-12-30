@@ -10,7 +10,7 @@ CREATE OR REPLACE FUNCTION updateRentRequests(
 ) RETURNS VOID AS $$
 BEGIN
   UPDATE "RentRequest"
-  SET status = 'REJECTED'
+  SET "adminStatus" = 'REJECTED', "ownerStatus" = 'REJECTED'
   WHERE "itemId" = i
     AND "startDate" >= sd
     AND "endDate" <= ed;
@@ -37,7 +37,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER request_accepted
 AFTER UPDATE ON "RentRequest"
 FOR EACH ROW
-WHEN (NEW.status = 'ACCEPTED')
+WHEN (NEW."ownerStatus" = 'ACCEPTED' AND NEW."adminStatus" = 'ACCEPTED')
 EXECUTE FUNCTION request_accepted();
 ```
 
@@ -51,7 +51,7 @@ BEGIN
   IF NEW."userId" = 0 AND OLD."userId" IS DISTINCT FROM 0 THEN
     -- Reject all RentRequests with the same itemId
     UPDATE "RentRequest"
-    SET status = 'REJECTED'
+    SET adminStatus = 'REJECTED', ownerStatus = 'REJECTED'
     WHERE "itemId" = NEW.id;
   END IF;
 
@@ -183,4 +183,35 @@ AFTER INSERT ON "User"
 FOR EACH ROW
 EXECUTE FUNCTION updateUserProfilePic();
 
+```
+
+6. Procedure to migrate ActiveRent to OverRent
+Need to enable `pgcron` extension and schedule the procedure to run daily
+
+```sql
+select cron.schedule(
+  're',
+  '0 0 * * *',
+  'call moveactiverenttooverrent();'
+);
+```
+```sql
+CREATE OR REPLACE PROCEDURE moveActiveRentToOverRent()
+AS $$
+BEGIN
+  INSERT INTO "OverRent" ("itemId", "userId", "startDate", "endDate", "isPaid", "price")
+  SELECT
+    "itemId",
+    "userId",
+    "startDate",
+    "endDate",
+    "isPaid",
+    "price"
+  FROM "ActiveRent"
+  WHERE "endDate" <= CURRENT_TIMESTAMP;
+
+  DELETE FROM "ActiveRent"
+  WHERE "endDate" <= CURRENT_TIMESTAMP;
+END;
+$$ LANGUAGE plpgsql;
 ```

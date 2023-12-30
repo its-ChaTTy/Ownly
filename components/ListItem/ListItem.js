@@ -63,7 +63,7 @@ function ListItem({ user }) {
 		if (error) {
 			console.log(error)
 		} else {
-			console.log("Image removed successfully");
+			alert("Image removed successfully");
 		}
 		imageUrlsCopy.splice(index, 1);
 		setImageUrls(imageUrlsCopy);

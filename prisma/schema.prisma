@@ -66,17 +66,18 @@ model OverRent {
 }
 
 model RentRequest {
-  id        Int      @id @default(autoincrement())
-  itemId    Int
-  userId    Int
-  startDate DateTime
-  endDate   DateTime
-  status    Status   @default(PENDING)
-  days      Int      @default(0)
-  price     Int      @default(0)
-  cartId    Int?
-  item      Item     @relation(fields: [itemId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
+  id          Int      @id @default(autoincrement())
+  itemId      Int
+  userId      Int
+  startDate   DateTime
+  endDate     DateTime
+  ownerStatus Status   @default(PENDING)
+  adminStatus Status   @default(PENDING)
+  days        Int      @default(0)
+  price       Int      @default(0)
+  cartId      Int?
+  item        Item     @relation(fields: [itemId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
 }
 
 model Cart {
