@@ -67,6 +67,14 @@ export async function rejectRequest(id) {
   })
 }
 
+export async function ownerApprovedRequests() {
+  return await db.rentRequest.findMany({
+    where: {
+      ownerStatus: "ACCEPTED",
+    }
+  })
+}
+
 
 
 

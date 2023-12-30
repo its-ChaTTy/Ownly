@@ -38,7 +38,7 @@ function Navbar() {
 					</div>
 					<div className="Navbar__container--pages">
 						<p onClick={() => { router.push('/') }}>Home</p>
-						<p onClick={() => scrollToSection('how')}>Features</p>
+						<p onClick={() =>  {router.push('/productPage')}}>Listings</p>
 						<p onClick={() => { scrollToSection('howItWorks') }}>How it works</p>
 						<p onClick={() => { scrollToSection('about') }}>About us</p>
 						<p onClick={() => { scrollToSection('footer') }}>Contact</p>

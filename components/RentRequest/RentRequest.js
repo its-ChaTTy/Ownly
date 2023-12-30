@@ -79,14 +79,17 @@ const RentRequest = ({ item, sent, user }) => {
                 </div>
             </div>
             <div className='RentRequest__bottom'>
-                <div className='RentRequest__bottom--delivered'>Status {item.status}</div>
+                <div className='RentRequest__bottom--delivered'>Owner Status {item.ownerStatus}</div>
+                <div className='RentRequest__bottom--delivered'>Ownly Status {item.adminStatus}</div>
                 <div className='RentRequest__bottom--details'>
                     <img className='RentRequest__bottom--details__image' src={item.imageURL[0]} />
                     <div className='RentRequest__bottom--details__content'>
                         <p className='RentRequest__bottom--details__content--item_name'>{item.name}</p>
                         <p className='RentRequest__bottom--details__content--item_desc'>{item.description}</p>
                         {sent ||
-                            <div className='RentRequest__bottom--details__content--buttons'>
+                            <div className='RentRequest__bottom--details__content--buttons' style={{
+                                display: item.ownerStatus === 'ACCEPTED' ? 'none' : 'flex'
+                            }}>
                                 <button className='RentRequest__bottom--details__content--buttons__again' onClick={() => { acceptRequest() }}>Accept</button>
                                 <button className='RentRequest__bottom--details__content--buttons__view' onClick={() => { rejectRequest() }}>Reject</button>
                             </div>
