@@ -192,13 +192,14 @@ Need to enable `pgcron` extension and schedule the procedure to run daily
 select cron.schedule(
   're',
   '0 0 * * *',
-  'call moveactiverenttooverrent();'
+  $$ CALL moveactiverenttooverrent(); $$
 );
 ```
 ```sql
-CREATE OR REPLACE PROCEDURE moveActiveRentToOverRent()
-AS $$
+CREATE
+OR REPLACE PROCEDURE moveactiverenttooverrent () AS $$
 BEGIN
+
   INSERT INTO "OverRent" ("itemId", "userId", "startDate", "endDate", "isPaid", "price")
   SELECT
     "itemId",
@@ -208,10 +209,17 @@ BEGIN
     "isPaid",
     "price"
   FROM "ActiveRent"
-  WHERE "endDate" <= CURRENT_TIMESTAMP;
+  WHERE  ("endDate"::TIMESTAMP AT TIME ZONE 'Asia/Kolkata') < (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata')::TIMESTAMP;
+
 
   DELETE FROM "ActiveRent"
-  WHERE "endDate" <= CURRENT_TIMESTAMP;
+  WHERE  ("endDate"::TIMESTAMP AT TIME ZONE 'Asia/Kolkata') < (CURRENT_TIMESTAMP AT TIME ZONE 'Asia/Kolkata')::TIMESTAMP;
+  
 END;
 $$ LANGUAGE plpgsql;
+
+-- select * from cron.job_run_details;
+-- select * from cron.job;
+-- select cron.unschedule(9);
+
 ```
