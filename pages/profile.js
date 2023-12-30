@@ -148,7 +148,7 @@ export default function Profile({ user, allItems, history, sentRequests, recieve
                                     <p className="profile_main--elements__requests--text">Recieved Requests</p>
                                     {
                                         recievedRequests.map((item, index) => {
-                                            if (item.status !== 'REJECTED') {
+                                            if (item.ownerStatus !== 'REJECTED') {
                                                 return (
                                                     <div className='Listing__main--item' key={index}>
                                                         <RentRequest item={item} sent={false} user={user} />

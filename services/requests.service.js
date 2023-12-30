@@ -51,7 +51,7 @@ export async function acceptRequest(id) {
       id
     },
     data: {
-      status: 'ACCEPTED'
+      ownerStatus: 'ACCEPTED'
     }
   })
 }
@@ -62,7 +62,7 @@ export async function rejectRequest(id) {
       id
     },
     data: {
-      status: 'REJECTED'
+      ownerStatus: 'REJECTED'
     }
   })
 }
