@@ -10,3 +10,14 @@ export async function fetchAllCompletedBorrowing(userId){
         }
     })
 }
+
+export async function fetchAllOngoingBorrowing(userId){
+    return await db.activeRent.findMany({
+        where: {
+            userId,
+        },
+        include: {
+            item: true
+        }
+    })
+}

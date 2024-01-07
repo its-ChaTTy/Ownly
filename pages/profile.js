@@ -13,9 +13,10 @@ import ListItem from '@/components/ListItem/ListItem';
 import { fetchAvailableItems, getAllItemsByUser } from "@/services/items.service";
 import { useEffect, useState } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import { fetchAllCompletedBorrowing } from "@/services/rent.service";
+import { fetchAllCompletedBorrowing, fetchAllOngoingBorrowing } from "@/services/rent.service";
 import { getAllRequests, getUserRequests } from "@/services/requests.service";
 import RentRequest from "@/components/RentRequest/RentRequest";
+import ActiveRent from "@/components/ActiveRent/ActiveRent";
 
 export async function getServerSideProps(context) {
 
@@ -30,6 +31,7 @@ export async function getServerSideProps(context) {
 
     const allItems = await getAllItemsByUser(context.req.session.user.id);
     const lent = await fetchAllCompletedBorrowing(context.req.session.user.id);
+    const ongoing = await fetchAllOngoingBorrowing(context.req.session.user.id);
     const allAvailableItems = await fetchAvailableItems()
     const history = lent.map((rent) => {
         return {
@@ -41,6 +43,18 @@ export async function getServerSideProps(context) {
             order_placed: JSON.stringify(rent.startDate),
             delivered_date: JSON.stringify(rent.endDate),
             duration: JSON.stringify(new Date(rent.endDate).getDate() - new Date(rent.startDate).getDate())
+        }
+    })
+    const active = ongoing.map((activerent) => {
+        return {
+            id: activerent.id,
+            total: activerent.price,
+            item_name: activerent.item.name,
+            item_desc: activerent.item.description,
+            item_image: activerent.item.imageURL[0],
+            order_placed: JSON.stringify(activerent.startDate),
+            delivered_date: JSON.stringify(activerent.endDate),
+            duration: JSON.stringify(new Date(activerent.endDate).getDate() - new Date(activerent.startDate).getDate())
         }
     })
 
@@ -72,12 +86,12 @@ export async function getServerSideProps(context) {
     })
 
     return {
-        props: { user: user, allItems: allItems, history: history, sentRequests: JSON.parse(JSON.stringify(sentRequests)), recievedRequests: JSON.parse(JSON.stringify(recievedRequests)) },
+        props: { user: user, allItems: allItems, history: history, active: active, sentRequests: JSON.parse(JSON.stringify(sentRequests)), recievedRequests: JSON.parse(JSON.stringify(recievedRequests)) },
     }
 
 }
 
-export default function Profile({ user, allItems, history, sentRequests, recievedRequests }) {
+export default function Profile({ user, allItems, history, active, sentRequests, recievedRequests }) {
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -137,6 +151,18 @@ export default function Profile({ user, allItems, history, sentRequests, recieve
                                         return (
                                             <div className='Listing__main--item' key={index}>
                                                 <RentalHistory item={item} />
+                                            </div>)
+                                    })}
+                                </div> :
+                                null
+                        }
+                        {
+                            page === 'active' ?
+                                <div className="profile_main--elements__history">
+                                    {active.map((item, index) => {
+                                        return (
+                                            <div className='Listing__main--item' key={index}>
+                                                <ActiveRent item={item} />
                                             </div>)
                                     })}
                                 </div> :

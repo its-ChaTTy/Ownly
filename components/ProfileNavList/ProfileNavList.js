@@ -31,6 +31,10 @@ function ProfileNavList() {
                 <p onClick={() => { setPage("history") }}>Rental History</p>
             </div>
             <div style={{ cursor: "pointer" }} className='navList__elements'>
+                <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
+                <p onClick={() => { setPage("active") }}>Active Rent</p>
+            </div>
+            <div style={{ cursor: "pointer" }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faCodePullRequest} />
                 <p onClick={() => { setPage("requests") }}>Rent Requests</p>
             </div>
