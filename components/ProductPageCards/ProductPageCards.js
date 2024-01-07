@@ -33,7 +33,7 @@ function ProductPageCards({ items, userId }) {
                                     style={{
                                         display: item.userId === userId ? 'none' : ''
                                     }}
-                                >Buy Now</button>
+                                >Rent Now</button>
                             </div>
                             <div className='Product__Cards--item__image'>
                                 <Slideshow imageURL={item.imageURL} />

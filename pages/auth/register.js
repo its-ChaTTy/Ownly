@@ -4,11 +4,13 @@ import { Input, Button, FormControl } from '@chakra-ui/react'
 import { useState } from "react"
 import '@/styles/routes/auth/register.scss'
 import { FaArrowLeft } from "react-icons/fa";
+import { useRouter } from "next/router"
 
 function Register() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const router = useRouter()
     const [name, setName] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
@@ -83,7 +85,7 @@ function Register() {
                         marginTop: '1rem',
                         borderRadius: '7px'
                     }}>Register</Button>
-                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>Already have an account? <span style={{ color: '#113447' }}>Login</span></p>
+                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>Already have an account? <span onClick={() => { router.push('/auth/login') }} style={{ color: '#113447', cursor: "pointer" }}>Login</span></p>
                 </div>
             </div>
         </>
