@@ -4,10 +4,12 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import "./Navbar.scss";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Notification from '../Notification/Notification';
 
 function Navbar() {
 	const router = useRouter();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
 	function scrollToSection(sectionId) {
 		const section = document.getElementById(sectionId);
@@ -23,8 +25,16 @@ function Navbar() {
 		router.push("/profile");
 	}
 
+	const handleNotificationClick = () => {
+		setIsNotificationOpen(true);
+	};
+
+	const handleCloseNotification = () => {
+		setIsNotificationOpen(false);
+	};
+
 	return (
-		<div className="Navbar">
+		<div className={`Navbar ${isNotificationOpen ? 'blur' : ''}`}>
 			<div className="Navbar__container">
 				<FaBars className="fabar-icon" onClick={() => setIsSidebarOpen(true)} />
 				<div className="Navbar__leftside">
@@ -51,6 +61,10 @@ function Navbar() {
 							className="search-bar"
 							placeholder="Search for items to rent"
 						/>
+					</div>
+
+					<div onClick={handleNotificationClick}>
+						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/notification.png'} width={43} height={43} />
 					</div>
 
 					<div onClick={handleUser} >
@@ -86,6 +100,7 @@ function Navbar() {
 						<p>About us</p>
 						<p>Contact</p>
 					</div>
+					{isNotificationOpen && <Notification onClose={handleCloseNotification} />}
 				</div>
 			)}
 		</div>
