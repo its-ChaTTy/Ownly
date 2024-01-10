@@ -1,18 +1,20 @@
 import { isEmail, isName, isPassword } from "@/utils/validator"
 import { register } from "@/operations/auth.fetch"
-import { Input, Button, FormControl } from '@chakra-ui/react'
+import { Input, Button, FormControl, InputGroup, InputRightElement } from '@chakra-ui/react'
 import { useState } from "react"
 import '@/styles/routes/auth/register.scss'
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/router"
 
 function Register() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
     const router = useRouter()
     const [name, setName] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
 
     const handleRegister = async () => {
         if (!isEmail(email)) {
@@ -40,6 +42,8 @@ function Register() {
         }
     }
 
+    const handlePasswordVisibility = () => setShowPassword(!showPassword);
+    const handleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
 
     return (
         <>
@@ -66,18 +70,36 @@ function Register() {
                             backgroundColor: 'white'
                         }} type="email" value={email} />
                     </FormControl>
-                    <FormControl>
-                        <Input placeholder="Password" onChange={(e) => setPassword(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                        }} type="password" value={password} />
-                    </FormControl>
-                    <FormControl>
-                        <Input placeholder="Confirm Password" onChange={(e) => setConfirmPassword(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                        }} type="password" value={confirmPassword} />
-                    </FormControl>
+                    <InputGroup>
+                        <Input
+                            placeholder="Password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            style={{
+                                color: '#737F95',
+                                border: '1px solid #737F95',
+                            }}
+                        />
+                        <InputRightElement onClick={handlePasswordVisibility}>
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </InputRightElement>
+                    </InputGroup>
+                    <InputGroup>
+                        <Input
+                            placeholder="Confirm Password"
+                            type={showConfirmPassword ? "text" : "password"}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            style={{
+                                color: '#737F95',
+                                border: '1px solid #737F95',
+                            }}
+                        />
+                        <InputRightElement onClick={handleConfirmPasswordVisibility}>
+                            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                        </InputRightElement>
+                    </InputGroup>
                     <Button onClick={handleRegister} style={{
                         backgroundColor: '#113447',
                         color: 'white',
