@@ -74,9 +74,9 @@ export default function ProductPage({ allItems, user }) {
         <SortbyBar setSortOrder={setSortOrder} />
       </div>
       <div className="section_main">
-        <div className="section_main__filter">
+        {/* <div className="section_main__filter">
           <ProductPageFilter />
-        </div>
+        </div> */}
         <div className="section_main__cards">
           <ProductPageCards items={itemsArray} userId={user.id} />
         </div>

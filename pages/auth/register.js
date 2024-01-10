@@ -13,6 +13,9 @@ function Register() {
     const [showPassword, setShowPassword] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+    const [phoneNumber, setPhoneNumber] = useState('')
+    const [address, setAddress] = useState('')
+    const [location, setLocation] = useState('')
     const router = useRouter()
     const [name, setName] = useState('')
 
@@ -33,7 +36,7 @@ function Register() {
             alert('Passwords do not match')
             return
         }
-        const res = await register({ email, password, name })
+        const res = await register({ email, password, name, phone: parseInt(phoneNumber), address, location })
         if (res.status === 200) {
             alert('Registration successful')
             window.location.href = '/'
@@ -100,6 +103,27 @@ function Register() {
                             {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
                         </InputRightElement>
                     </InputGroup>
+                    <FormControl>
+                        <Input placeholder="Phone Number" onChange={(e) => setPhoneNumber(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                            backgroundColor: 'white'
+                        }} type="tel" value={phoneNumber} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Address" onChange={(e) => setAddress(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                            backgroundColor: 'white'
+                        }} type="text" value={address} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Location" onChange={(e) => setLocation(e.target.value)} style={{
+                            color: '#737F95',
+                            border: '1px solid #737F95',
+                            backgroundColor: 'white'
+                        }} type="text" value={location} />
+                    </FormControl>
                     <Button onClick={handleRegister} style={{
                         backgroundColor: '#113447',
                         color: 'white',
