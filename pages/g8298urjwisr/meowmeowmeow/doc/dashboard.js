@@ -1,3 +1,4 @@
+import { paymentApprove } from "@/operations/dashboard.fetch";
 import { ownerApprovedRequests } from "@/services/requests.service";
 import {
     Table,
@@ -9,12 +10,13 @@ import {
     Td,
     TableCaption,
     TableContainer,
+    Button,
 } from '@chakra-ui/react'
+import { useState } from "react";
 
 // /g8298urjwisr/meowmeowmeow/doc/dashboard
 export async function getServerSideProps(context) {
     const user = context.req.session.user;
-
     if (user === undefined) {
         return {
             redirect: {
@@ -33,44 +35,67 @@ export async function getServerSideProps(context) {
 }
 
 function dashboard({ user, pendingRequests }) {
-    console.log(pendingRequests)
+    const [iseLoading, setIsLoading] = useState(false);
+    const handleApprove = async (request) => {
+        const temp = request['rentReqId'].map(async (id) => {
+            const response = await paymentApprove({ 'id1': id, 'id2': request['id'] });
+            if (response.status != 200) {
+                alert("Something went wrong");
+                return;
+            }
+        })
+        await Promise.all(temp);
+        alert("Approved");
+        window.location.reload();
+    }
     return (
-        <TableContainer>
-            <Table variant='simple'>
-                <TableCaption>Imperial to metric conversion factors</TableCaption>
-                <Thead>
-                    <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
-                    </Tr>
-                </Thead>
-                <Tbody>
-                    <Tr>
-                        <Td>inches</Td>
-                        <Td>millimetres (mm)</Td>
-                        <Td isNumeric>25.4</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>feet</Td>
-                        <Td>centimetres (cm)</Td>
-                        <Td isNumeric>30.48</Td>
-                    </Tr>
-                    <Tr>
-                        <Td>yards</Td>
-                        <Td>metres (m)</Td>
-                        <Td isNumeric>0.91444</Td>
-                    </Tr>
-                </Tbody>
-                <Tfoot>
-                    <Tr>
-                        <Th>To convert</Th>
-                        <Th>into</Th>
-                        <Th isNumeric>multiply by</Th>
-                    </Tr>
-                </Tfoot>
-            </Table>
-        </TableContainer>
+        <>
+            {iseLoading ||
+                <>
+                    <h1>Dashboard</h1>
+                    <TableContainer>
+                        <Table variant='simple'>
+                            <Thead>
+                                <Tr>
+                                    <Th>Id</Th>
+                                    <Th>Payment ID</Th>
+                                    <Th>Payment ScreenShot</Th>
+                                    <Th>Amount</Th>
+                                    <Th>Approve</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {pendingRequests.map((request, index) => {
+                                    return (
+                                        <Tr key={index}>
+                                            <Td>{request.id}</Td>
+                                            <Td>{request.paymentId}</Td>
+                                            <Td>
+                                                <img style={{ width: "20rem" }} src={request.imageURL} alt="payment screenshot" />
+                                            </Td>
+                                            <Td>{request.amount}</Td>
+                                            {request.isPaidToTeam === false ?
+                                                <Td>
+                                                    <Button onClick={() => {
+                                                        handleApprove(request)
+                                                    }}>Approve</Button>
+                                                </Td>
+                                                :
+                                                <Td>
+                                                    Approved
+                                                </Td>
+                                            }
+
+                                        </Tr>
+                                    )
+                                })}
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                </>
+            }
+
+        </>
     )
 }
 
