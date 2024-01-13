@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
     const approvedRequests = await ownerApprovedRequests();
 
     return {
-        props: { user: user, pendingRequests: approvedRequests },
+        props: { user: user, pendingRequests: JSON.parse(JSON.stringify(approvedRequests)) },
     }
 
 }

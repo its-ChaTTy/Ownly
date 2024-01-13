@@ -5,9 +5,6 @@ export async function fetchAllCompletedBorrowing(userId){
         where: {
             userId,
         },
-        include: {
-            item: true
-        }
     })
 }
 
@@ -16,8 +13,8 @@ export async function fetchAllOngoingBorrowing(userId){
         where: {
             userId,
         },
-        include: {
-            item: true
-        }
+        // include: {
+        //     item: true
+        // }
     })
 }
