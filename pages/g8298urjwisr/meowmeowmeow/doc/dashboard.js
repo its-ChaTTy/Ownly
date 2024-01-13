@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
     const approvedRequests = await ownerApprovedRequests();
 
     return {
-        props: { user: user },
+        props: { user: user, pendingRequests: approvedRequests },
     }
 
 }
@@ -72,7 +72,8 @@ export async function getServerSideProps(context) {
 //     }
 // ]
 
-function dashboard() {
+function dashboard({ user, pendingRequests }) {
+    console.log(pendingRequests)
     return (
         <div>dashboard</div>
     )

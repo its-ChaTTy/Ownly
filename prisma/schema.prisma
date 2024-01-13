@@ -7,40 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id          Int           @id @default(autoincrement())
-  email       String        @unique
-  password    String
-  name        String
-  profilePic  String        @default("")
-  address     String        @default("")
-  phone       Int           @default(0)
-  location    String        @default("")
-  isVerified  Boolean       @default(false)
-  totalEarned Int           @default(0)
-  ActiveRent  ActiveRent[]
-  Cart        Cart[]
-  items       Item[]
-  OverRent    OverRent[]
-  RentRequest RentRequest[]
-}
-
-model Item {
-  id          Int           @id @default(autoincrement())
-  name        String
-  description String
-  category    Category
-  price       Int
-  imageURL    String[]
-  userId      Int
-  isAvailable Boolean       @default(true)
-  ActiveRent  ActiveRent[]
-  CartItem    CartItem[]
-  user        User          @relation(fields: [userId], references: [id])
-  OverRent    OverRent[]
-  RentRequest RentRequest[]
-}
-
 model ActiveRent {
   id        Int      @id @default(autoincrement())
   itemId    Int
@@ -49,42 +15,15 @@ model ActiveRent {
   endDate   DateTime
   isPaid    Boolean  @default(false)
   price     Int
-  item      Item     @relation(fields: [itemId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-}
-
-model OverRent {
-  id        Int      @id @default(autoincrement())
-  itemId    Int
-  userId    Int
-  startDate DateTime
-  endDate   DateTime
-  isPaid    Boolean  @default(false)
-  price     Int
-  item      Item     @relation(fields: [itemId], references: [id])
-  user      User     @relation(fields: [userId], references: [id])
-}
-
-model RentRequest {
-  id          Int      @id @default(autoincrement())
-  itemId      Int
-  userId      Int
-  startDate   DateTime
-  endDate     DateTime
-  ownerStatus Status   @default(PENDING)
-  adminStatus Status   @default(PENDING)
-  days        Int      @default(0)
-  price       Int      @default(0)
-  cartId      Int?
-  item        Item     @relation(fields: [itemId], references: [id])
-  user        User     @relation(fields: [userId], references: [id])
+  Item      Item     @relation(fields: [itemId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
 }
 
 model Cart {
   id       Int        @id @default(autoincrement())
   userId   Int
   value    Int
-  user     User       @relation(fields: [userId], references: [id])
+  User     User       @relation(fields: [userId], references: [id])
   CartItem CartItem[]
 }
 
@@ -98,6 +37,83 @@ model CartItem {
   price     Int      @default(0)
   Cart      Cart     @relation(fields: [cartId], references: [id])
   Item      Item     @relation(fields: [itemId], references: [id])
+}
+
+model Item {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String
+  category    Category
+  price       Int
+  imageURL    String[]
+  userId      Int
+  isAvailable Boolean       @default(true)
+  ActiveRent  ActiveRent[]
+  CartItem    CartItem[]
+  User        User          @relation(fields: [userId], references: [id])
+  OverRent    OverRent[]
+  RentRequest RentRequest[]
+}
+
+model OverRent {
+  id        Int      @id @default(autoincrement())
+  itemId    Int
+  userId    Int
+  startDate DateTime
+  endDate   DateTime
+  isPaid    Boolean  @default(false)
+  price     Int
+  Item      Item     @relation(fields: [itemId], references: [id])
+  User      User     @relation(fields: [userId], references: [id])
+}
+
+model Payments {
+  id            Int           @id @default(autoincrement())
+  userId        Int
+  rentReqId     Int[]
+  isPaidToTeam  Boolean       @default(false)
+  isPaidToOwner Boolean       @default(false)
+  amount        Int
+  paymentId     String
+  imageURL      String
+  User          User          @relation(fields: [userId], references: [id])
+  RentRequest   RentRequest[]
+}
+
+model RentRequest {
+  id          Int       @id @default(autoincrement())
+  itemId      Int
+  userId      Int
+  startDate   DateTime
+  endDate     DateTime
+  days        Int       @default(0)
+  price       Int       @default(0)
+  cartId      Int?
+  adminStatus Status    @default(PENDING)
+  ownerStatus Status    @default(ACCEPTED)
+  paymentsId  Int?
+  Item        Item      @relation(fields: [itemId], references: [id])
+  Payments    Payments? @relation(fields: [paymentsId], references: [id])
+  User        User      @relation(fields: [userId], references: [id])
+}
+
+model User {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  name        String
+  address     String        @default("")
+  phone       Int           @default(0)
+  location    String        @default("")
+  isVerified  Boolean       @default(false)
+  totalEarned Int           @default(0)
+  profilePic  String        @default("")
+  ActiveRent  ActiveRent[]
+  Cart        Cart[]
+  Item        Item[]
+  OverRent    OverRent[]
+  Payments    Payments[]
+  RentRequest RentRequest[]
 }
 
 enum Category {
