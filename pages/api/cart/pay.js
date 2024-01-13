@@ -19,6 +19,7 @@ async function pay(req, res) {
             paymentId,
             imageURL
         }
+        console.log(data);
         const response = await payment(data);
         res.json({ status: 200, response });
     }

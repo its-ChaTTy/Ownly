@@ -74,18 +74,19 @@ function mycart({ user, items, userCart }) {
   const [isOpen, setIsOpen] = useState(false);
   const [paymentId, setPaymentId] = useState(null)
   const [imageURL, setImageURL] = useState(null)
+  const [rentRequestId, setRentReqId] = useState([]);
 
   const supabase = createClient(supabaseUrl, supabaseKey)
 
-	async function uploadFile(file, file_path) {
-		const { data, error } = await supabase.storage.from('payments').upload(file_path, file)
-		const res = supabase.storage.from('payments').getPublicUrl(file_path);
-		if (error) {
-			console.log(error)
-		} else {
-			setImageURL(res['data'].publicUrl)
-		}
-	}
+  async function uploadFile(file, file_path) {
+    const { data, error } = await supabase.storage.from('payments').upload(file_path, file)
+    const res = supabase.storage.from('payments').getPublicUrl(file_path);
+    if (error) {
+      console.log(error)
+    } else {
+      setImageURL(res['data'].publicUrl)
+    }
+  }
 
   const uploadImages = async (file) => {
     const file_path = generate();
@@ -98,6 +99,7 @@ function mycart({ user, items, userCart }) {
 
   const handleCheckout = async () => {
     setIsLoading(true);
+    setIsOpen(true);
     try {
 
       const requests = items.map(async (item) => {
@@ -115,6 +117,9 @@ function mycart({ user, items, userCart }) {
 
         if (response.status === 200) {
           console.log(response);
+          const temp = response['request']['id'];
+          setRentReqId(rentRequestId => [...rentRequestId, temp]);
+          console.log(rentRequestId);
         } else {
           console.log(response);
           throw new Error('Failed to create rent request');
@@ -148,15 +153,20 @@ function mycart({ user, items, userCart }) {
 
     const data = {
       userId: user.id,
-      rentReqId: items.map((item) => item.id),
+      rentReqId: rentRequestId, //
       amount: userCart.value,
       paymentId: paymentId,
       imageURL: imageURL
     }
 
-    // handleCheckout();
-    console.log(data)
-
+    const response = await makePayment(data);
+    if (response.status === 200) {
+      alert('Your request has been sent');
+      window.location.reload()
+    } else {
+      alert('Something went wrong');
+      window.location.reload();
+    }
   }
 
   // Simulate loading
@@ -187,7 +197,7 @@ function mycart({ user, items, userCart }) {
               <FormLabel>Upload Payment Screenshot</FormLabel>
               <Input type="file" onChange={(e) => { uploadImages(e.target.files[0]) }} />
             </FormControl>
-            <Button onClick={paySubmit}>Submit</Button>
+            <Button onClick={() => { paySubmit() }}>Submit</Button>
           </ModalContent>
         </Modal>
       }
@@ -212,7 +222,7 @@ function mycart({ user, items, userCart }) {
               })}
             </div>
             <div className='CartSection__buttons'>
-              <button onClick={() => { setIsOpen(true) }} className='CartSection__buttons--checkout'>Checkout</button>
+              <button onClick={() => { handleCheckout() }} className='CartSection__buttons--checkout'>Checkout</button>
               <button className='CartSection__buttons--clear'>Clear Cart</button>
             </div>
           </div>
