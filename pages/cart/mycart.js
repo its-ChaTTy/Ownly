@@ -7,8 +7,8 @@ import { createRentRequest } from '@/operations/request.fetch';
 import { removeCartItem } from '@/operations/cart.fetch';
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
-import useAuth from '@/hooks/useAuth';
 import { generate } from "random-words";
+import { makePayment } from '@/operations/cart.fetch';
 
 import {
   Modal, ModalOverlay,
@@ -18,7 +18,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-
 } from '@chakra-ui/react';
 
 import { createClient } from '@supabase/supabase-js'
@@ -138,11 +137,6 @@ function mycart({ user, items, userCart }) {
         }
       })
       await Promise.all(cartItems)
-
-      setRequests(requests);
-      console.log(requests);
-
-      window.location.reload();
 
     } catch (error) {
       console.error(error);
