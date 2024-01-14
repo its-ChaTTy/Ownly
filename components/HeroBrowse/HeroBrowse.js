@@ -6,7 +6,7 @@ import useAuth from "@/hooks/useAuth";
 function HeroBrowse() {
 
   const router = useRouter();
-  const { setAddModal } = useAuth()
+  const { setAddModal } = useAuth();
 
   return (
     <div className="HeroBrowse">

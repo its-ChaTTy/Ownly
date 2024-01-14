@@ -5,11 +5,13 @@ import "./Navbar.scss";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Notification from '../Notification/Notification';
+import useAuth from "@/hooks/useAuth";
 
 function Navbar() {
 	const router = useRouter();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+	const { setAddModal } = useAuth();
 
 	function scrollToSection(sectionId) {
 		const section = document.getElementById(sectionId);
@@ -49,19 +51,24 @@ function Navbar() {
 					<div className="Navbar__container--pages">
 						<p onClick={() => { router.push('/') }}>Home</p>
 						<p onClick={() => { router.push('/productPage') }}>Listings</p>
-						<p onClick={() => { scrollToSection('howItWorks') }}>How it works</p>
 						<p onClick={() => { scrollToSection('about') }}>About us</p>
 						<p onClick={() => { scrollToSection('footer') }}>Contact</p>
 					</div>
 				</div>
 				<div className="Navbar__rightside">
-					<div className="Navbar__container--search">
+					{/* <div className="Navbar__container--search">
 						<input
 							type="text"
 							className="search-bar"
 							placeholder="Search for items to rent"
 						/>
-					</div>
+					</div> */}
+
+					<p className="Navbar__rightside--text" onClick={() => { scrollToSection('howItWorks') }}>How it works</p>
+					<p className="Navbar__rightside--text" onClick={() => {
+						router.push("/profile");
+						setAddModal(true);
+					}}>List an Item</p>
 
 					<div onClick={handleNotificationClick}>
 						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/notification.png'} width={43} height={43} />
@@ -96,7 +103,6 @@ function Navbar() {
 					</div>
 					<div className="Navbar__container--pages">
 						<p>Home</p>
-						<p>How it works</p>
 						<p>About us</p>
 						<p>Contact</p>
 					</div>
