@@ -1,5 +1,9 @@
 .Navbar {
   background-color: white;
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  z-index: 999;
   width: 100vw;
   color: black;
   padding: 10px 30px;
