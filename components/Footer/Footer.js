@@ -51,14 +51,22 @@ function Footer() {
                         </div>
                         <div className="Footer__container--links--column">
                             <p className='Footer__container--links--column--title'>Support</p>
-                            <p>FAQs</p>
+                            <Link href="./faq">
+                                <p>FAQs</p>
+                            </Link>
                             <p>Terms & Conditions</p>
                         </div>
                         <div className="Footer__container--links--column">
                             <p className='Footer__container--links--column--title'>Social</p>
-                            <p>Instagram</p>
-                            <p>Email</p>
-                            <p>LinkedIn</p>
+                            <Link href="https://www.instagram.com/ownly.in/">
+                                <p>Instagram</p>
+                            </Link>
+                            <Link href="mailto:ownlyco@gmail.com">
+                                <p>Email</p>
+                            </Link>
+                            <Link href="https://www.linkedin.com/company/ownly/">
+                                <p>LinkedIn</p>
+                            </Link>
                         </div>
                     </div>
                     <div className="Footer__container--seperator">
