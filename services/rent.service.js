@@ -6,7 +6,7 @@ export async function fetchAllCompletedBorrowing(userId){
             userId,
         },
         include: {
-            item: true
+            Item: true
         }
     })
 }
@@ -17,7 +17,7 @@ export async function fetchAllOngoingBorrowing(userId){
             userId,
         },
         include: {
-            item: true
+            Item: true
         }
     })
 }
