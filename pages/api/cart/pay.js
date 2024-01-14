@@ -19,8 +19,9 @@ async function pay(req, res) {
             paymentId,
             imageURL
         }
-        console.log(data);
+        
         const response = await payment(data);
+        // call mailer here
         res.json({ status: 200, response });
     }
     catch (error) {

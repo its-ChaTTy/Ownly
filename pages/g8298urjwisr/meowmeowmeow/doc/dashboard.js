@@ -52,7 +52,6 @@ function dashboard({ user, pendingRequests }) {
         <>
             {iseLoading ||
                 <>
-                    <h1>Dashboard</h1>
                     <TableContainer>
                         <Table variant='simple'>
                             <Thead>
