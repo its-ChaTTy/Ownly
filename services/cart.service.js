@@ -41,3 +41,9 @@ export async function deleteCartItem(id, cartId) {
         }
     })
 }
+
+export async function payment(data) {
+    return db.payments.create({
+        data
+    })
+}

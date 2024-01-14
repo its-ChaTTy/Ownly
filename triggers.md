@@ -25,7 +25,7 @@ BEGIN
   VALUES (NEW."itemId", NEW."userId", NEW."startDate", NEW."endDate", NEW.price);
 
   -- Delete the accepted request from RentRequest
-  DELETE FROM "RentRequest" WHERE id = NEW.id;
+  -- DELETE FROM "RentRequest" WHERE id = NEW.id;
 
   -- Update other overlapping requests to be rejected
   PERFORM updateRentRequests(NEW."itemId", NEW."startDate", NEW."endDate");

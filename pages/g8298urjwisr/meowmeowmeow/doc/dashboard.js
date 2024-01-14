@@ -1,9 +1,22 @@
+import { paymentApprove } from "@/operations/dashboard.fetch";
 import { ownerApprovedRequests } from "@/services/requests.service";
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,
+    TableCaption,
+    TableContainer,
+    Button,
+} from '@chakra-ui/react'
+import { useState } from "react";
 
 // /g8298urjwisr/meowmeowmeow/doc/dashboard
 export async function getServerSideProps(context) {
     const user = context.req.session.user;
-
     if (user === undefined) {
         return {
             redirect: {
@@ -16,65 +29,72 @@ export async function getServerSideProps(context) {
     const approvedRequests = await ownerApprovedRequests();
 
     return {
-        props: { user: user },
+        props: { user: user, pendingRequests: JSON.parse(JSON.stringify(approvedRequests)) },
     }
 
 }
 
-// [
-//     {
-//         id: 19,
-//         itemId: 8,
-//         userId: 8,
-//         startDate: 2023 - 12 - 29T07:07: 10.068Z,
-//         endDate: 2023 - 12 - 30T18: 30:00.000Z,
-//         ownerStatus: 'ACCEPTED',
-//         adminStatus: 'ACCEPTED',
-//         days: 2,
-//         price: 80,
-//         cartId: 5
-//     },
-//     {
-//         id: 25,
-//         itemId: 10,
-//         userId: 9,
-//         startDate: 2023 - 12 - 30T14: 40: 17.226Z,
-//         endDate: 2023 - 12 - 30T18: 30:00.000Z,
-//         ownerStatus: 'ACCEPTED',
-//         adminStatus: 'ACCEPTED',
-//         days: 1,
-//         price: 200,
-//         cartId: 6
-//     },
-//     {
-//         id: 17,
-//         itemId: 5,
-//         userId: 3,
-//         startDate: 2023 - 12 - 29T05:08: 18.320Z,
-//         endDate: 2023 - 12 - 30T18: 30:00.000Z,
-//         ownerStatus: 'ACCEPTED',
-//         adminStatus: 'ACCEPTED',
-//         days: 2,
-//         price: 400,
-//         cartId: 1
-//     },
-//     {
-//         id: 26,
-//         itemId: 7,
-//         userId: 11,
-//         startDate: 2023 - 12 - 30T14: 45: 52.771Z,
-//         endDate: 2024-01-05T18: 30:00.000Z,
-//         ownerStatus: 'ACCEPTED',
-//         adminStatus: 'PENDING',
-//         days: 7,
-//         price: 7,
-//         cartId: 8
-//     }
-// ]
-
-function dashboard() {
+function dashboard({ user, pendingRequests }) {
+    const [iseLoading, setIsLoading] = useState(false);
+    const handleApprove = async (request) => {
+        const temp = request['rentReqId'].map(async (id) => {
+            const response = await paymentApprove({ 'id1': id, 'id2': request['id'] });
+            if (response.status != 200) {
+                alert("Something went wrong");
+                return;
+            }
+        })
+        await Promise.all(temp);
+        alert("Approved");
+        window.location.reload();
+    }
     return (
-        <div>dashboard</div>
+        <>
+            {iseLoading ||
+                <>
+                    <TableContainer>
+                        <Table variant='simple'>
+                            <Thead>
+                                <Tr>
+                                    <Th>Id</Th>
+                                    <Th>Payment ID</Th>
+                                    <Th>Payment ScreenShot</Th>
+                                    <Th>Amount</Th>
+                                    <Th>Approve</Th>
+                                </Tr>
+                            </Thead>
+                            <Tbody>
+                                {pendingRequests.map((request, index) => {
+                                    return (
+                                        <Tr key={index}>
+                                            <Td>{request.id}</Td>
+                                            <Td>{request.paymentId}</Td>
+                                            <Td>
+                                                <img style={{ width: "20rem" }} src={request.imageURL} alt="payment screenshot" />
+                                            </Td>
+                                            <Td>{request.amount}</Td>
+                                            {request.isPaidToTeam === false ?
+                                                <Td>
+                                                    <Button onClick={() => {
+                                                        handleApprove(request)
+                                                    }}>Approve</Button>
+                                                </Td>
+                                                :
+                                                <Td>
+                                                    Approved
+                                                </Td>
+                                            }
+
+                                        </Tr>
+                                    )
+                                })}
+                            </Tbody>
+                        </Table>
+                    </TableContainer>
+                </>
+            }
+
+        </>
     )
 }
 

@@ -23,6 +23,9 @@ export function AuthProvider({ children, ssrUser, ...props }) {
     const [itemPrice, setItemPrice] = useState(null)
     const [itemDays, setItemDays] = useState(null)
     const [itemId, setItemId] = useState(null)
+    const [cartValue, setCartValue] = useState(0)
+    const [requests, setRequests] = useState([])
+
     const auth = {
         user,
         page,
@@ -41,7 +44,12 @@ export function AuthProvider({ children, ssrUser, ...props }) {
         setItemDays,
         itemId,
         setItemId,
+        cartValue,
+        setCartValue,
+        requests,
+        setRequests,
         ...props
     }
+
     return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }

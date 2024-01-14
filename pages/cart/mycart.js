@@ -7,6 +7,22 @@ import { createRentRequest } from '@/operations/request.fetch';
 import { removeCartItem } from '@/operations/cart.fetch';
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { generate } from "random-words";
+import { makePayment } from '@/operations/cart.fetch';
+
+import {
+  Modal, ModalOverlay,
+  ModalContent,
+  Button,
+  CloseButton,
+  FormControl,
+  FormLabel,
+  Input,
+} from '@chakra-ui/react';
+
+import { createClient } from '@supabase/supabase-js'
+const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
 export async function getServerSideProps(context) {
   const user = context.req.session.user;
@@ -55,8 +71,35 @@ export async function getServerSideProps(context) {
 
 function mycart({ user, items, userCart }) {
   const [isLoading, setIsLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [paymentId, setPaymentId] = useState(null)
+  const [imageURL, setImageURL] = useState(null)
+  const [rentRequestId, setRentReqId] = useState([]);
+
+  const supabase = createClient(supabaseUrl, supabaseKey)
+
+  async function uploadFile(file, file_path) {
+    const { data, error } = await supabase.storage.from('payments').upload(file_path, file)
+    const res = supabase.storage.from('payments').getPublicUrl(file_path);
+    if (error) {
+      console.log(error)
+    } else {
+      setImageURL(res['data'].publicUrl)
+    }
+  }
+
+  const uploadImages = async (file) => {
+    const file_path = generate();
+    if (file.size > 1024 * 1024 * 3) {
+      alert('File is larger than 3MB');
+      return;
+    }
+    await uploadFile(file, file_path);
+  }
+
   const handleCheckout = async () => {
     setIsLoading(true);
+    setIsOpen(true);
     try {
 
       const requests = items.map(async (item) => {
@@ -74,6 +117,9 @@ function mycart({ user, items, userCart }) {
 
         if (response.status === 200) {
           console.log(response);
+          const temp = response['request']['id'];
+          setRentReqId(rentRequestId => [...rentRequestId, temp]);
+          console.log(rentRequestId);
         } else {
           console.log(response);
           throw new Error('Failed to create rent request');
@@ -97,11 +143,30 @@ function mycart({ user, items, userCart }) {
       })
       await Promise.all(cartItems)
 
-      window.location.reload();
     } catch (error) {
       console.error(error);
     }
     setIsLoading(false);
+  }
+
+  const paySubmit = async () => {
+
+    const data = {
+      userId: user.id,
+      rentReqId: rentRequestId, //
+      amount: userCart.value,
+      paymentId: paymentId,
+      imageURL: imageURL
+    }
+
+    const response = await makePayment(data);
+    if (response.status === 200) {
+      alert('Your request has been sent');
+      window.location.reload()
+    } else {
+      alert('Something went wrong');
+      window.location.reload();
+    }
   }
 
   // Simulate loading
@@ -119,6 +184,23 @@ function mycart({ user, items, userCart }) {
       <div className="section_navbar">
         <Navbar />
       </div>
+      {
+        isOpen && <Modal isOpen={isOpen} onClose={() => { setIsOpen(false) }} size={'md'} isCentered>
+          <ModalOverlay />
+          <ModalContent>
+            <CloseButton onClick={() => { setIsOpen(false) }} />
+            <FormControl id="paymentId">
+              <FormLabel>Payment ID</FormLabel>
+              <Input type="text" onChange={(e) => { setPaymentId(e.target.value) }} />
+            </FormControl>
+            <FormControl id="imageURL">
+              <FormLabel>Upload Payment Screenshot</FormLabel>
+              <Input type="file" onChange={(e) => { uploadImages(e.target.files[0]) }} />
+            </FormControl>
+            <Button onClick={() => { paySubmit() }}>Submit</Button>
+          </ModalContent>
+        </Modal>
+      }
       {
         userCart.value === 0 ?
           <div className='CartSection__empty'>
