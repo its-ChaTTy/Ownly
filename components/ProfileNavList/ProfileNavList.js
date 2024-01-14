@@ -5,7 +5,7 @@ import useAuth from '@/hooks/useAuth';
 import { logout } from '@/operations/auth.fetch';
 
 function ProfileNavList() {
-    const { setPage, setAddModal, addModal } = useAuth()
+    const { setPage, setAddModal, addModal, page } = useAuth()
 
     const handleLogout = async () => {
         const res = await logout();
@@ -18,27 +18,45 @@ function ProfileNavList() {
 
     return (
         <div className='navList'>
-            <div style={{ cursor: "pointer" }} className='navList__elements'>
+            <div style={{
+                cursor: "pointer",
+                color: page === "profile" ? "#FF6B00" : "black",
+            }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faHouseUser} />
                 <p onClick={() => { setPage("profile") }}>My Profile</p>
             </div>
-            <div style={{ cursor: "pointer" }} className='navList__elements'>
+            <div style={{
+                cursor: "pointer",
+                color: page === "listings" ? "#FF6B00" : "black",
+            }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faCompass} />
                 <p onClick={() => { setPage("listings") }}>My Listings</p>
             </div>
-            <div style={{ cursor: "pointer" }} className='navList__elements'>
+            <div style={{
+                cursor: "pointer",
+                color: page === "history" ? "#FF6B00" : "black",
+            }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
                 <p onClick={() => { setPage("history") }}>Rental History</p>
             </div>
-            <div style={{ cursor: "pointer" }} className='navList__elements'>
+            <div style={{
+                cursor: "pointer",
+                color: page === "active" ? "#FF6B00" : "black",
+            }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
                 <p onClick={() => { setPage("active") }}>Active Rent</p>
             </div>
-            <div style={{ cursor: "pointer" }} className='navList__elements'>
+            <div style={{
+                cursor: "pointer",
+                color: page === "requests" ? "#FF6B00" : "black",
+            }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faCodePullRequest} />
                 <p onClick={() => { setPage("requests") }}>Rent Requests</p>
             </div>
-            <div style={{ cursor: "pointer" }} className='navList__elements'>
+            <div style={{
+                cursor: "pointer",
+                color: page === "logout" ? "#FF6B00" : "black",
+            }} className='navList__elements'>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSignOut} />
                 <p onClick={() => { handleLogout() }}>Logout</p>
             </div>
