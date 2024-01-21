@@ -8,25 +8,25 @@ import { useRouter } from "next/router"
 
 function Register() {
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [showPassword, setShowPassword] = useState(false)
-    const [confirmPassword, setConfirmPassword] = useState('')
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false)
-    const [phoneNumber, setPhoneNumber] = useState('')
-    const [address, setAddress] = useState('')
-    const [location, setLocation] = useState('')
-    const router = useRouter()
-    const [name, setName] = useState('')
+    const router = useRouter();
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [address, setAddress] = useState('');
+    const [location, setLocation] = useState('');
+    const [name, setName] = useState('');
 
     const handleRegister = async () => {
         if (!isEmail(email)) {
             alert('Please enter a valid email')
-            return
+            return;
         }
         if (!isName(name)) {
             alert('Please enter a valid name')
-            return
+            return;
         }
         if (!isPassword(password)) {
             alert('Password must be at least 8 characters, contain at least 1 letter and 1 number')
@@ -45,8 +45,8 @@ function Register() {
         }
     }
 
-    const handlePasswordVisibility = () => setShowPassword(!showPassword);
-    const handleConfirmPasswordVisibility = () => setShowConfirmPassword(!showConfirmPassword);
+    const handlePasswordVisibility = async () => setShowPassword(!showPassword);
+    const handleConfirmPasswordVisibility = async () => setShowConfirmPassword(!showConfirmPassword);
 
     return (
         <>
@@ -60,69 +60,48 @@ function Register() {
                     <h1>Hello User</h1>
                     <p>Sign up to create an account.</p>
                     <FormControl>
-                        <Input placeholder="Name" onChange={(e) => setName(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                            backgroundColor: 'white'
-                        }} type="text" value={name} />
+                        <Input placeholder="Name" onChange={(e) => setName(e.target.value)} type="text" value={name} />
                     </FormControl>
                     <FormControl>
-                        <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                            backgroundColor: 'white'
-                        }} type="email" value={email} />
-                    </FormControl>
-                    <InputGroup>
-                        <Input
-                            placeholder="Password"
-                            type={showPassword ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            style={{
-                                color: '#737F95',
-                                border: '1px solid #737F95',
-                            }}
-                        />
-                        <InputRightElement onClick={handlePasswordVisibility}>
-                            {showPassword ? <FaEyeSlash /> : <FaEye />}
-                        </InputRightElement>
-                    </InputGroup>
-                    <InputGroup>
-                        <Input
-                            placeholder="Confirm Password"
-                            type={showConfirmPassword ? "text" : "password"}
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            style={{
-                                color: '#737F95',
-                                border: '1px solid #737F95',
-                            }}
-                        />
-                        <InputRightElement onClick={handleConfirmPasswordVisibility}>
-                            {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-                        </InputRightElement>
-                    </InputGroup>
-                    <FormControl>
-                        <Input placeholder="Phone Number" onChange={(e) => setPhoneNumber(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                            backgroundColor: 'white'
-                        }} type="tel" value={phoneNumber} />
+                        <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="email" value={email} />
                     </FormControl>
                     <FormControl>
-                        <Input placeholder="Address" onChange={(e) => setAddress(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                            backgroundColor: 'white'
-                        }} type="text" value={address} />
+
+                        <InputGroup>
+                            <Input
+                                placeholder="Password"
+                                type={showPassword ? "text" : "password"}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <InputRightElement onClick={handlePasswordVisibility}>
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </InputRightElement>
+                        </InputGroup>
                     </FormControl>
                     <FormControl>
-                        <Input placeholder="Location" onChange={(e) => setLocation(e.target.value)} style={{
-                            color: '#737F95',
-                            border: '1px solid #737F95',
-                            backgroundColor: 'white'
-                        }} type="text" value={location} />
+                        <InputGroup>
+                            <Input
+                                placeholder="Confirm Password"
+                                type={showConfirmPassword ? "text" : "password"}
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+
+                            />
+                            <InputRightElement onClick={handleConfirmPasswordVisibility}>
+                                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+                            </InputRightElement>
+                        </InputGroup>
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Phone Number" onChange={(e) => setPhoneNumber(e.target.value)} type="number"
+                            value={phoneNumber} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Address" onChange={(e) => setAddress(e.target.value)} type="text" value={address} />
+                    </FormControl>
+                    <FormControl>
+                        <Input placeholder="Location" onChange={(e) => setLocation(e.target.value)} type="text" value={location} />
                     </FormControl>
                     <Button onClick={handleRegister} style={{
                         backgroundColor: '#113447',

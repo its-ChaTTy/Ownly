@@ -19,8 +19,8 @@
     &__form {
 
         width: 85%; // based on view change to 80 if feels too big
-        height: 60vh;
-        grid-area: 4 / 2 / 11 / 6;
+        height: 80vh;
+        grid-area: 3 / 2 / 11 / 6;
 
         display: flex;
         flex-direction: column;
@@ -28,6 +28,15 @@
         align-items: center;
 
         padding-left: 30px;
+        // color: '#737F95',
+        // border: '1px solid #737F95',
+        // backgroundColor: 'white'
+
+        input{
+            color: #737F95;
+            border: 1px solid #737F95;
+            background-color: white;
+        }
 
         h1 {
             font-size: 2rem;
@@ -44,7 +53,7 @@
     &__sideimg {
         grid-area: 2 / 7 / 12 / 12;
 
-        background-image: url("/Images/Assets/login_bg_img.webp ");
+        background-image: url("/Images/Assets/login_bg_img.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
