@@ -1,4 +1,4 @@
-const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const emailRegex = /^[\w-\.]+@snu\.edu\.in$/;
 
 const nameRegex = /^[a-zA-Z ]{3,40}$/;
 

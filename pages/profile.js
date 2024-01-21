@@ -37,9 +37,9 @@ export async function getServerSideProps(context) {
         return {
             id: rent.id,
             total: rent.price,
-            item_name: rent.item.name,
-            item_desc: rent.item.description,
-            item_image: rent.item.imageURL[0],
+            item_name: rent.Item.name,
+            item_desc: rent.Item.description,
+            item_image: rent.Item.imageURL[0],
             order_placed: JSON.stringify(rent.startDate),
             delivered_date: JSON.stringify(rent.endDate),
             duration: JSON.stringify(new Date(rent.endDate).getDate() - new Date(rent.startDate).getDate())
@@ -49,9 +49,9 @@ export async function getServerSideProps(context) {
         return {
             id: activerent.id,
             total: activerent.price,
-            item_name: activerent.item.name,
-            item_desc: activerent.item.description,
-            item_image: activerent.item.imageURL[0],
+            item_name: activerent.Item.name,
+            item_desc: activerent.Item.description,
+            item_image: activerent.Item.imageURL[0],
             order_placed: JSON.stringify(activerent.startDate),
             delivered_date: JSON.stringify(activerent.endDate),
             duration: JSON.stringify(new Date(activerent.endDate).getDate() - new Date(activerent.startDate).getDate())

@@ -5,7 +5,12 @@ import { withSessionRoute } from "@/lib/ironOptions";
 export default withSessionRoute(SignUp);
 
 async function SignUp(req, res) {
-    const { email, name, password } = req.body;
+    const { email, name, password, phone, address, location} = req.body;
+
+    const emailRegex = /^[\w-\.]+@snu\.edu\.in$/;
+    if (!emailRegex.test(email)) {
+        return res.send({ status: 400, message: "Invalid email. Only @snu.edu.in emails are allowed." });
+    }
 
     try {
         const Euser = await fetchUser(email);
@@ -16,6 +21,10 @@ async function SignUp(req, res) {
             name: name,
             email: email,
             password: hashSync(password, 10),
+            phone: phone,
+            address: address,
+            location: location
+            
         });
 
         const user = await fetchUser(email);
