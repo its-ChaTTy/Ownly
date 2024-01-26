@@ -6,11 +6,14 @@ import ProductPageCards from "@/components/ProductPageCards/ProductPageCards";
 import { useState, useEffect } from "react";
 import { fetchAvailableItems } from "@/services/items.service";
 import '@/styles/routes/productPage.scss'
+import { searchItems } from "@/services/items.service";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 
 export async function getServerSideProps(context) {
   
   const user = context.req.session.user;
+  const searchParams = context.query.search;
+
   var userProp = null;
 
   if (user === undefined) {
@@ -24,7 +27,12 @@ export async function getServerSideProps(context) {
     userProp = user;
   }
 
-  let allItems = await fetchAvailableItems();
+  let allItems = null;
+  if (searchParams === undefined || searchParams === "" || searchParams === null) {
+    allItems = await fetchAvailableItems();
+  } else {
+    allItems = await searchItems(searchParams);
+  }
 
   return {
     props: { allItems: allItems, user: userProp },
