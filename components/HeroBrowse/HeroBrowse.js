@@ -1,12 +1,21 @@
 import "./HeroBrowse.scss";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 import useAuth from "@/hooks/useAuth";
 
 function HeroBrowse() {
 
   const router = useRouter();
   const { setAddModal } = useAuth();
+
+  const [search, setSearch] = useState("");
+
+  const handleSearch = async () => {
+    router.push(`/productPage?search=${search}`);
+  };
+  
+
 
   return (
     <div className="HeroBrowse">
@@ -24,6 +33,8 @@ function HeroBrowse() {
             type="text"
             className="search-bar"
             placeholder="Search for items to rent"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
           />
           <p>Or</p>
           <button onClick={() => {
