@@ -3,12 +3,11 @@ import Navbar from "@/components/Navbar/Navbar";
 import { fetchAvailableItems } from '@/services/items.service';
 import CartCard from '@/components/CartCard/CartCard';
 import '@/styles/routes/mycart.scss'
-import { createRentRequest } from '@/operations/request.fetch';
-import { removeCartItem } from '@/operations/cart.fetch';
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { generate } from "random-words";
-import { makePayment } from '@/operations/cart.fetch';
+import { makePayment, removeCartItem } from '@/operations/cart.fetch';
+import { createRentRequest } from '@/operations/request.fetch';
 
 import {
   Modal, ModalOverlay,
@@ -79,6 +78,8 @@ function mycart({ user, items, userCart }) {
   const supabase = createClient(supabaseUrl, supabaseKey)
 
   async function uploadFile(file, file_path) {
+
+    setIsLoading(true);
     const { data, error } = await supabase.storage.from('payments').upload(file_path, file)
     const res = supabase.storage.from('payments').getPublicUrl(file_path);
     if (error) {
@@ -86,6 +87,7 @@ function mycart({ user, items, userCart }) {
     } else {
       setImageURL(res['data'].publicUrl)
     }
+    setIsLoading(false);
   }
 
   const uploadImages = async (file) => {
@@ -100,6 +102,8 @@ function mycart({ user, items, userCart }) {
   const handleCheckout = async () => {
     setIsLoading(true);
     setIsOpen(true);
+
+    // return;
     try {
 
       const requests = items.map(async (item) => {
@@ -159,11 +163,15 @@ function mycart({ user, items, userCart }) {
       imageURL: imageURL
     }
 
+    console.log(data);
+    // return;
+
     const response = await makePayment(data);
     if (response.status === 200) {
       alert('Your request has been sent');
       window.location.reload()
     } else {
+      console.log(response);
       alert('Something went wrong');
       window.location.reload();
     }

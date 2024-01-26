@@ -35,7 +35,9 @@ export async function getServerSideProps(context) {
 }
 
 function dashboard({ user, pendingRequests }) {
+
     const [iseLoading, setIsLoading] = useState(false);
+    
     const handleApprove = async (request) => {
         const temp = request['rentReqId'].map(async (id) => {
             const response = await paymentApprove({ 'id1': id, 'id2': request['id'] });
@@ -48,6 +50,7 @@ function dashboard({ user, pendingRequests }) {
         alert("Approved");
         window.location.reload();
     }
+
     return (
         <>
             {iseLoading ||

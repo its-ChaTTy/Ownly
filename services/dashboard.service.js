@@ -7,6 +7,17 @@ export async function approvePayment(data) {
         },
         data: {
             adminStatus: 'ACCEPTED'
+        },
+        include:{
+            User:{
+                select:{
+                    email:true,
+                    name:true,
+                    address:true,
+                    phone:true,
+                    location: true
+                }
+            }
         }
     })
 }
