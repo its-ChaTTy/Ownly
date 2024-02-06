@@ -17,6 +17,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  Image
 } from '@chakra-ui/react';
 
 import { createClient } from '@supabase/supabase-js'
@@ -197,6 +198,7 @@ function mycart({ user, items, userCart }) {
           <ModalOverlay />
           <ModalContent>
             <CloseButton onClick={() => { setIsOpen(false) }} />
+            <Image src={"/Images/Store/qr.jpg"} alt="QR Code" height={"auto"} width={"65%"} objectFit="cover" />
             <FormControl id="paymentId">
               <FormLabel>Payment ID</FormLabel>
               <Input type="text" onChange={(e) => { setPaymentId(e.target.value) }} />
