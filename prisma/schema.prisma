@@ -90,7 +90,7 @@ model RentRequest {
   price       Int       @default(0)
   cartId      Int?
   adminStatus Status    @default(PENDING)
-  ownerStatus Status    @default(ACCEPTED)
+  ownerStatus Status    @default(PENDING)
   paymentsId  Int?
   Item        Item      @relation(fields: [itemId], references: [id])
   Payments    Payments? @relation(fields: [paymentsId], references: [id])

@@ -62,17 +62,17 @@ export async function getServerSideProps(context) {
     const allRequests = await getAllRequests();
     const userRequests = await getUserRequests(user.id);
     let sentRequests = [];
-    
-    // let recievedRequests = [];
-    // allRequests.forEach((request) => {
-    //     const item = allItems.find((item) => item.id === request.itemId);
-    //     if (item) {
-    //         recievedRequests.push({
-    //             ...item,
-    //             ...request,
-    //         });
-    //     }
-    // })
+
+    let recievedRequests = [];
+    allRequests.forEach((request) => {
+        const item = allItems.find((item) => item.id === request.itemId);
+        if (item) {
+            recievedRequests.push({
+                ...item,
+                ...request,
+            });
+        }
+    })
 
     userRequests.forEach((request) => {
         const item = allAvailableItems.find((item) => item.id === request.itemId);
@@ -92,12 +92,13 @@ export async function getServerSideProps(context) {
             history: history,
             active: active,
             sentRequests: JSON.parse(JSON.stringify(sentRequests)),
+            recievedRequests: JSON.parse(JSON.stringify(recievedRequests))
         },
     }
 
 }
 
-export default function Profile({ user, allItems, history, active, sentRequests }) {
+export default function Profile({ user, allItems, history, active, sentRequests, recievedRequests }) {
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -177,7 +178,7 @@ export default function Profile({ user, allItems, history, active, sentRequests 
                         {
                             page === 'requests' ?
                                 <div className="profile_main--elements__requests">
-                                    {/* <p className="profile_main--elements__requests--text">Recieved Requests</p>
+                                    <p className="profile_main--elements__requests--text">Recieved Requests</p>
                                     {
                                         recievedRequests.map((item, index) => {
                                             if (item.ownerStatus !== 'REJECTED') {
@@ -187,7 +188,7 @@ export default function Profile({ user, allItems, history, active, sentRequests 
                                                     </div>)
                                             }
                                         })
-                                    } */}
+                                    }
                                     <p className="profile_main--elements__requests--text">Sent Requests</p>
                                     {
                                         sentRequests.map((item, index) => {
