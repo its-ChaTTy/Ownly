@@ -3,19 +3,6 @@
 1. After a RentRequest is accepted then reject all other requests for that property during that tenure
 
 ```sql
-CREATE OR REPLACE FUNCTION updateRentRequests(
-  i INT,
-  sd TIMESTAMP WITH TIME ZONE,
-  ed TIMESTAMP WITH TIME ZONE
-) RETURNS VOID AS $$
-BEGIN
-  UPDATE "RentRequest"
-  SET "adminStatus" = 'REJECTED', "ownerStatus" = 'REJECTED'
-  WHERE "itemId" = i
-    AND "startDate" >= sd
-    AND "endDate" <= ed;
-END;
-$$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION request_accepted()
 RETURNS TRIGGER AS $$
@@ -24,15 +11,18 @@ BEGIN
   INSERT INTO "ActiveRent" ("itemId", "userId", "startDate", "endDate", "price")
   VALUES (NEW."itemId", NEW."userId", NEW."startDate", NEW."endDate", NEW.price);
 
-  -- Delete the accepted request from RentRequest
-  -- DELETE FROM "RentRequest" WHERE id = NEW.id;
-
   -- Update other overlapping requests to be rejected
-  PERFORM updateRentRequests(NEW."itemId", NEW."startDate", NEW."endDate");
+  UPDATE "RentRequest"
+  SET "ownerStatus" = 'REJECTED', "adminStatus" = 'REJECTED'
+  WHERE "itemId" = NEW."itemId"
+    AND "startDate" >= NEW."startDate"
+    AND "endDate" <= NEW."endDate"
+    AND id != NEW.id;
 
   RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
+
 
 CREATE TRIGGER request_accepted
 AFTER UPDATE ON "RentRequest"
