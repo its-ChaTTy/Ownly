@@ -30,6 +30,17 @@ export async function fetchItem(id) {
     })
 }
 
+export async function fetchItemUser(id) {
+    return await db.item.findUnique({
+        where: {
+            id
+        },
+        include: {
+            User: true
+        }
+    })
+}
+
 export async function updateItem(id, data, userId) {
     return await db.item.update({
         where: {

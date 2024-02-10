@@ -40,21 +40,24 @@ function dashboard({ user, pendingRequests }) {
     
     const handleApprove = async (request) => {
         console.log(request);
-        return;
+        // return;
 
         const data = {
-            
+            id: request.id,
+            id2: user.id,
+            paymentId: request.paymentId,
+            amount: request.amount
+        }
 
-        // const temp = request['rentReqId'].map(async (id) => {
-        //     const response = await paymentApprove({ 'id1': id, 'id2': request['id'] });
-        //     if (response.status != 200) {
-        //         alert("Something went wrong");
-        //         return;
-        //     }
-        // })
-        // await Promise.all(temp);
-        // alert("Approved");
-        // window.location.reload();
+        const response = await paymentApprove(data);
+        if (response.status === 200) {
+            alert("Approved");
+            window.location.reload();
+        }
+        else {
+            alert("Something went wrong");
+        }
+
     }
 
     return (

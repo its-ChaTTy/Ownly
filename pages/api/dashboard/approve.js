@@ -1,37 +1,25 @@
 import { withSessionRoute } from "@/lib/ironOptions";
 import { approvePayment, approvePayment2 } from "@/services/dashboard.service";
 import transporter from "@/utils/transporter";
+import { fetchItemUser } from "@/services/items.service";
 
 export default withSessionRoute(approve);
 
-// {
-//     id: 39,
-//     itemId: 8,
-//     userId: 1,
-//     startDate: 2024-01-14T13:35:35.046Z,
-//     endDate: 2024-01-17T18:30:00.000Z,
-//     days: 4,
-//     price: 160,
-//     cartId: 3,
-//     adminStatus: 'ACCEPTED',
-//     ownerStatus: 'ACCEPTED',
-//     paymentsId: null,
-//     User: {
-//       email: 'ps@snu.edu.in',
-//       name: 'Sujith',
-//       address: 'moye moye',
-//       phone: 1234567890,
-//       location: 'daadrii'
-//     }
-//   }
-
 async function approve(req, res) {
-    const { id1, id2 } = req.body;
+
+    const { id, id2, paymentId, amount } = req.body;
+
+    if(id === undefined || id2 === undefined || paymentId === undefined || amount === undefined){
+        res.json({ status: 400, error: "Invalid data" });
+        return;
+    }
 
     try {
-        const response = await approvePayment({ 'id': id1 });
-        const response2 = await approvePayment2({ 'id': id2 });
-        await sendApprovalMail(response.User);
+        const response = await approvePayment({ 'id': id });
+        // console.log(response, "response\n");
+        const owner = await fetchItemUser(id);
+        // console.log(owner, "owner\n");
+        await sendApprovalMail(response.User,owner.User);
         res.json({ status: 200, response });
     }
     catch (error) {
@@ -40,12 +28,12 @@ async function approve(req, res) {
     }
 }
 
-async function sendApprovalMail(user) {
+async function sendApprovalMail(user,owner) {
     const mailData = {
         from: 'ownlyco@gmail.com',
         to: user.email,
         subject: 'Rent Request Approved',
-        html: `<h1>Hi User,</h1><br><p>Your rent request has been approved.Owner name: ${user.name}, Owner address: ${user.address}, Owner phone: ${user.phone}, Owner location: ${user.location}</p>`
+        html: `<h1>Hi User,</h1><br><p>Your rent request has been approved.Owner name: ${owner.name}, Owner email: ${owner.email}, Owner phone: ${owner.phone}, Owner address: ${owner.address}, Owner location: ${owner.location}</p>`
     };
 
     transporter.sendMail(mailData, function (err, info) {
@@ -53,7 +41,7 @@ async function sendApprovalMail(user) {
             console.log(err);
         }
         else {
-            console.log(info);
+            console.log("Email sent successfully");
         }
     });
 
