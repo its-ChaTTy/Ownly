@@ -52,6 +52,9 @@ export async function acceptRequest(id) {
     },
     data: {
       ownerStatus: 'ACCEPTED'
+    },
+    include: {
+      User: true
     }
   })
 }

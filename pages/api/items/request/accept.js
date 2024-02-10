@@ -36,7 +36,7 @@ async function requestAccept(req, res) {
         const request = await acceptRequest(id);
         console.log(request);
         // need to fetch the user email from reqquest.userId
-        // await sendOwnerApprovalMail(user);
+        await sendOwnerApprovalMail(request);
         return res.json({ status: 200, message: "Request accepted", request });
     }
     catch (error) {
@@ -46,25 +46,37 @@ async function requestAccept(req, res) {
 }
 
 // {
-//     id: 49,
-//     itemId: 14,
+//     id: 50,
+//     itemId: 17,
 //     userId: 15,
-//     startDate: 2024-02-08T15:42:46.458Z,
-//     endDate: 2024-02-16T18:30:00.000Z,
-//     days: 9,
-//     price: 1107,
+//     startDate: 2024-02-10T09:18:37.201Z,
+//     endDate: 2024-02-17T18:30:00.000Z,
+//     days: 8,
+//     price: 552,
 //     cartId: 12,
 //     adminStatus: 'PENDING',
 //     ownerStatus: 'ACCEPTED',
-//     paymentsId: null
+//     paymentsId: null,
+//     User: {
+//       id: 15,
+//       email: 'ps335@snu.edu.in',
+//       password: '$2b$10$WqSRlZKG8QPMEI1T.p5kVOwPFabf4um/QdCN/fnM55N3b3H0JtJtG',
+//       name: 'Sujith',
+//       address: '123456789o',
+//       phone: 1234567890,
+//       location: '123456789o',
+//       isVerified: false,
+//       totalEarned: 0,
+//       profilePic: 'https://aniaodrkdkwrtfkhpjgp.supabase.co/storage/v1/object/public/profile-photos/15/profile'
+//     }
 //   }
 
-async function sendOwnerApprovalMail(user) {
+async function sendOwnerApprovalMail(request) {
     const mailData = {
         from: 'ownlyco@gmail.com',
-        to: user.email,
+        to: request.User.email,
         subject: 'Owner Rent Request Approved, Time to Pay',
-        html: `<h1>Hi User,</h1><br><p>Your rent request has been approved by owner, Time to Pay</p>`
+        html: `<h1>Hi ${request.User.name},</h1><br><p>Your rent request has been approved by owner, Time to Pay at <a href="http://localhost:3000/cart/pay?id=${request.id}&user=${request.userId}&price=${request.price}">here</a></p>`
     };
 
     transporter.sendMail(mailData, function (err, info) {
@@ -72,8 +84,9 @@ async function sendOwnerApprovalMail(user) {
             console.log(err);
         }
         else {
-            console.log(info);
+            // console.log(info);
+            console.log("Mail Sent")
         }
     });
+    
 }
-

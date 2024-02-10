@@ -70,7 +70,7 @@ model OverRent {
 model Payments {
   id            Int           @id @default(autoincrement())
   userId        Int
-  rentReqId     Int[]
+  rentReqId     Int
   isPaidToTeam  Boolean       @default(false)
   isPaidToOwner Boolean       @default(false)
   amount        Int

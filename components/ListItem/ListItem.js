@@ -13,6 +13,7 @@ import { generate } from "random-words";
 import useAuth from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import { listItem, updateItem } from "@/operations/items.fetch";
+import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 
 import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
@@ -22,6 +23,7 @@ function ListItem({ user }) {
 
     const { setAddModal, editItem } = useAuth();
 	const [item, setItem] = useState(editItem);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		setItem(editItem);
@@ -36,6 +38,7 @@ function ListItem({ user }) {
 	const supabase = createClient(supabaseUrl, supabaseKey)
 
 	async function uploadFile(file, file_path) {
+		setIsLoading(true);
 		const { data, error } = await supabase.storage.from('ownly-images').upload(file_path, file)
 		const res = supabase.storage.from('ownly-images').getPublicUrl(file_path);
 		if (error) {
@@ -43,6 +46,7 @@ function ListItem({ user }) {
 		} else {
 			setImageUrls([...imageUrls, res['data'].publicUrl])
 		}
+		setIsLoading(false);
 	}
 
 	const uploadImages = async (file) => {
@@ -143,6 +147,7 @@ function ListItem({ user }) {
 
 	return (
 		<>
+			{isLoading && <LoadingSpinner />}
 			<div className="ListItem">
 				<div className="ListItem__description">
 					<h1>Description</h1>
