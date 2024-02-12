@@ -64,7 +64,7 @@ function Navbar() {
 						/>
 					</div> */}
 
-					<p className="Navbar__rightside--text" onClick={() => { scrollToSection('howItWorks') }}>How it works</p>
+					<p className="Navbar__rightside--text" onClick={() => { scrollToSection('how') }}>How it works</p>
 					<p className="Navbar__rightside--text" onClick={() => {
 						router.push("/profile");
 						setAddModal(true);
