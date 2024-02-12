@@ -9,7 +9,7 @@ async function approve(req, res) {
 
     const { id, id2, paymentId, amount } = req.body;
 
-    if(id === undefined || id2 === undefined || paymentId === undefined || amount === undefined){
+    if (id === undefined || id2 === undefined || paymentId === undefined || amount === undefined) {
         res.json({ status: 400, error: "Invalid data" });
         return;
     }
@@ -17,9 +17,10 @@ async function approve(req, res) {
     try {
         const response = await approvePayment({ 'id': id });
         // console.log(response, "response\n");
-        const owner = await fetchItemUser(id);
+        const owner = await fetchItemUser(response.itemId);
         // console.log(owner, "owner\n");
-        await sendApprovalMail(response.User,owner.User);
+        await sendApprovalMail(response.User, owner.User);
+        await approvePayment2({ 'id': id2 });
         res.json({ status: 200, response });
     }
     catch (error) {
@@ -28,7 +29,8 @@ async function approve(req, res) {
     }
 }
 
-async function sendApprovalMail(user,owner) {
+async function sendApprovalMail(user, owner) {
+    console.log(user, owner);
     const mailData = {
         from: 'ownlyco@gmail.com',
         to: user.email,
@@ -41,6 +43,7 @@ async function sendApprovalMail(user,owner) {
             console.log(err);
         }
         else {
+            console.log(info);
             console.log("Email sent successfully");
         }
     });

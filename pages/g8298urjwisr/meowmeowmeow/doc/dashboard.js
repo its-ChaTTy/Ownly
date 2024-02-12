@@ -39,12 +39,12 @@ function dashboard({ user, pendingRequests }) {
     const [iseLoading, setIsLoading] = useState(false);
     
     const handleApprove = async (request) => {
-        console.log(request);
+        // console.log(request);
         // return;
 
         const data = {
-            id: request.id,
-            id2: user.id,
+            id: request.rentReqId,
+            id2: request.id,
             paymentId: request.paymentId,
             amount: request.amount
         }
@@ -55,6 +55,7 @@ function dashboard({ user, pendingRequests }) {
             window.location.reload();
         }
         else {
+            console.log(response);
             alert("Something went wrong");
         }
 
