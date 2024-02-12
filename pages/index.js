@@ -59,9 +59,9 @@ export default function Home({ allItems, user }) {
       <div id="earning" className="section">
         <Earning />
       </div>
-      <div id="howItWorks" className="section">
+      {/* <div id="howItWorks" className="section">
         <How_it_works />
-      </div>
+      </div> */}
       <div id="footer" className="section">
         <Footer />
       </div>
