@@ -4,17 +4,17 @@ const About = () => {
     const cards = [
         {
             'title': 'Share your stuff',
-            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
+            'description': 'Put your unused items to work and earn for you! List your item for rent, set availability and rental duration, and start earning money from your unused items.',
             'button': 'Start Sharing'
         },
         {
             'title': 'Browse from someone',
-            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
+            'description': 'In need of a product for a short-term rental? Post a rent request and access a wide variety of products from other users, and conveniently rent them out for however long you need.',
             'button': 'Start Browsing'
         },
         {
             'title': 'Request an item',
-            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.',
+            'description': 'Simply fill out our easy form to submit your item request. Our team will promptly review your request and work to fulfill it. Let us know what you need, and we will take care of the rest!',
             'button': 'Start Requesting'
         },
     ];
@@ -24,7 +24,7 @@ const About = () => {
             <div className='AboutSection__header'>
                 <p className='AboutSection__header--text1'>What sets us apart</p>
                 <p className='AboutSection__header--text2'>What's in store for you</p>
-                <p className='AboutSection__header--text3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p>
+                {/* <p className='AboutSection__header--text3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p> */}
             </div>
             <div>
                 <div className='AboutSection__cards'>
@@ -36,7 +36,7 @@ const About = () => {
                             <div className='AboutSection__cards--card__text'>
                                 <p className='AboutSection__cards--card__text--title'>{card.title}</p>
                                 <p style={{ color: `${index == 0 ? "rgba(110, 120, 141, 1)" : (index == 1) ? "rgba(235, 235, 235, 1)" : "rgba(235, 235, 235, 1)"}` }} className='AboutSection__cards--card__text--description'>{card.description}</p>
-                                <button className='AboutSection__cards--card__text--button'>{card.button}</button>
+                                {/* <button className='AboutSection__cards--card__text--button'>{card.button}</button> */}
                             </div>
                         </div>
                     ))}
