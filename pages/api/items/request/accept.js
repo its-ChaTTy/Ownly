@@ -3,6 +3,7 @@ import { isItemByUser } from "@/services/items.service";
 import { getActiveRent } from "@/services/items.service";
 import { acceptRequest } from "@/services/requests.service";
 import transporter from "@/utils/transporter";
+import { appendNewMessage } from "@/services/messages.service";
 
 export default withSessionRoute(requestAccept);
 
@@ -34,9 +35,13 @@ async function requestAccept(req, res) {
 
     try {
         const request = await acceptRequest(id);
-        console.log(request);
+        // console.log(request);
         // need to fetch the user email from reqquest.userId
         await sendOwnerApprovalMail(request);
+        await appendNewMessage({
+            userId: request.userId,
+            message: "Your rent request has been approved by the owner, Time to Pay"
+        });
         return res.json({ status: 200, message: "Request accepted", request });
     }
     catch (error) {

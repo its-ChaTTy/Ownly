@@ -114,6 +114,14 @@ model User {
   OverRent    OverRent[]
   Payments    Payments[]
   RentRequest RentRequest[]
+  Message     Message[]
+}
+
+model Message {
+  id      Int  @id @default(autoincrement())
+  userId  Int  @unique
+  message String[]
+  User    User @relation(fields: [userId], references: [id])
 }
 
 enum Category {

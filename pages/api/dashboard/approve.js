@@ -2,6 +2,7 @@ import { withSessionRoute } from "@/lib/ironOptions";
 import { approvePayment, approvePayment2 } from "@/services/dashboard.service";
 import transporter from "@/utils/transporter";
 import { fetchItemUser } from "@/services/items.service";
+import { appendNewMessage } from "@/services/messages.service";
 
 export default withSessionRoute(approve);
 
@@ -21,6 +22,11 @@ async function approve(req, res) {
         // console.log(owner, "owner\n");
         await sendApprovalMail(response.User, owner.User);
         await approvePayment2({ 'id': id2 });
+        await appendNewMessage({ 
+            userId: response.User.id,
+            message: "Your rent request has been approved, time to contact the owner"
+        });
+
         res.json({ status: 200, response });
     }
     catch (error) {
@@ -30,7 +36,7 @@ async function approve(req, res) {
 }
 
 async function sendApprovalMail(user, owner) {
-    console.log(user, owner);
+    
     const mailData = {
         from: 'ownlyco@gmail.com',
         to: user.email,

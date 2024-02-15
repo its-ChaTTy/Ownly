@@ -2,7 +2,10 @@ import db from '@/lib/prisma'
 
 export async function createRequest(data) {
   return await db.rentRequest.create({
-    data
+    data,
+    include: {
+      Item: true
+    }
   })
 }
 

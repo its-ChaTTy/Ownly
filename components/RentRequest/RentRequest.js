@@ -1,6 +1,5 @@
 import { acceptRentRequest, rejectRentRequest } from '@/operations/request.fetch';
 import './RentRequest.scss'
-import Image from 'next/image'
 
 const RentRequest = ({ item, sent, user }) => {
 

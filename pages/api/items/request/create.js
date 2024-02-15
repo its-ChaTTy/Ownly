@@ -1,6 +1,7 @@
 import { withSessionRoute } from "@/lib/ironOptions";
 import { createRequest } from "@/services/requests.service";
 import { fetchItem } from "@/services/items.service";
+import { appendNewMessage } from "@/services/messages.service";
 
 export default withSessionRoute(requestCreate);
 
@@ -22,6 +23,10 @@ async function requestCreate(req, res) {
 
     try {
         const request = await createRequest(data);
+        await appendNewMessage({
+            userId: request.Item.userId,
+            message: "You have a new rent request, check your dashboard"
+        });
         res.json({ status: 200, request })
     } catch (error) {
         console.log(error)

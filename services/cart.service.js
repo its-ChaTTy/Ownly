@@ -1,4 +1,3 @@
-import Cart from '@/components/Cart/Cart'
 import db from '@/lib/prisma'
 
 export async function initializeCart(data) {
