@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import useAuth from "@/hooks/useAuth";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 function HeroBrowse() {
 
@@ -14,7 +16,7 @@ function HeroBrowse() {
   const handleSearch = async () => {
     router.push(`/productPage?search=${search}`);
   };
-  
+
 
 
   return (
@@ -29,28 +31,42 @@ function HeroBrowse() {
           neighborhood.
         </p>
         <div className="HeroBrowse__left__search">
-          <input
-            type="text"
-            className="search-bar"
-            placeholder="Search for items to rent"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+          <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+            <input
+              type="text"
+              className="search-bar"
+              placeholder="Search for items to rent"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{ paddingRight: '30px' }} // make room for the icon
+            />
+            <FontAwesomeIcon
+              icon={faSearch}
+              style={{
+                cursor: 'pointer',
+                position: 'absolute',
+                right: '25px',
+                top: '50%',
+                transform: 'translateY(-50%)'
+              }}
+              onClick={handleSearch}
+            />
+          </div>
           <p>Or</p>
           <button onClick={() => {
             router.push("/profile");
             setAddModal(true);
           }} className="HeroBrowse__left__search__btn">List an Item</button>
         </div>
-        <div className="HeroBrowse__left__Button">
+        {/* <div className="HeroBrowse__left__Button">
           <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.webp" />
           <Link href="/productPage">
             <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.webp" />
           </Link>
-        </div>
+        </div> */}
       </div>
       <div className="HeroBrowse__right">
-        <img src="/Images/Home_page/home_page.webp" alt="Hero Browse" />
+        <img src="/Images/Home_page/home_page.png" alt="Hero Browse" />
       </div>
     </div>
   );

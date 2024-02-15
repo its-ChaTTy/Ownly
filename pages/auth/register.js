@@ -70,7 +70,7 @@ function Register() {
                         <Input placeholder="Name" onChange={(e) => setName(e.target.value)} type="text" value={name} />
                     </FormControl>
                     <FormControl>
-                        <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} type="email" value={email} />
+                        <Input placeholder="Email (SNU Id)" onChange={(e) => setEmail(e.target.value)} type="email" value={email} />
                     </FormControl>
                     <FormControl>
 
@@ -105,7 +105,7 @@ function Register() {
                             value={phoneNumber} />
                     </FormControl>
                     <FormControl>
-                        <Input placeholder="Address" onChange={(e) => setAddress(e.target.value)} type="text" value={address} />
+                        <Input placeholder="Address (Hostel Name & Room No.)" onChange={(e) => setAddress(e.target.value)} type="text" value={address} />
                     </FormControl>
                     <FormControl>
                         <Input placeholder="Location" onChange={(e) => setLocation(e.target.value)} type="text" value={location} />
