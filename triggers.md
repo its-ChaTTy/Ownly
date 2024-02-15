@@ -213,3 +213,21 @@ $$ LANGUAGE plpgsql;
 -- select cron.unschedule(9);
 
 ```
+
+7. Empty Message
+```sql
+CREATE OR REPLACE FUNCTION createEmptyMessageForUser()
+RETURNS TRIGGER AS $$
+BEGIN
+  INSERT INTO "Message" ("userId", "message")
+  VALUES (NEW.id, ARRAY[]::VARCHAR[]); -- Assuming an empty array for message
+
+  RETURN NULL;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER create_empty_message_for_user
+AFTER INSERT ON "User"
+FOR EACH ROW
+EXECUTE FUNCTION createEmptyMessageForUser();
+```

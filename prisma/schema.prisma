@@ -120,7 +120,7 @@ model User {
 model Message {
   id      Int  @id @default(autoincrement())
   userId  Int  @unique
-  message String[]
+  message String[] @default([])
   User    User @relation(fields: [userId], references: [id])
 }
 
