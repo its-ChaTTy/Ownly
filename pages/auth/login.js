@@ -36,7 +36,12 @@ function Login() {
     return (
         <>
             <div className="Login">
-                <div className="Login__icon">
+                <div className="Login__icon" 
+                    onClick={() => router.push('/')} style={
+                        {
+                            cursor: 'pointer'
+                        }
+                    }>
                     <FaArrowLeft />
                 </div>
                 <div className="Login__sideimg">

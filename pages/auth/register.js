@@ -51,7 +51,14 @@ function Register() {
     return (
         <>
             <div className="Register">
-                <div className="Register__icon">
+                <div className="Register__icon"
+                    onClick={() => router.push('/')}
+                    style={
+                        {
+                            cursor: 'pointer'
+                        }
+                    }>
+
                     <FaArrowLeft />
                 </div>
                 <div className="Register__sideimg">
