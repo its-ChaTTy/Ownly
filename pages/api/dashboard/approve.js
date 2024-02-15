@@ -35,7 +35,7 @@ async function sendApprovalMail(user, owner) {
         from: 'ownlyco@gmail.com',
         to: user.email,
         subject: 'Rent Request Approved',
-        html: `<h1>Hi User,</h1><br><p>Your rent request has been approved.Owner name: ${owner.name}, Owner email: ${owner.email}, Owner phone: ${owner.phone}, Owner address: ${owner.address}, Owner location: ${owner.location}</p>`
+        html: `<h1>Hi User,</h1><br><p>Your rent request has been approved.<br/>Owner name: ${owner.name}, <br/>Owner email: ${owner.email}, <br/>Owner phone: ${owner.phone},<br/> Owner address: ${owner.address}, <br/>Owner location: ${owner.location}</p>`
     };
 
     transporter.sendMail(mailData, function (err, info) {
