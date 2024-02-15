@@ -15,7 +15,7 @@ const Store = ({ allItems }) => {
                 <div className='Store__header'>
                     <p className='Store__header--text1'>What sets us apart</p>
                     <p className='Store__header--text2'>What's in store for you</p>
-                    <p className='Store__header--text3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p>
+                    {/* <p className='Store__header--text3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p> */}
                 </div>
                 <div className='Store__pills'>
                     {pills.map((pill, index) => (
