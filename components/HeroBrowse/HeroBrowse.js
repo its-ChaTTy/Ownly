@@ -27,7 +27,7 @@ function HeroBrowse() {
         </h1>
         <p className="HeroBrowse__left__Para">
           Explore a world of possibilities, effortlessly share what you have,
-          brand turn every lend into an opportunity to earn in your vibrant
+          and turn every lend into an opportunity to earn in your vibrant
           neighborhood.
         </p>
         <div className="HeroBrowse__left__search">
