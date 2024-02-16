@@ -21,7 +21,9 @@ function Footer() {
             <div className="Footer">
                 <div className="Footer__container">
                     <div className="Footer__container--description">
-                        <Image src="/Images/Logos/ownly_footer_logo.webp" alt="Ownly Logo" width={100} height={100} />
+                        <div className='Footer__container--description--logo'>
+                            <Image src="/Images/Logos/ownly_footer_logo.webp" alt="Ownly Logo" width={100} height={100} />
+                        </div>
                         <p style={{ fontWeight: 'bold', fontSize: '1em' }}>Rent smart, live smart!</p>
                         <div className="Footer__container--description--socials">
                             <Link href="https://www.instagram.com/ownly.in/">

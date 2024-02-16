@@ -23,7 +23,7 @@ function HeroBrowse() {
     <div className="HeroBrowse">
       <div className="HeroBrowse__left">
         <h1 className="HeroBrowse__left__Header">
-          Unlock Possibilities, Rent with <br /> Ease, Earn Smartly!
+         RENT WHAT YOU NEED <br /> SHARE WHAT YOU HAVE!
         </h1>
         <p className="HeroBrowse__left__Para">
           Explore a world of possibilities, effortlessly share what you have,
