@@ -22,7 +22,7 @@ const About = () => {
     return (
         <div className='AboutSection'>
             <div className='AboutSection__header'>
-                <p className='AboutSection__header--text1'>What sets us apart</p>
+                {/* <p className='AboutSection__header--text1'>What sets us apart</p> */}
                 <p className='AboutSection__header--text2'>What's in store for you</p>
                 {/* <p className='AboutSection__header--text3'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi.</p> */}
             </div>
