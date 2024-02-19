@@ -36,7 +36,7 @@ function Footer() {
                                     <MdOutlineMailOutline />
                                 </div>
                             </Link>
-                            <Link href="https://www.linkedin.com/company/ownly/">
+                            <Link href="http://www.linkedin.com/in/ownly-in-5a154a2aa">
                                 <div className="Footer__container--description--socials--icon">
                                     <FaLinkedinIn />
                                 </div>
