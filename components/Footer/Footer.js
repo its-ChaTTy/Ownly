@@ -47,9 +47,13 @@ function Footer() {
                         <div className="Footer__container--links--column">
                             <p className='Footer__container--links--column--title'>Company</p>
                             <p onClick={() => { router.push('/') }}>Home</p>
-                            <p onClick={() => { scrollToSection('howItWorks') }}>How it works</p>
+                            <p onClick={() => { scrollToSection('how') }}>How it works</p>
                             <p onClick={() => { scrollToSection('about') }}>About us</p>
-                            <p onClick={() => { scrollToSection('footer') }}>Contact</p>
+                            <Link href="mailto:ownlyco@gmail.com">
+                                <p>
+                                    Contact Us
+                                </p>
+                            </Link>
                         </div>
                         <div className="Footer__container--links--column">
                             <p className='Footer__container--links--column--title'>Support</p>
@@ -66,7 +70,7 @@ function Footer() {
                             <Link href="mailto:ownlyco@gmail.com">
                                 <p>Email</p>
                             </Link>
-                            <Link href="https://www.linkedin.com/company/ownly/">
+                            <Link href="http://www.linkedin.com/in/ownly-in-5a154a2aa">
                                 <p>LinkedIn</p>
                             </Link>
                         </div>
