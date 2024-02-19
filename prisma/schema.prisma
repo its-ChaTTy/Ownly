@@ -103,7 +103,7 @@ model User {
   password    String
   name        String
   address     String        @default("")
-  phone       Int           @default(0)
+  phone       BigInt
   location    String        @default("")
   isVerified  Boolean       @default(false)
   totalEarned Int           @default(0)
@@ -111,17 +111,17 @@ model User {
   ActiveRent  ActiveRent[]
   Cart        Cart[]
   Item        Item[]
+  Message     Message?
   OverRent    OverRent[]
   Payments    Payments[]
   RentRequest RentRequest[]
-  Message     Message[]
 }
 
 model Message {
-  id      Int  @id @default(autoincrement())
-  userId  Int  @unique
-  message String[] 
-  User    User @relation(fields: [userId], references: [id])
+  id      Int      @id @default(autoincrement())
+  userId  Int      @unique
+  message String[]
+  User    User     @relation(fields: [userId], references: [id])
 }
 
 enum Category {
