@@ -231,3 +231,43 @@ AFTER INSERT ON "User"
 FOR EACH ROW
 EXECUTE FUNCTION createEmptyMessageForUser();
 ```
+
+8. Deleting a user
+```sql
+CREATE OR REPLACE FUNCTION delete_user_and_related_data(p_user_id INT)
+RETURNS VOID AS $$
+BEGIN
+  -- Delete from the "Payments" table
+  DELETE FROM "Payments" WHERE "userId" = p_user_id;
+
+  -- Delete from the "RentRequest" table
+  DELETE FROM "RentRequest" WHERE "userId" = p_user_id;
+
+  -- Delete from the "ActiveRent" table
+  DELETE FROM "ActiveRent" WHERE "userId" = p_user_id;
+
+  -- Delete from the "CartItem" table
+  DELETE FROM "CartItem" WHERE "cartId" IN (SELECT id FROM "Cart" WHERE "userId" = p_user_id);
+
+  -- Delete from the "Cart" table
+  DELETE FROM "Cart" WHERE "userId" = p_user_id;
+
+  -- Delete from the "Message" table
+  DELETE FROM "Message" WHERE "userId" = p_user_id;
+
+  -- Delete from the "OverRent" table
+  DELETE FROM "OverRent" WHERE "userId" = p_user_id;
+
+  -- Delete from the "Item" table
+  DELETE FROM "Item" WHERE "userId" = p_user_id;
+
+  -- Finally, delete from the "User" table
+  DELETE FROM "User" WHERE id = p_user_id;
+END;
+$$ LANGUAGE plpgsql;
+```
+To use the function, you can call it like this:
+```sql
+-- To delete a user and all related data
+SELECT delete_user_and_related_data(1);
+```
