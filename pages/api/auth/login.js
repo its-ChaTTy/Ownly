@@ -5,6 +5,10 @@ import { fetchUser } from "@/services/user.service";
 
 export default withIronSessionApiRoute(loginRoute, ironOptions);
 
+BigInt.prototype.toJSON = function () {
+    return this.toString();
+};
+
 async function loginRoute(req, res) {
     const { email, password } = await req.body;
 
@@ -16,6 +20,8 @@ async function loginRoute(req, res) {
 
     const isMatch = await compareSync(password, user.password)
     delete user.password;
+
+    user.phone =  BigInt(user.phone).toString();
 
     if (isMatch) {
         req.session.user = user;
