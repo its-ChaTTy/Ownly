@@ -8,7 +8,7 @@ import { logout } from '@/operations/auth.fetch';
 import { isPhone } from '@/utils/validator';
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co';
+const supabaseUrl = 'https://ejemahwsmspobcfvofxe.supabase.co';
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 

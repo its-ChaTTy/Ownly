@@ -15,7 +15,7 @@ import { generate } from "random-words";
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
+const supabaseUrl = 'https://ejemahwsmspobcfvofxe.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
 export async function getServerSideProps(context) {

@@ -161,7 +161,7 @@ CREATE OR REPLACE FUNCTION updateUserProfilePic()
 RETURNS TRIGGER AS $$
 BEGIN
   UPDATE "User"
-  SET "profilePic" = 'https://aniaodrkdkwrtfkhpjgp.supabase.co/storage/v1/object/public/profile-photos/' || NEW."id" || '/profile'
+  SET "profilePic" = 'https://ejemahwsmspobcfvofxe.supabase.co/storage/v1/object/public/profile-photos/' || NEW."id" || '/profile'
   WHERE "id" = NEW."id";
 
   RETURN NEW;

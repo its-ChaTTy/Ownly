@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 import { useState } from "react";
 
-// /g8298urjwisr/meowmeowmeow/doc/dashboard
+// `/g8298urjwisr/meowmeowmeow/doc/dashboard`
 export async function getServerSideProps(context) {
     const user = context.req.session.user;
     if (user === undefined) {

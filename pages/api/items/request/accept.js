@@ -81,7 +81,7 @@ async function sendOwnerApprovalMail(request) {
         from: 'ownlyco@gmail.com',
         to: request.User.email,
         subject: 'Owner Rent Request Approved, Time to Pay',
-        html: `<h1>Hi ${request.User.name},</h1><br><p>Your rent request has been approved by owner, Time to Pay at <a href="http://ownnly.co.in/cart/pay?id=${request.id}&user=${request.userId}&price=${request.price}">here</a></p>`
+        html: `<h1>Hi ${request.User.name},</h1><br><p>Your rent request has been approved by owner, Time to Pay at <a href="http://ownly.co.in/cart/pay?id=${request.id}&user=${request.userId}&price=${request.price}">here</a></p>`
     };
 
     transporter.sendMail(mailData, function (err, info) {

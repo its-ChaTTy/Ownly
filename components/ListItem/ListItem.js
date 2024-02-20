@@ -16,7 +16,7 @@ import { listItem, updateItem } from "@/operations/items.fetch";
 import LoadingSpinner from '@/components/LoadingSpinner/LoadingSpinner';
 
 import { createClient } from '@supabase/supabase-js'
-const supabaseUrl = 'https://aniaodrkdkwrtfkhpjgp.supabase.co'
+const supabaseUrl = 'https://ejemahwsmspobcfvofxe.supabase.co'
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY
 
 function ListItem({ user }) {
