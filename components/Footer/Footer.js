@@ -60,7 +60,9 @@ function Footer() {
                             <Link href="./faq">
                                 <p>FAQs</p>
                             </Link>
-                            <p>Terms & Conditions</p>
+                            <Link href="https://docs.google.com/document/d/1fWsxo_xUREIitSKV4csGhaJTmnj8T3li9gh9qF_NQI4/edit?usp=sharing">
+                                <p>Terms & Conditions</p>
+                            </Link>
                         </div>
                         <div className="Footer__container--links--column">
                             <p className='Footer__container--links--column--title'>Social</p>
