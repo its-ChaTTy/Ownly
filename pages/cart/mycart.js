@@ -106,6 +106,8 @@ function mycart({ user, items, userCart }) {
       })
       await Promise.all(cartItems)
 
+      alert('Rent request created successfully, keep an on your email inbox for further details!');
+
     } catch (error) {
       console.error(error);
     }

@@ -4,6 +4,10 @@ import { withSessionRoute } from "@/lib/ironOptions";
 
 export default withSessionRoute(SignUp);
 
+BigInt.prototype.toJSON = function () {
+    return this.toString();
+};
+
 async function SignUp(req, res) {
     const { email, name, password, phone, address, location} = req.body;
 
@@ -28,7 +32,15 @@ async function SignUp(req, res) {
         });
 
         const user = await fetchUser(email);
-        req.session.user = user;
+        // Convert any BigInt values to strings before storing the user in the session
+        const userForSession = Object.fromEntries(
+            Object.entries(user).map(([key, value]) => [
+                key,
+                typeof value === 'bigint' ? value.toString() : value,
+            ])
+        );
+
+        req.session.user = userForSession;
         await req.session.save();
 
         res.send({ status: 200, message: JSON.stringify(response) });
@@ -37,5 +49,4 @@ async function SignUp(req, res) {
         console.log(error);
         res.send({ status: 500, message: "Internal Server Error" });
     }
-
 }

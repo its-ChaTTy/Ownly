@@ -33,6 +33,7 @@ function ProfileElements({ user }) {
     const uploadFile = async (file, file_path) => {
         const { data, error } = await supabase.storage.from('profile-photos').upload(file_path, file);
         const res = await supabase.storage.from('profile-photos').getPublicUrl(file_path);
+
         if (error) {
             console.log(error);
         } else {
@@ -42,7 +43,7 @@ function ProfileElements({ user }) {
 
     const uploadProfilePhotoHandler = async (event) => {
         const file = event.target.files[0];
-        const file_path = `${user.id}/profile`;
+        const file_path = `${user.id}`;
         if (file.size > 1024 * 1024 * 3) {
             alert('File is larger than 3MB');
             return;

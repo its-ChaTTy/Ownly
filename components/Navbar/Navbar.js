@@ -7,6 +7,7 @@ import Link from "next/link";
 import Notification from '../Notification/Notification';
 import useAuth from "@/hooks/useAuth";
 import Modal from 'react-modal';
+import tc from '@/components/TC/tc';
 
 Modal.setAppElement('#__next'); // replace '#__next' with the id of your app's root element
 
@@ -18,12 +19,25 @@ function Navbar() {
 	const { setAddModal } = useAuth();
 
 	function scrollToSection(sectionId) {
-		const section = document.getElementById(sectionId);
-
-		if (section) {
-			section.scrollIntoView({ behavior: 'smooth' });
+		if (router.pathname !== '/') {
+			router.push('/').then(() => {
+				// Wait for the navigation to complete before scrolling
+				const section = document.getElementById(sectionId);
+	
+				if (section) {
+					section.scrollIntoView({ behavior: 'smooth' });
+				} else {
+					console.error(`Section with ID ${sectionId} not found.`);
+				}
+			});
 		} else {
-			console.error(`Section with ID ${sectionId} not found.`);
+			const section = document.getElementById(sectionId);
+	
+			if (section) {
+				section.scrollIntoView({ behavior: 'smooth' });
+			} else {
+				console.error(`Section with ID ${sectionId} not found.`);
+			}
 		}
 	}
 

@@ -60,7 +60,7 @@ function Footer() {
                             <Link href="./faq">
                                 <p>FAQs</p>
                             </Link>
-                            <Link href="https://docs.google.com/document/d/1fWsxo_xUREIitSKV4csGhaJTmnj8T3li9gh9qF_NQI4/edit?usp=sharing">
+                            <Link href="./tc">
                                 <p>Terms & Conditions</p>
                             </Link>
                         </div>
