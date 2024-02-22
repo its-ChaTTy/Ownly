@@ -41,7 +41,7 @@ BEGIN
   IF NEW."userId" = 0 AND OLD."userId" IS DISTINCT FROM 0 THEN
     -- Reject all RentRequests with the same itemId
     UPDATE "RentRequest"
-    SET adminStatus = 'REJECTED', ownerStatus = 'REJECTED'
+    SET "adminStatus" = 'REJECTED', "ownerStatus" = 'REJECTED'
     WHERE "itemId" = NEW.id;
   END IF;
 
