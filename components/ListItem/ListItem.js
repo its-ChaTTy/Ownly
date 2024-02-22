@@ -82,6 +82,11 @@ function ListItem({ user }) {
 			return;
 		}
 
+		if(imageUrls.length < 1) {
+			alert("Please upload at least one image");
+			return;
+		}
+
 		if (isNaN(price)) {
 			alert("Price must be a number");
 			return;
