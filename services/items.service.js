@@ -14,6 +14,14 @@ export async function fetchAvailableItems() {
     })
 }
 
+export async function fetchAllItems() {
+    return await db.item.findMany({
+        where: {
+            isAvailable: true
+        }
+    })
+}
+
 export async function fetchItemByCategory(cat) {
     return await db.item.findMany({
         where: {

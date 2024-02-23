@@ -1,5 +1,8 @@
 import { paymentApprove } from "@/operations/dashboard.fetch";
 import { ownerApprovedRequests } from "@/services/requests.service";
+import { fetchAllItems } from "@/services/items.service";
+import { deleteItem } from '@/operations/items.fetch';
+
 import {
     Table,
     Thead,
@@ -11,6 +14,11 @@ import {
     TableCaption,
     TableContainer,
     Button,
+    Tabs,
+    TabList,
+    TabPanels,
+    Tab,
+    TabPanel
 } from '@chakra-ui/react'
 import { useState } from "react";
 
@@ -27,20 +35,38 @@ export async function getServerSideProps(context) {
     }
 
     const approvedRequests = await ownerApprovedRequests();
+    const items = await fetchAllItems();
 
     return {
-        props: { user: user, pendingRequests: JSON.parse(JSON.stringify(approvedRequests)) },
+        props: { user: user, pendingRequests: JSON.parse(JSON.stringify(approvedRequests)), items: JSON.parse(JSON.stringify(items)) }
     }
 
 }
 
-function dashboard({ user, pendingRequests }) {
+function dashboard({ user, pendingRequests, items }) {
 
     const [iseLoading, setIsLoading] = useState(false);
-    
+
+    const removeItem = async (id, userId) => {
+        const choice = window.confirm('Are you sure you want to delete this item?')
+        if (choice) {
+            const data = {
+                id: id,
+                userId: userId
+            }
+
+            const response = await deleteItem(data)
+            if (response.status === 200) {
+                alert('Item deleted successfully')
+                window.location.reload()
+            } else {
+                alert('Something went wrong')
+            }
+        }
+    }
+
+
     const handleApprove = async (request) => {
-        // console.log(request);
-        // return;
 
         const data = {
             id: request.rentReqId,
@@ -63,49 +89,95 @@ function dashboard({ user, pendingRequests }) {
 
     return (
         <>
-            {iseLoading ||
-                <>
-                    <TableContainer>
-                        <Table variant='simple'>
-                            <Thead>
-                                <Tr>
-                                    <Th>Id</Th>
-                                    <Th>Payment ID</Th>
-                                    <Th>Payment ScreenShot</Th>
-                                    <Th>Amount</Th>
-                                    <Th>Approve</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {pendingRequests.map((request, index) => {
-                                    return (
-                                        <Tr key={index}>
-                                            <Td>{request.id}</Td>
-                                            <Td>{request.paymentId}</Td>
-                                            <Td>
-                                                <img style={{ width: "20rem" }} src={request.imageURL} alt="payment screenshot" />
-                                            </Td>
-                                            <Td>{request.amount}</Td>
-                                            {request.isPaidToTeam === false ?
+            <Tabs>
+                <TabList>
+                    <Tab>
+                        Payment Requests
+                    </Tab>
+                    <Tab>
+                        Items
+                    </Tab>
+                </TabList>
+                <TabPanels>
+                    <TabPanel>
+                        {iseLoading ||
+                            <>
+                                <TableContainer>
+                                    <Table variant='simple'>
+                                        <Thead>
+                                            <Tr>
+                                                <Th>Id</Th>
+                                                <Th>Payment ID</Th>
+                                                <Th>Payment ScreenShot</Th>
+                                                <Th>Amount</Th>
+                                                <Th>Approve</Th>
+                                            </Tr>
+                                        </Thead>
+                                        <Tbody>
+                                            {pendingRequests.map((request, index) => {
+                                                return (
+                                                    <Tr key={index}>
+                                                        <Td>{request.id}</Td>
+                                                        <Td>{request.paymentId}</Td>
+                                                        <Td>
+                                                            <img style={{ width: "20rem" }} src={request.imageURL} alt="payment screenshot" />
+                                                        </Td>
+                                                        <Td>{request.amount}</Td>
+                                                        {request.isPaidToTeam === false ?
+                                                            <Td>
+                                                                <Button onClick={() => {
+                                                                    handleApprove(request)
+                                                                }}>Approve</Button>
+                                                            </Td>
+                                                            :
+                                                            <Td>
+                                                                Approved
+                                                            </Td>
+                                                        }
+
+                                                    </Tr>
+                                                )
+                                            })}
+                                        </Tbody>
+                                    </Table>
+                                </TableContainer>
+                            </>
+                        }
+                    </TabPanel>
+                    <TabPanel>
+                        <TableContainer>
+                            <Table variant='simple'>
+                                <Thead>
+                                    <Tr>
+                                        <Th>Id</Th>
+                                        <Th>Item Name</Th>
+                                        <Th>Price</Th>
+                                        <Th>Category</Th>
+                                        <Th>Remove</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    {items.map((item, index) => {
+                                        return (
+                                            <Tr key={index}>
+                                                <Td>{item.id}</Td>
+                                                <Td>{item.name}</Td>
+                                                <Td>{item.price}</Td>
+                                                <Td>{item.category}</Td>
                                                 <Td>
                                                     <Button onClick={() => {
-                                                        handleApprove(request)
-                                                    }}>Approve</Button>
+                                                        removeItem(item.id, item.userId)
+                                                    }}>Remove</Button>
                                                 </Td>
-                                                :
-                                                <Td>
-                                                    Approved
-                                                </Td>
-                                            }
-
-                                        </Tr>
-                                    )
-                                })}
-                            </Tbody>
-                        </Table>
-                    </TableContainer>
-                </>
-            }
+                                            </Tr>
+                                        )
+                                    })}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
 
         </>
     )
