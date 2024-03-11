@@ -138,21 +138,26 @@ export async function getAllItemsByUser(userId) {
 export async function searchItems(query) {
     return await db.item.findMany({
         where: {
-            OR: [
-                {
-                    name: {
-                        contains: query,
-                        mode: "insensitive"
-                    }
-                },
-                {
-                    description: {
-                        contains: query,
-                        mode: "insensitive"
-                    }
-                },
-            ],
+            OR: [{
+                name: {
+                    contains: query,
+                    mode: "insensitive"
+                }
+            },
+            {
+                description: {
+                    contains: query,
+                    mode: "insensitive"
+                }
+            },],
             isAvailable: true,
         }
     });
 }
+
+export async function requestItem(item) {
+    return await db.request.create({
+        item: item
+    })
+}
+

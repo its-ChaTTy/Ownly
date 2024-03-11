@@ -3,7 +3,6 @@
 1. After a RentRequest is accepted then reject all other requests for that property during that tenure
 
 ```sql
-
 CREATE OR REPLACE FUNCTION request_accepted()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -79,13 +78,11 @@ CREATE TRIGGER check_item_availability_trigger
 BEFORE INSERT ON "RentRequest"
 FOR EACH ROW
 EXECUTE FUNCTION checkItemAvailability();
-
 ```
 
 4. As soon as User Created we need to initialize empty cart
 
 ```sql
-
 CREATE OR REPLACE FUNCTION createCartForNewUser()
 RETURNS TRIGGER AS $$
 BEGIN
@@ -172,7 +169,6 @@ CREATE TRIGGER update_user_profile_pic
 AFTER INSERT ON "User"
 FOR EACH ROW
 EXECUTE FUNCTION updateUserProfilePic();
-
 ```
 
 6. Procedure to migrate ActiveRent to OverRent
@@ -211,7 +207,6 @@ $$ LANGUAGE plpgsql;
 -- select * from cron.job_run_details;
 -- select * from cron.job;
 -- select cron.unschedule(9);
-
 ```
 
 7. Empty Message
@@ -270,4 +265,29 @@ To use the function, you can call it like this:
 ```sql
 -- To delete a user and all related data
 SELECT delete_user_and_related_data(1);
+```
+
+9. Requesting for an Item
+```sql
+CREATE OR REPLACE FUNCTION updateMessages()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- Add the new item to all Message.message arrays
+  UPDATE "Message"
+  SET message = message || NEW.item
+  WHERE true; -- Add any additional conditions here if needed
+
+  -- Remove one string from arrays if length is over 5
+  UPDATE "Message"
+  SET message = message[2:6]
+  WHERE array_length(message, 1) > 5;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER after_request_insert
+AFTER INSERT ON "Request"
+FOR EACH ROW
+EXECUTE FUNCTION updateMessages();
 ```

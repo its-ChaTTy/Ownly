@@ -124,6 +124,11 @@ model Message {
   User    User     @relation(fields: [userId], references: [id])
 }
 
+model Request {
+  id   Int    @id @default(autoincrement())
+  item String
+}
+
 enum Category {
   ELECTRONICS
   FURNITURE
