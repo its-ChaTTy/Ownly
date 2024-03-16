@@ -10,23 +10,26 @@ import { fetchAvailableItems } from "@/services/items.service";
 import "@/styles/routes/index.scss";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { fetchMessagesOfUser } from '@/services/messages.service';
 
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
   const user = context.req.session.user;
   var userProp;
+  const messages = await fetchMessagesOfUser(user);
+
   if(user === undefined) {
     userProp = null;
   } else {
     userProp = user;
   }
   return {
-    props: { allItems: allItems, user: userProp },
+    props: { allItems: allItems, user: userProp, messages: messages ? messages.message : [], },
   };
 }
 
 
-export default function Home({ allItems, user }) {
+export default function Home({ allItems, user, messages }) {
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulate loading
@@ -42,7 +45,7 @@ export default function Home({ allItems, user }) {
     <>
       {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
-        <Navbar />
+        <Navbar user={user} messages={messages} />
       </div>
       <div id="heroBrowse" className="section">
         <HeroBrowse />

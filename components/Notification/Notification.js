@@ -1,26 +1,40 @@
-import { useState } from 'react';
-import styles from './Notification.scss';
+import React, { useState, useEffect } from 'react';
+import './Notification.scss';
 
-const Notification = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const notifications = ['Notification 1', 'Notification 2', 'Notification 3']; // replace this with your actual notifications
+const Notification = ({ onClose, userId }) => { // add userId as a prop
+    const [notifications, setNotifications] = useState([]);
 
-    const toggleNotifications = () => {
-        setIsOpen(!isOpen);
-    };
+    // useEffect(() => {
+    //     const fetchNotifications = async () => {
+    //         const messages = await fetchMessagesOfUser(userId);
+    //         if (messages) {
+    //             setNotifications(messages.message);
+    //         }
+    //     };
+
+    //     fetchNotifications();
+    // }, [userId]);
 
     return (
-        <div className={styles.notification}>
-            <button onClick={toggleNotifications}>Notifications</button>
-            {isOpen && (
-                <div className={styles.notificationList}>
+        <div className="Notification">
+            <div className="Notification__container">
+                <div className="Notification__container--header">
+                    <p>Notifications</p>
+                    <span
+                        className="Notification__container--close"
+                        onClick={onClose}
+                    >
+                        &#10799;
+                    </span>
+                </div>
+                <div className="Notification__containerBody">
                     {notifications.map((notification, index) => (
-                        <div key={index} className={styles.notificationItem}>
+                        <div key={index} className="Notification__containerBody--item">
                             {notification}
                         </div>
                     ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };
