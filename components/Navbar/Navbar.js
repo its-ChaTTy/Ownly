@@ -11,7 +11,7 @@ import tc from '@/components/TC/tc';
 
 Modal.setAppElement('#__next'); // replace '#__next' with the id of your app's root element
 
-function Navbar() {
+function Navbar({ messages }) {
 	const router = useRouter();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
@@ -23,7 +23,7 @@ function Navbar() {
 			router.push('/').then(() => {
 				// Wait for the navigation to complete before scrolling
 				const section = document.getElementById(sectionId);
-	
+
 				if (section) {
 					section.scrollIntoView({ behavior: 'smooth' });
 				} else {
@@ -32,7 +32,7 @@ function Navbar() {
 			});
 		} else {
 			const section = document.getElementById(sectionId);
-	
+
 			if (section) {
 				section.scrollIntoView({ behavior: 'smooth' });
 			} else {
@@ -46,7 +46,7 @@ function Navbar() {
 	}
 
 	const handleNotificationClick = () => {
-		setIsNotificationOpen(true);
+		setIsNotificationOpen(prevState => !prevState);
 	};
 
 	const handleCloseNotification = () => {
@@ -79,8 +79,8 @@ function Navbar() {
 						<p onClick={() => { router.push('/') }}>Home</p>
 						<p onClick={() => { router.push('/productPage') }}>Listings</p>
 						<Link href="./tc">
-                            <p>T&C</p>
-                        </Link>
+							<p>T&C</p>
+						</Link>
 						<p onClick={() => { scrollToSection('footer') }}>Contact</p>
 					</div>
 				</div>
@@ -105,6 +105,7 @@ function Navbar() {
 					</div>
 				</div>
 			</div>
+			{isNotificationOpen && <Notification messages={messages} onClose={handleCloseNotification} />}
 			{isSidebarOpen && (
 				<div className="Navbar__sidebar">
 					<FaTimes
@@ -124,7 +125,6 @@ function Navbar() {
 						<p>About us</p>
 						<p>Contact</p>
 					</div>
-					{isNotificationOpen && <Notification onClose={handleCloseNotification} />}
 				</div>
 			)}
 			<Modal

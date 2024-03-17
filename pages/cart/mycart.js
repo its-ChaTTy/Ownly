@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
 import { removeCartItem } from '@/operations/cart.fetch';
 import { createRentRequest } from '@/operations/request.fetch';
+import { fetchMessagesOfUser } from '@/services/messages.service';
 
 export async function getServerSideProps(context) {
   const user = context.req.session.user;
@@ -21,6 +22,7 @@ export async function getServerSideProps(context) {
   }
 
   let cart = await fetchCart(user.id);
+  const messages = await fetchMessagesOfUser(user.id);
 
   const userCart = {
     userId: cart.userId,
@@ -48,12 +50,12 @@ export async function getServerSideProps(context) {
   })
 
   return {
-    props: { user: user, items: cart, userCart: userCart },
+    props: { user: user, items: cart, userCart: userCart, messages: messages ? messages.message : [], },
   }
 
 }
 
-function mycart({ user, items, userCart }) {
+function mycart({ user, items, userCart, messages }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [rentRequestId, setRentReqId] = useState([]);
@@ -127,7 +129,7 @@ function mycart({ user, items, userCart }) {
     <>
       {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
-        <Navbar />
+        <Navbar messages={messages} />
       </div>
       {
         userCart.value === 0 ?

@@ -5,28 +5,34 @@ import About from "@/components/About/About";
 import Store from "@/components/Store/Store";
 import How from "@/components/How/How";
 import Earning from "@/components/Earning/Earning";
-import How_it_works from "@/components/How_it_works/How_it_works";
 import { fetchAvailableItems } from "@/services/items.service";
 import "@/styles/routes/index.scss";
 import { useState, useEffect } from "react";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { fetchMessagesOfUser } from '@/services/messages.service';
 
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
-  const user = context.req.session.user;
-  var userProp;
-  if(user === undefined) {
-    userProp = null;
-  } else {
-    userProp = user;
+  const session = context.req.session;
+  if (session.user === undefined) {
+    return {
+      props: { allItems: allItems, user: null, messages: [] },
+    };
   }
+
+  const user = session.user;
+  let messages;
+  if (user !== undefined && user !== null) {
+    messages = await fetchMessagesOfUser(user.id);
+  }
+
   return {
-    props: { allItems: allItems, user: userProp },
+    props: { allItems: allItems, user: user, messages: messages ? messages.message : [], },
   };
 }
 
 
-export default function Home({ allItems, user }) {
+export default function Home({ allItems, user, messages }) {
   const [isLoading, setIsLoading] = useState(true);
 
   // Simulate loading
@@ -37,12 +43,12 @@ export default function Home({ allItems, user }) {
 
     return () => clearTimeout(timer);
   }, []);
-  
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
-        <Navbar />
+        <Navbar messages={messages} />
       </div>
       <div id="heroBrowse" className="section">
         <HeroBrowse />
@@ -59,9 +65,6 @@ export default function Home({ allItems, user }) {
       <div id="earning" className="section">
         <Earning />
       </div>
-      {/* <div id="howItWorks" className="section">
-        <How_it_works />
-      </div> */}
       <div id="footer" className="section">
         <Footer />
       </div>

@@ -17,6 +17,7 @@ import { fetchAllCompletedBorrowing, fetchAllOngoingBorrowing } from "@/services
 import { getAllRequests, getUserRequests } from "@/services/requests.service";
 import RentRequest from "@/components/RentRequest/RentRequest";
 import ActiveRent from "@/components/ActiveRent/ActiveRent";
+import { fetchMessagesOfUser } from "@/services/messages.service";
 
 export async function getServerSideProps(context) {
 
@@ -32,7 +33,8 @@ export async function getServerSideProps(context) {
     const allItems = await getAllItemsByUser(context.req.session.user.id);
     const lent = await fetchAllCompletedBorrowing(context.req.session.user.id);
     const ongoing = await fetchAllOngoingBorrowing(context.req.session.user.id);
-    const allAvailableItems = await fetchAvailableItems()
+    const allAvailableItems = await fetchAvailableItems();
+    const messages = await fetchMessagesOfUser(context.req.session.user.id);
     const history = lent.map((rent) => {
         return {
             id: rent.id,
@@ -92,13 +94,14 @@ export async function getServerSideProps(context) {
             history: history,
             active: active,
             sentRequests: JSON.parse(JSON.stringify(sentRequests)),
-            recievedRequests: JSON.parse(JSON.stringify(recievedRequests))
+            recievedRequests: JSON.parse(JSON.stringify(recievedRequests)),
+            messages: messages ? messages.message : [],
         },
     }
 
 }
 
-export default function Profile({ user, allItems, history, active, sentRequests, recievedRequests }) {
+export default function Profile({ user, allItems, history, active, sentRequests, recievedRequests, messages }) {
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -128,7 +131,7 @@ export default function Profile({ user, allItems, history, active, sentRequests,
             </Modal>
             <div className="profile">
                 <div className="profile_navbar">
-                    <Navbar />
+                    <Navbar messages={messages} />
                 </div>
                 <div className="profile_main">
                     <div className="profile_main--navlist">

@@ -8,6 +8,7 @@ import { fetchAvailableItems } from "@/services/items.service";
 import '@/styles/routes/productPage.scss'
 import { searchItems } from "@/services/items.service";
 import LoadingSpinner from "@/components/LoadingSpinner/LoadingSpinner";
+import { fetchMessagesOfUser } from "@/services/messages.service";
 
 export async function getServerSideProps(context) {
   
@@ -27,6 +28,8 @@ export async function getServerSideProps(context) {
     userProp = user;
   }
 
+  const messages = await fetchMessagesOfUser(user.id);
+
   let allItems = null;
   if (searchParams === undefined || searchParams === "" || searchParams === null) {
     allItems = await fetchAvailableItems();
@@ -35,11 +38,11 @@ export async function getServerSideProps(context) {
   }
 
   return {
-    props: { allItems: allItems, user: userProp },
+    props: { allItems: allItems, user: userProp, messages: messages ? messages.message : [], },
   };
 }
 
-export default function ProductPage({ allItems, user }) {
+export default function ProductPage({ allItems, user, messages }) {
 
   const [sortOrder, setSortOrder] = useState(0);
   const [itemsArray, setItems] = useState(allItems);
@@ -76,7 +79,7 @@ export default function ProductPage({ allItems, user }) {
     <>
       {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
-        <Navbar />
+        <Navbar messages={messages} />
       </div>
       <div className="section_sortByBar">
         <SortbyBar setSortOrder={setSortOrder} />
