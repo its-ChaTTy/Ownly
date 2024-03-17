@@ -13,7 +13,14 @@ import { fetchMessagesOfUser } from '@/services/messages.service';
 
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
-  const user = context.req.session.user;
+  const session = context.req.session;
+  if (session.user === undefined) {
+    return {
+      props: { allItems: allItems, user: null, messages: [] },
+    };
+  }
+
+  const user = session.user;
   let messages;
   if (user !== undefined && user !== null) {
     messages = await fetchMessagesOfUser(user.id);

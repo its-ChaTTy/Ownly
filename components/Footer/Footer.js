@@ -79,7 +79,7 @@ function Footer() {
                     </div>
                     <div className="Footer__container--seperator">
                         <hr />
-                        <span>© Copyright 2023 Ownly. All rights reserved. </span>
+                        <span>© Copyright 2023-2024 Ownly. All rights reserved. </span>
                     </div>
                 </div>
             </div>
