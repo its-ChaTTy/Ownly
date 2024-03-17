@@ -11,7 +11,7 @@ import tc from '@/components/TC/tc';
 
 Modal.setAppElement('#__next'); // replace '#__next' with the id of your app's root element
 
-function Navbar({ user, messages }) {
+function Navbar({ messages }) {
 	const router = useRouter();
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false);

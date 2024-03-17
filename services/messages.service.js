@@ -10,7 +10,7 @@ import db from '@/lib/prisma'
 export async function fetchMessagesOfUser(userId) {
     return db.message.findFirst({
         where: {
-            userId
+            userId: userId
         }
     })
 }

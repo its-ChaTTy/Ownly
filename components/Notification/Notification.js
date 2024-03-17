@@ -1,20 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import './Notification.scss';
 
-const Notification = ({ onClose, userId }) => { // add userId as a prop
-    const [notifications, setNotifications] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchNotifications = async () => {
-    //         const messages = await fetchMessagesOfUser(userId);
-    //         if (messages) {
-    //             setNotifications(messages.message);
-    //         }
-    //     };
-
-    //     fetchNotifications();
-    // }, [userId]);
-
+const Notification = ({ onClose, messages }) => {
     return (
         <div className="Notification">
             <div className="Notification__container">
@@ -28,9 +14,9 @@ const Notification = ({ onClose, userId }) => { // add userId as a prop
                     </span>
                 </div>
                 <div className="Notification__containerBody">
-                    {notifications.map((notification, index) => (
+                    {messages.map((message, index) => (
                         <div key={index} className="Notification__containerBody--item">
-                            {notification}
+                            {message}
                         </div>
                     ))}
                 </div>

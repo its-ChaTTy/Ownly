@@ -5,7 +5,6 @@ import About from "@/components/About/About";
 import Store from "@/components/Store/Store";
 import How from "@/components/How/How";
 import Earning from "@/components/Earning/Earning";
-import How_it_works from "@/components/How_it_works/How_it_works";
 import { fetchAvailableItems } from "@/services/items.service";
 import "@/styles/routes/index.scss";
 import { useState, useEffect } from "react";
@@ -15,16 +14,13 @@ import { fetchMessagesOfUser } from '@/services/messages.service';
 export async function getServerSideProps(context) {
   let allItems = await fetchAvailableItems();
   const user = context.req.session.user;
-  var userProp;
-  const messages = await fetchMessagesOfUser(user);
-
-  if(user === undefined) {
-    userProp = null;
-  } else {
-    userProp = user;
+  let messages;
+  if (user !== undefined && user !== null) {
+    messages = await fetchMessagesOfUser(user.id);
   }
+
   return {
-    props: { allItems: allItems, user: userProp, messages: messages ? messages.message : [], },
+    props: { allItems: allItems, user: user, messages: messages ? messages.message : [], },
   };
 }
 
@@ -40,12 +36,12 @@ export default function Home({ allItems, user, messages }) {
 
     return () => clearTimeout(timer);
   }, []);
-  
+
   return (
     <>
       {isLoading && <LoadingSpinner />}
       <div className="section_navbar">
-        <Navbar user={user} messages={messages} />
+        <Navbar messages={messages} />
       </div>
       <div id="heroBrowse" className="section">
         <HeroBrowse />
@@ -62,9 +58,6 @@ export default function Home({ allItems, user, messages }) {
       <div id="earning" className="section">
         <Earning />
       </div>
-      {/* <div id="howItWorks" className="section">
-        <How_it_works />
-      </div> */}
       <div id="footer" className="section">
         <Footer />
       </div>
