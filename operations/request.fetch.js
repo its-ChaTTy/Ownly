@@ -42,3 +42,18 @@ export async function rejectRentRequest(data) {
         console.log(err)
     });
 }
+
+export async function askForAnItem(data) {
+    return await fetch('/api/items/ask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: "include"
+    }).then((res) => {
+        return res.json()
+    }).catch((err) => {
+        console.log(err)
+    });
+}
