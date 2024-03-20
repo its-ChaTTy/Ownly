@@ -2,16 +2,16 @@ import { paymentApprove } from "@/operations/dashboard.fetch";
 import { ownerApprovedRequests } from "@/services/requests.service";
 import { fetchAllItems } from "@/services/items.service";
 import { deleteItem } from '@/operations/items.fetch';
+import { fetchAllItemRequests } from "@/services/items.service";
+import { deleteRequestItem } from "@/operations/items.fetch";
 
 import {
     Table,
     Thead,
     Tbody,
-    Tfoot,
     Tr,
     Th,
     Td,
-    TableCaption,
     TableContainer,
     Button,
     Tabs,
@@ -36,14 +36,20 @@ export async function getServerSideProps(context) {
 
     const approvedRequests = await ownerApprovedRequests();
     const items = await fetchAllItems();
+    const requestedItems = await fetchAllItemRequests();
 
     return {
-        props: { user: user, pendingRequests: JSON.parse(JSON.stringify(approvedRequests)), items: JSON.parse(JSON.stringify(items)) }
+        props: {
+            user: user,
+            pendingRequests: JSON.parse(JSON.stringify(approvedRequests)),
+            items: JSON.parse(JSON.stringify(items)),
+            requestedItems: requestedItems
+        }
     }
 
 }
 
-function dashboard({ user, pendingRequests, items }) {
+function dashboard({ user, pendingRequests, items, requestedItems }) {
 
     const [iseLoading, setIsLoading] = useState(false);
 
@@ -61,6 +67,26 @@ function dashboard({ user, pendingRequests, items }) {
                 window.location.reload()
             } else {
                 alert('Something went wrong')
+            }
+        }
+    }
+
+
+    const removeRequestItem = async (id, item) => {
+        const choice = window.confirm('Are you sure you want to delete this item request?')
+        if (choice) {
+            const data = {
+                id: id,
+                item: item
+            }
+
+            const response = await deleteRequestItem(data)
+            if (response.status === 200) {
+                alert('Item request deleted successfully')
+                window.location.reload()
+            } else {
+                alert('Something went wrong')
+                console.log(response)
             }
         }
     }
@@ -96,6 +122,9 @@ function dashboard({ user, pendingRequests, items }) {
                     </Tab>
                     <Tab>
                         Items
+                    </Tab>
+                    <Tab>
+                        Item Requests
                     </Tab>
                 </TabList>
                 <TabPanels>
@@ -168,6 +197,36 @@ function dashboard({ user, pendingRequests, items }) {
                                                     <Button onClick={() => {
                                                         removeItem(item.id, item.userId)
                                                     }}>Remove</Button>
+                                                </Td>
+                                            </Tr>
+                                        )
+                                    })}
+                                </Tbody>
+                            </Table>
+                        </TableContainer>
+                    </TabPanel>
+                    <TabPanel>
+                        <TableContainer>
+                            <Table variant='simple'>
+                                <Thead>
+                                    <Tr>
+                                        <Th>Id</Th>
+                                        <Th>Item Name</Th>
+                                        <Th>Delete Request</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    {requestedItems.map((item, index) => {
+                                        return (
+                                            <Tr key={index}>
+                                                <Td>{item.id}</Td>
+                                                <Td>{item.item}</Td>
+                                                <Td>
+                                                    <Button
+                                                        onClick={() => {
+                                                            removeRequestItem(item.id, item.item)
+                                                        }}
+                                                    >Delete</Button>
                                                 </Td>
                                             </Tr>
                                         )

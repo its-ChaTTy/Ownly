@@ -58,3 +58,19 @@ export async function deleteItem(data) {
         console.log(err)
     });
 }
+
+
+export async function deleteRequestItem(data) {
+    return await fetch('/api/items/deleteask', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        credentials: "include"
+    }).then((res) => {
+        return res.json()
+    }).catch((err) => {
+        console.log(err)
+    });
+}

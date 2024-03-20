@@ -169,3 +169,7 @@ export async function deleteRequestItem(id, item) {
         }
     })
 }
+
+export async function fetchAllItemRequests() {
+    return await db.request.findMany()
+}
