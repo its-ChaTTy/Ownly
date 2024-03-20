@@ -291,3 +291,27 @@ AFTER INSERT ON "Request"
 FOR EACH ROW
 EXECUTE FUNCTION updateMessages();
 ```
+
+10. Deleting an Requested Item
+```sql
+-- Create or replace the function to update messages after delete
+CREATE OR REPLACE FUNCTION updateMessagesAfterDelete()
+RETURNS TRIGGER AS $$
+BEGIN
+  -- If the operation is DELETE, remove the item from all Message.message arrays
+  IF TG_OP = 'DELETE' THEN
+    UPDATE "Message"
+    SET message = array_remove(message, OLD.item)
+    WHERE OLD.item = ANY(message);
+  END IF;
+
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Create the trigger to execute the function after a deletion in the Request table
+CREATE TRIGGER after_request_delete
+AFTER DELETE ON "Request"
+FOR EACH ROW
+EXECUTE FUNCTION updateMessagesAfterDelete();
+```
