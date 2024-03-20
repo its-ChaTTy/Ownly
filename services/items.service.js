@@ -161,3 +161,11 @@ export async function requestItem(item) {
     })
 }
 
+export async function deleteRequestItem(id, item) {
+    return await db.request.delete({
+        where: {
+            id,
+            item
+        }
+    })
+}
