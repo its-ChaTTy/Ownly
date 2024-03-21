@@ -6,12 +6,12 @@ const Notification = ({ onClose, messages }) => {
             <div className="Notification__container">
                 <div className="Notification__container--header">
                     <p>Notifications</p>
-                    <span
+                    {/* <span
                         className="Notification__container--close"
                         onClick={onClose}
                     >
                         &#10799;
-                    </span>
+                    </span> */}
                 </div>
                 <div className="Notification__containerBody">
                     {messages.map((message, index) => (

@@ -8,8 +8,9 @@ import Notification from '../Notification/Notification';
 import useAuth from "@/hooks/useAuth";
 import Modal from 'react-modal';
 import tc from '@/components/TC/tc';
+import RequestItem from "../RequestItem/RequestItem";
 
-Modal.setAppElement('#__next'); // replace '#__next' with the id of your app's root element
+Modal.setAppElement('#__next'); 
 
 function Navbar({ messages }) {
 	const router = useRouter();
@@ -17,6 +18,7 @@ function Navbar({ messages }) {
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 	const [isTermsModalOpen, setIsTermsModalOpen] = useState(false);
 	const { setAddModal } = useAuth();
+	const [isRequestItemOpen, setIsRequestItemOpen] = useState(false);
 
 	function scrollToSection(sectionId) {
 		if (router.pathname !== '/') {
@@ -62,6 +64,14 @@ function Navbar({ messages }) {
 		setIsTermsModalOpen(false);
 	};
 
+	const handleOpenRequestItem = () => { 
+        setIsRequestItemOpen(true);
+    };
+
+    const handleCloseRequestItem = () => { 
+        setIsRequestItemOpen(false);
+    };
+
 	return (
 		<div className={`Navbar ${isNotificationOpen ? 'blur' : ''}`}>
 			<div className="Navbar__container">
@@ -85,7 +95,7 @@ function Navbar({ messages }) {
 					</div>
 				</div>
 				<div className="Navbar__rightside">
-					<p className="Navbar__rightside--text" onClick={() => { scrollToSection('how') }}>How it works</p>
+				<p className="Navbar__rightside--text" onClick={handleOpenRequestItem}>Request an Item</p>
 					<p className="Navbar__rightside--text" onClick={handleOpenTermsModal}>List an Item</p>
 
 					<div onClick={handleNotificationClick}>
@@ -106,6 +116,7 @@ function Navbar({ messages }) {
 				</div>
 			</div>
 			{isNotificationOpen && <Notification messages={messages} onClose={handleCloseNotification} />}
+			{isRequestItemOpen && <RequestItem isOpen={isRequestItemOpen} onRequestClose={handleCloseRequestItem} />}
 			{isSidebarOpen && (
 				<div className="Navbar__sidebar">
 					<FaTimes

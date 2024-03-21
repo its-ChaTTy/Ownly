@@ -12,8 +12,8 @@ async function askForItem(req, res) {
     }
 
     try {
-        const item = await requestItem(item);
-        res.json({ status: 200, item });
+        const itemR = await requestItem(item);
+        res.json({ status: 200, itemR });
     }
     catch (error) {
         console.log(error);

@@ -155,9 +155,11 @@ export async function searchItems(query) {
     });
 }
 
-export async function requestItem(item) {
+export async function requestItem(itemName) {
     return await db.request.create({
-        item: item
+        data: {
+            item: itemName
+        }
     })
 }
 

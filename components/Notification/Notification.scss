@@ -1,9 +1,9 @@
 .Notification {
-    position: fixed;
-    top: 40;
+    position: absolute;
+    top:55px;
     right: 0;
     width: 300px;
-    height: 30%;
+    height: 30vh;
     background-color: white;
     border: 1px solid #ccc;
     overflow-y: auto;
