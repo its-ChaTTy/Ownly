@@ -1,22 +1,28 @@
+import { useRouter } from 'next/router';
 import './Notification.scss';
 
 const Notification = ({ onClose, messages }) => {
+    const router = useRouter();
+
+    const handleClick = () => {
+        router.push(`/profile`); 
+    };
+
     return (
         <div className="Notification">
             <div className="Notification__container">
                 <div className="Notification__container--header">
                     <p>Notifications</p>
-                    {/* <span
-                        className="Notification__container--close"
-                        onClick={onClose}
-                    >
-                        &#10799;
-                    </span> */}
                 </div>
                 <div className="Notification__containerBody">
                     {messages.map((message, index) => (
-                        <div key={index} className="Notification__containerBody--item">
-                            {message}
+                        <div 
+                            key={index} 
+                            className="Notification__containerBody--item"
+                            onClick={() => handleClick(message)}
+                            style={{ cursor: 'pointer' }} // make it look clickable
+                        >
+                            {message} was requested. Click here to list the product.
                         </div>
                     ))}
                 </div>
