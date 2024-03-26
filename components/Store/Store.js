@@ -50,7 +50,7 @@ const Store = ({ allItems }) => {
                 <div className='Store__button'>
                     <button onClick={() => {
                         router.push('/productPage')
-                    }}>Load More</button>
+                    }} className='loadmore' >Load More</button>
                 </div>
             </div>
         </>

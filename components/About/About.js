@@ -35,7 +35,7 @@ const About = () => {
                             </div>
                             <div className='AboutSection__cards--card__text'>
                                 <p className='AboutSection__cards--card__text--title'>{card.title}</p>
-                                <p style={{ color: `${index == 0 ? "rgba(110, 120, 141, 1)" : (index == 1) ? "rgba(235, 235, 235, 1)" : "rgba(235, 235, 235, 1)"}` }} className='AboutSection__cards--card__text--description'>{card.description}</p>
+                                <p style={{ color: `${index == 0 ? "rgba(235, 235, 235, 1)" : (index == 1) ? "rgba(235, 235, 235, 1)" : "rgba(235, 235, 235, 1)"}` }} className='AboutSection__cards--card__text--description'>{card.description}</p>
                                 {/* <button className='AboutSection__cards--card__text--button'>{card.button}</button> */}
                             </div>
                         </div>
