@@ -78,6 +78,9 @@ function Login() {
                         borderRadius: '7px'
                     }}>Login</Button>
                     <p style={{ textAlign: 'center', marginTop: '1rem' }}>Don't have an account? <span onClick={() => { router.push('/auth/register') }} style={{ color: '#113447', cursor: "pointer" }}>Sign Up</span></p>
+                    <p style={{ textAlign: 'center', marginTop: '1rem' }}>
+                        <span onClick={() => { router.push('/auth/forgotpassword') }} style={{ color: '#113447', cursor: "pointer" }}>Forgot Password?</span>
+                    </p>
                 </div>
 
             </div>

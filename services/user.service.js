@@ -14,6 +14,18 @@ export async function createUser(data) {
     });
 }
 
+export async function updatePassword(id,email, password) {
+    return db.user.update({
+        where: {
+            id,
+            email,
+        },
+        data: {
+            password,
+        },
+    });
+}
+
 export async function updateUser(id, data) {
     return db.user.update({
         where: {
