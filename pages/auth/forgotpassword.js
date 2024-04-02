@@ -9,7 +9,8 @@ import {
     CloseButton
 } from '@chakra-ui/react';
 import { isPassword } from "@/utils/validator";
-
+import '@/styles/routes/auth/login.scss';
+import { FaArrowLeft } from "react-icons/fa";
 
 function forgotpassword() {
 
@@ -27,7 +28,6 @@ function forgotpassword() {
         const data = { email };
         const response = await sendOtp(data);
         if (response.status === 200) {
-            console.log("recieved otp: ", response.otp);
             setId(response.id);
             setOtp(response.otp);
             setShowOtp(true);
@@ -75,14 +75,21 @@ function forgotpassword() {
     }
 
     return (
-        <div>
+        <div className="Login">
             {showOtp ? (
                 <Modal isOpen={showOtp} onClose={() => setShowOtp(false)} size={'sm'} isCentered>
                     <ModalOverlay />
-                    <ModalContent textAlign={'center'}>
+                    <ModalContent textAlign={'center'} isCentered style={{
+                        padding: '2rem'
+                    }}>
                         <CloseButton onClick={() => setShowOtp(false)} />
                         <h1>Enter OTP</h1>
-                        <FormControl>
+                        <p>Enter the OTP sent to your email</p>
+                        <p>Check your spam folder if you don't see the email</p>
+                        <FormControl style={{
+                            marginBottom: '1rem'
+                        
+                        }}>
                             <Input
                                 placeholder="OTP"
                                 value={userOtp}
@@ -97,17 +104,24 @@ function forgotpassword() {
                 showResetPassword ? (
                     <Modal isOpen={showResetPassword} onClose={() => setShowResetPassword(false)} size={'sm'} isCentered>
                         <ModalOverlay />
-                        <ModalContent textAlign={'center'}>
+                        <ModalContent textAlign={'center'} isCentered style={{
+                            padding: '2rem'
+                        }}>
                             <CloseButton onClick={() => setShowResetPassword(false)} />
                             <h1>Reset Password</h1>
-                            <FormControl>
+                            <FormControl style={{
+                                marginBottom: '1rem',
+                                marginTop: '1rem'
+                            }}>
                                 <Input
                                     placeholder="Password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
                             </FormControl>
-                            <FormControl>
+                            <FormControl style={{
+                                marginBottom: '1rem'
+                            }}>
                                 <Input
                                     placeholder="Confirm Password"
                                     value={confirmPassword}
@@ -119,15 +133,29 @@ function forgotpassword() {
                     </Modal>
                 ) : null
             }
-            <h1>Forgot Password</h1>
-            <FormControl>
-                <Input
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-            </FormControl>
-            <Button onClick={handleSendOtp}>Send OTP</Button>                
+            <div className="Login__icon"
+                onClick={() => router.push('/')} style={
+                    {
+                        cursor: 'pointer'
+                    }
+                }>
+                <FaArrowLeft />
+            </div>
+            <div className="Login__sideimg">
+            </div>
+            <div className="Login__form">
+                <h1>Forgot Password</h1>
+                <p>Enter your email to receive an OTP</p>
+                <FormControl>
+                    <Input
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        width={'100%'}
+                    />
+                </FormControl>
+                <Button onClick={handleSendOtp} width={'100%'}>Send OTP</Button>
+            </div>
         </div>
     )
 }
