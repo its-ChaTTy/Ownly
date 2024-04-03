@@ -3,7 +3,6 @@ import './RentRequest.scss'
 
 const RentRequest = ({ item, sent, user }) => {
 
-    console.log(item)
 
     function formatDateString(inputDateString) {
         const dateString = inputDateString;

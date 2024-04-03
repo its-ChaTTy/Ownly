@@ -28,6 +28,11 @@
 
     &--icon {
       margin-top: 4px;
+
+      &--ex{
+        display: none;
+      }
+
     }
 
     p {
@@ -35,4 +40,27 @@
       font-weight: 500;
     }
   }
+
+  @media (max-width: 768px){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 90vw;
+
+    p{
+      display: none;
+    }
+
+    &__elements{
+      padding: 1rem 0;
+      margin-left: 0;
+    }
+
+    &__elements--icon--ex{
+      display: block;
+    }
+    
+  }
+
 }

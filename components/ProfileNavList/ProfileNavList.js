@@ -1,8 +1,9 @@
 import './ProfileNavList.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouseUser, faCompass, faSquarePollVertical, faSignOut, faCodePullRequest } from '@fortawesome/free-solid-svg-icons';
+import { faHouseUser, faCompass, faSquarePollVertical, faSignOut, faCodePullRequest, faPlus } from '@fortawesome/free-solid-svg-icons';
 import useAuth from '@/hooks/useAuth';
 import { logout } from '@/operations/auth.fetch';
+
 
 function ProfileNavList() {
     const { setPage, setAddModal, addModal, page } = useAuth()
@@ -21,46 +22,50 @@ function ProfileNavList() {
             <div style={{
                 cursor: "pointer",
                 color: page === "profile" ? "#FF6B00" : "black",
-            }} className='navList__elements'>
+            }} className='navList__elements'
+            onClick={() => { setPage("profile") }}>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faHouseUser} />
-                <p onClick={() => { setPage("profile") }}>My Profile</p>
+                <p >My Profile</p>
             </div>
             <div style={{
                 cursor: "pointer",
                 color: page === "listings" ? "#FF6B00" : "black",
-            }} className='navList__elements'>
+            }} className='navList__elements' onClick={() => { setPage("listings") }} >
                 <FontAwesomeIcon className='navList__elements--icon' icon={faCompass} />
-                <p onClick={() => { setPage("listings") }}>My Listings</p>
+                <p >My Listings</p>
             </div>
             <div style={{
                 cursor: "pointer",
                 color: page === "history" ? "#FF6B00" : "black",
-            }} className='navList__elements'>
+            }} className='navList__elements' onClick={() => { setPage("history") }}>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
-                <p onClick={() => { setPage("history") }}>Rental History</p>
+                <p >Rental History</p>
             </div>
             <div style={{
                 cursor: "pointer",
                 color: page === "active" ? "#FF6B00" : "black",
-            }} className='navList__elements'>
+            }} className='navList__elements' onClick={() => { setPage("active") }}>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSquarePollVertical} />
-                <p onClick={() => { setPage("active") }}>Active Rent</p>
+                <p >Active Rent</p>
             </div>
             <div style={{
                 cursor: "pointer",
                 color: page === "requests" ? "#FF6B00" : "black",
-            }} className='navList__elements'>
+            }} className='navList__elements' onClick={() => { setPage("requests") }}>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faCodePullRequest} />
-                <p onClick={() => { setPage("requests") }}>Rent Requests</p>
+                <p >Rent Requests</p>
             </div>
             <div style={{
                 cursor: "pointer",
                 color: page === "logout" ? "#FF6B00" : "black",
-            }} className='navList__elements'>
+            }} className='navList__elements' onClick={() => { handleLogout() }}>
                 <FontAwesomeIcon className='navList__elements--icon' icon={faSignOut} />
-                <p onClick={() => { handleLogout() }}>Logout</p>
+                <p >Logout</p>
             </div>
-            <div onClick={() => { setAddModal(!addModal) }} className='navList__elements'>
+            <div onClick={() => { setAddModal(!addModal) }} className='navList__elements' style={{
+                cursor: "pointer",
+            }}>
+                <FontAwesomeIcon className='navList__elements--icon--ex' icon={faPlus} />
                 <p className='navList__elements--add'>+ Add Item</p>
             </div>
         </div>

@@ -9,32 +9,74 @@
     &_main {
         display: flex;
         flex-direction: row;
-        &--elements{
+
+        &--elements {
             &__listings {
                 display: flex;
                 flex-wrap: wrap;
                 margin-left: 2rem;
                 margin-top: 1.5rem;
+
                 &--card {
                     margin-right: 2.5rem;
                     margin-bottom: 1rem;
                 }
+
+                @media (max-width: 768px) {
+                    margin-left: 0;
+                    padding: 0 1rem;
+                }
+
             }
+
             &__history {
                 margin-left: 2rem;
                 margin-top: 1.5rem;
+
+                @media (max-width: 768px) {
+                    margin-left: 0;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 1rem;
+
+                }
+
             }
+
             &__requests {
                 margin-left: 2rem;
                 margin-top: 1.5rem;
+
                 &--text {
                     font-family: 'Roboto', sans-serif;
                     font-size: 1.2rem;
                     font-weight: 500;
                     margin-bottom: 1rem;
                 }
+
+                @media (max-width: 768px) {
+                    margin-left: 0;
+                    padding: 0 1rem;
+
+                }
+
             }
         }
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+
+            &--elements {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
+
     }
 
 }
