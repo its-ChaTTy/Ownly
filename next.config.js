@@ -20,7 +20,7 @@ const nextConfig = {
     additionalData: `@import "styles/root/_mixins.scss";`,
   },
   images: {
-    domains: ['ejemahwsmspobcfvofxe.supabase.co'],
+    domains: ['aniaodrkdkwrtfkhpjgp.supabase.co'],
   },
 };
 

@@ -72,7 +72,7 @@
   @media (max-width: 768px) {
     .Navbar__container {
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
 
       &--pages {
@@ -104,6 +104,18 @@
       display: block;
       // size: 6rem;
     }
+
+    .Navbar__rightside {
+      width: 70vw;
+      display: flex;
+      justify-content: flex-end;
+      align-items:flex-end;
+    }
+
+    .Navbar__rightside--text{
+      display: none;
+    }
+
   }
 
   .Navbar__sidebar {
@@ -140,6 +152,7 @@
       font-weight: 500;
       cursor: pointer;
     }
+
   }
 
   &__container--search {
