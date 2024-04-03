@@ -169,4 +169,57 @@
     background: #113447;
     border-color: #113447;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    &__right {
+      img{
+        width: 90vw;
+      }
+    }
+
+    &__left{
+
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      &__Header{
+        font-size: 1.4rem;
+      }
+
+      &__Para{
+        width: 80vw;
+        font-size: 0.8rem;
+      }
+
+      &__search{
+        input{
+          width: 70vw;
+        }
+
+        p{
+          padding: 1rem 0;
+        }
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+      }
+
+      &__Button{
+        width: 60vw;
+        img{
+          width: 60vw;
+        }
+      }
+    }
+
+  }
+
 }

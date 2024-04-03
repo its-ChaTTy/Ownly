@@ -20,6 +20,11 @@
       font-size: 2.7rem;
       font-family: "Roboto", sans-serif;
       font-weight: 700;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+
     }
 
     &--text3 {
@@ -31,6 +36,7 @@
 
   &__pills {
     display: flex;
+    flex-wrap: wrap;
 
     &--pill {
       border-radius: 1rem;
@@ -43,6 +49,11 @@
       &__text {
         font-size: 0.9rem;
       }
+
+      @media (max-width: 768px){
+        width: 32vw;
+      }
+
     }
   }
 

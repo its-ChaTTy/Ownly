@@ -20,6 +20,11 @@
       font-size: 2.7rem;
       font-family: "Roboto", sans-serif;
       font-weight: 700;
+
+      @media (max-width: 768px) {
+        font-size: 2rem;
+      }
+
     }
 
     &--text3 {
@@ -64,6 +69,21 @@
           border: 1px solid white;
           border-radius: 1rem;
           padding: .5rem 1rem .5rem 1rem;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      &--card {
+        width: 100%;
+        margin: 1rem 0;
+        padding: 1rem;
+
+        &__image {
+          img {
+            width: 10vw;
+          }
         }
       }
     }

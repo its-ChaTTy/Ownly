@@ -1,7 +1,6 @@
 import "./HeroBrowse.scss";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -17,13 +16,14 @@ function HeroBrowse() {
     router.push(`/productPage?search=${search}`);
   };
 
-
-
   return (
     <div className="HeroBrowse">
+      <div className="HeroBrowse__right">
+        <img src="/Images/Home_page/home_page.png" alt="Hero Browse" />
+      </div>
       <div className="HeroBrowse__left">
         <h1 className="HeroBrowse__left__Header">
-         RENT WHAT YOU NEED, <br /> SHARE WHAT YOU HAVE!
+          RENT WHAT YOU NEED, <br /> SHARE WHAT YOU HAVE!
         </h1>
         <p className="HeroBrowse__left__Para">
           Explore a world of possibilities, effortlessly share what you have,
@@ -58,15 +58,6 @@ function HeroBrowse() {
             setAddModal(true);
           }} className="HeroBrowse__left__search__btn">List an Item</button>
         </div>
-        {/* <div className="HeroBrowse__left__Button">
-          <img className="HeroBrowse__left__Button--monetize" src="/Images/Home_page/monetize.webp" />
-          <Link href="/productPage">
-            <img className="HeroBrowse__left__Button--explore" src="/Images/Home_page/explore_prod.webp" />
-          </Link>
-        </div> */}
-      </div>
-      <div className="HeroBrowse__right">
-        <img src="/Images/Home_page/home_page.png" alt="Hero Browse" />
       </div>
     </div>
   );

@@ -43,6 +43,14 @@ const Slideshow = ({ imageURL }) => {
             width: 15vw;
             height:15vw;
         }
+
+        @media (max-width: 768px) {
+            img {
+                width: 40vw;
+                height:40vw;
+            }
+        }
+
       `}</style>
         </div>
     );
