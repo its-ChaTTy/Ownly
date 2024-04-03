@@ -34,8 +34,8 @@ export async function getServerSideProps(context) {
 
     const rentRequestId = parseInt(context.query.id);
     const value = parseInt(context.query.price);
-    
-    // console.log(rentRequestId, value, userId);
+
+
     if (rentRequestId === undefined || value === undefined || userId === undefined || userId === null || rentRequestId === null || value === null) {
         return {
             redirect: {
@@ -52,7 +52,7 @@ export async function getServerSideProps(context) {
             },
         };
     }
-    
+
 
     return {
         props: { user: user, rentRequestId: rentRequestId, value: value },
@@ -95,13 +95,11 @@ function pay({ user, rentRequestId, value }) {
 
         const data = {
             userId: user.id,
-            rentReqId: rentRequestId, 
+            rentReqId: rentRequestId,
             amount: value,
             paymentId: paymentId,
             imageURL: imageURL
         }
-
-        // console.log(data);
 
         const response = await makePayment(data);
         if (response.status === 200) {
@@ -118,20 +116,36 @@ function pay({ user, rentRequestId, value }) {
     return (
         <div>
             {isLoading && <LoadingSpinner />}
-            <Modal isOpen={true} onClose={() => { setIsOpen(false) }} size={'md'} isCentered>
+            <Modal isOpen={isOpen} onClose={() => {
+                setIsOpen(false);
+            }} size={'md'} isCentered>
                 <ModalOverlay />
                 <ModalContent>
-                    <CloseButton onClick={() => { setIsOpen(false) }} />
-                    <Image src={"/Images/Store/qr.jpg"} alt="QR Code" height={"auto"} width={"65%"} objectFit="cover" />
-                    <FormControl id="paymentId">
-                        <FormLabel>Payment ID</FormLabel>
-                        <Input type="text" onChange={(e) => { setPaymentId(e.target.value) }} />
-                    </FormControl>
-                    <FormControl id="imageURL">
-                        <FormLabel>Upload Payment Screenshot</FormLabel>
-                        <Input type="file" onChange={(e) => { uploadImages(e.target.files[0]) }} />
-                    </FormControl>
-                    <Button onClick={() => { paySubmit() }}>Submit</Button>
+                    <CloseButton onClick={() => {
+                        setIsOpen(false);
+                        router.push('/cart/mycart');
+                    }} />
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        padding: '1rem'
+
+                    }}>
+                        <Image src={"/Images/Store/qr.jpg"} alt="QR Code" height={"auto"} width={"65%"} objectFit="cover" />
+                        <FormControl id="paymentId">
+                            <FormLabel>Payment ID</FormLabel>
+                            <Input type="text" onChange={(e) => { setPaymentId(e.target.value) }} />
+                        </FormControl>
+                        <FormControl id="imageURL">
+                            <FormLabel>Upload Payment Screenshot</FormLabel>
+                            <Input type="file" onChange={(e) => { uploadImages(e.target.files[0]) }} />
+                        </FormControl>
+                    </div>
+                    <Button onClick={() => { paySubmit() }} style={{
+                        margin: '1rem'
+                    }}>Submit</Button>
                 </ModalContent>
             </Modal></div>
     )
