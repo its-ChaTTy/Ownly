@@ -33,7 +33,6 @@ const RentRequest = ({ item, sent, user }) => {
             window.location.reload();
         } else {
             alert('Failed to accept rent request');
-            console.log(response)
         }
     }
 
@@ -52,7 +51,6 @@ const RentRequest = ({ item, sent, user }) => {
             window.location.reload();
         } else {
             alert('Failed to reject rent request');
-            console.log(response)
         }
     }
 

@@ -107,7 +107,6 @@ function pay({ user, rentRequestId, value }) {
             router.push('/');
             window.location.reload()
         } else {
-            console.log(response);
             alert('Something went wrong');
             window.location.reload();
         }

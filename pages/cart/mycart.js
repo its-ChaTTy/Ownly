@@ -81,12 +81,9 @@ function mycart({ user, items, userCart, messages }) {
         const response = await createRentRequest(rentreq);
 
         if (response.status === 200) {
-          console.log(response);
           const temp = response['request']['id'];
           setRentReqId(rentRequestId => [...rentRequestId, temp]);
-          console.log(rentRequestId);
         } else {
-          console.log(response);
           throw new Error('Failed to create rent request');
         }
       });
@@ -100,9 +97,7 @@ function mycart({ user, items, userCart, messages }) {
         }
         const response = await removeCartItem(data);
         if (response.status === 200) {
-          console.log(response);
         } else {
-          console.log(response);
           throw new Error('Failed to remove cart item');
         }
       })

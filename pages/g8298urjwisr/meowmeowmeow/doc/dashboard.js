@@ -86,7 +86,6 @@ function dashboard({ user, pendingRequests, items, requestedItems }) {
                 window.location.reload()
             } else {
                 alert('Something went wrong')
-                console.log(response)
             }
         }
     }
@@ -107,7 +106,6 @@ function dashboard({ user, pendingRequests, items, requestedItems }) {
             window.location.reload();
         }
         else {
-            console.log(response);
             alert("Something went wrong");
         }
 

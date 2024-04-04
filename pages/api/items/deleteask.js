@@ -8,7 +8,6 @@ async function deleteItemRequest(req, res) {
     const { id, item } = req.body;
 
     if (!id || !item) {
-        console.log(item,id);
         return res.json({ status: 400, message: "Item id and item name are required" });
     }
 

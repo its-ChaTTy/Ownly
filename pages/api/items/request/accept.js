@@ -35,7 +35,6 @@ async function requestAccept(req, res) {
 
     try {
         const request = await acceptRequest(id);
-        // console.log(request);
         // need to fetch the user email from reqquest.userId
         await sendOwnerApprovalMail(request);
         await appendNewMessage({

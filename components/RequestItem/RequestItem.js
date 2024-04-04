@@ -13,7 +13,6 @@ export default function RequestItem({ isOpen, onRequestClose }) {
         event.preventDefault();
         const data = { item: item };
         const response = await askForAnItem(data);
-        console.log(response);
         onRequestClose();
     };
 

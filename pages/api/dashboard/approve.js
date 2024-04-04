@@ -17,9 +17,7 @@ async function approve(req, res) {
 
     try {
         const response = await approvePayment({ 'id': id });
-        // console.log(response, "response\n");
         const owner = await fetchItemUser(response.itemId);
-        // console.log(owner, "owner\n");
         await sendApprovalMail(response.User, owner.User);
         await approvePayment2({ 'id': id2 });
         await appendNewMessage({ 
@@ -49,7 +47,6 @@ async function sendApprovalMail(user, owner) {
             console.log(err);
         }
         else {
-            console.log(info);
             console.log("Email sent successfully");
         }
     });

@@ -23,7 +23,7 @@ function Login() {
             return
         }
         const res = await login({ email, password });
-        console.log(res);
+        
         if (res.status === 200) {
             alert('Login successful')
             window.location.href = '/'
