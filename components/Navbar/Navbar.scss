@@ -1,13 +1,9 @@
 .Navbar {
   background-color: white;
-  // position: fixed;
-  // top: 0;
-  // left: 0;
   z-index: 999;
   width: 100vw;
   color: black;
   padding: 10px 30px;
-  // margin-top: 2vh;
 
   &__container {
     display: flex;
@@ -25,7 +21,6 @@
       display: flex;
       justify-content: left;
       align-items: center;
-      // margin-left: 20px;
       cursor: pointer;
       padding: 0 20px;
       width: 30vw;
@@ -40,6 +35,10 @@
     }
   }
 
+  .mobile-logo {
+    display: none;
+  }
+
   @media (max-width: 1248px) {
     .Navbar__container--pages {
       width: 35vw;
@@ -52,16 +51,6 @@
     .Navbar__leftside {
       width: 50vw;
     }
-
-    .Navbar__rightside {
-      width: 40vw;
-    }
-  }
-
-  @media (max-width: 1025px) {
-    .Navbar__rightside {
-      width: 45vw;
-    }
   }
 
   .fabar-icon {
@@ -71,12 +60,12 @@
 
   @media (max-width: 768px) {
     .Navbar__container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-direction: column;
 
       &--pages {
         flex-direction: column;
+        align-items: center;
+        width: 100%;
       }
     }
 
@@ -84,7 +73,7 @@
       display: none;
     }
 
-    & .Navbar__container--search {
+    .Navbar__container--search {
       margin-left: 20px;
       display: flex;
       align-items: center;
@@ -94,7 +83,6 @@
         margin-right: 10px;
         border: none;
         border-radius: 20px;
-        //background colour grey
         background: #f2f2f2;
         width: 70vw;
       }
@@ -102,20 +90,31 @@
 
     .fabar-icon {
       display: block;
-      // size: 6rem;
+    }
+
+    .mobile-logo {
+      display: block;
+      margin-top: 20px;
+      img {
+        mix-blend-mode: exclusion;
+      }
     }
 
     .Navbar__rightside {
-      width: 70vw;
+      width: 100%;
       display: flex;
       justify-content: flex-end;
       align-items:flex-end;
+      margin-top: -40px;
+    }
+
+    .icon2 {
+      margin-left: 8px;
     }
 
     .Navbar__rightside--text{
       display: none;
     }
-
   }
 
   .Navbar__sidebar {
@@ -153,7 +152,13 @@
       cursor: pointer;
     }
 
+    .icon2 {
+      width: 43;
+      height: 43;
+      cursor: pointer;
+    }
   }
+
 
   &__container--search {
     display: flex;
@@ -164,7 +169,6 @@
       margin-right: 10px;
       border: none;
       border-radius: 20px;
-      //background colour grey
       background: #f2f2f2;
       width: 22vw;
     }
