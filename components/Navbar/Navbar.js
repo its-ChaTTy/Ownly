@@ -74,7 +74,15 @@ function Navbar({ messages }) {
 	return (
 		<div className={`Navbar ${isNotificationOpen ? 'blur' : ''}`}>
 			<div className="Navbar__container">
-				<FaBars className="fabar-icon" onClick={() => setIsSidebarOpen(true)} />
+				{/* <FaBars className="fabar-icon" onClick={() => setIsSidebarOpen(true)} /> */}
+				<div className="mobile-logo">
+					<Image
+						src="/Images/Logos/ownly_footer_logo.webp"
+						alt="Your Logo"
+						width={100}
+						height={100}
+					/>
+				</div>
 				<div className="Navbar__leftside">
 					<div className="Navbar__container--logo">
 						<Image
@@ -98,25 +106,25 @@ function Navbar({ messages }) {
 					<p className="Navbar__rightside--text" onClick={handleOpenTermsModal}>List an Item</p>
 
 					<div onClick={handleNotificationClick}>
-						<Image style={{ cursor: "pointer" }} src={'/Images/Assets/notification.png'} width={43} height={43} />
+						<Image className="icon2" src={'/Images/Assets/notification.png'} width={43} height={43} />
 					</div>
 
 					<div onClick={handleUser} >
 						<Link href="/profile">
-							<Image style={{ cursor: "pointer" }} src={'/Images/Assets/profile.webp'} width={43} height={43} />
+							<Image className="icon2" src={'/Images/Assets/profile.webp'} width={43} height={43} />
 						</Link>
 					</div>
 
 					<div>
 						<Link href={'/cart/mycart'}>
-							<Image style={{ cursor: "pointer" }} src={'/Images/Assets/cart.webp'} width={43} height={43} />
+							<Image className="icon2" src={'/Images/Assets/cart.webp'} width={43} height={43} />
 						</Link>
 					</div>
 				</div>
 			</div>
 			{isNotificationOpen && <Notification messages={messages} onClose={handleCloseNotification} />}
 			{isRequestItemOpen && <RequestItem isOpen={isRequestItemOpen} onRequestClose={handleCloseRequestItem} />}
-			{isSidebarOpen && (
+			{/* {isSidebarOpen && (
 				<div className="Navbar__sidebar">
 					<FaTimes
 						className="close-icon"
@@ -136,7 +144,7 @@ function Navbar({ messages }) {
 						<p>Contact</p>
 					</div>
 				</div>
-			)}
+			)} */}
 			<Modal
 				isOpen={isTermsModalOpen}
 				onRequestClose={handleCloseTermsModal}

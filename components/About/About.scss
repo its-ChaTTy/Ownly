@@ -20,9 +20,19 @@
       font-size: 2.7rem;
       font-family: "Roboto", sans-serif;
       font-weight: 700;
+      flex-direction: row;
+      display: flex;
+
+      &--text21 {
+        font-style: italic;
+        margin-left: 10px;
+      }
 
       @media (max-width: 768px) {
-        font-size: 2rem;
+        font-size: 2.4rem;
+        font-weight: bold;
+        flex-direction: column;
+        margin-left: 0px;
       }
 
     }

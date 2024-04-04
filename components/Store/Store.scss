@@ -51,9 +51,12 @@
       }
 
       @media (max-width: 768px){
-        width: 32vw;
-      }
+        width: 20vw;
 
+        &__text {
+          font-size: 0.7rem;
+        }
+      }
     }
   }
 
@@ -75,8 +78,8 @@
         }
 
         position: absolute;
-        width: 15vw;
-        height: 15vw;
+          width: 15vw;
+          height: 15vw;
         background-color: rgba(0, 0, 0, 0.5);
         // border-radius: 1rem;
         display: flex;
@@ -126,6 +129,26 @@
         &--price {
           font-weight: 600;
           font-family: "Roboto", sans-serif;
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between; // Optional: to space out the items
+      align-items: center;
+    
+      &--item {
+        width: 45%; // Adjusted to allow two items per row
+        height: auto; // Adjusted to scale height automatically
+        margin: 1rem 2.5%; // Adjusted to add space around the item
+    
+        &__image {
+          img {
+            width: 100%; // Adjusted to match the item width
+            height: auto; // Adjusted to scale height automatically
+          }
         }
       }
     }
