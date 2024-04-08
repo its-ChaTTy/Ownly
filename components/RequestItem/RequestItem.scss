@@ -59,6 +59,10 @@ input {
     border-radius: 5px;
     margin-top: 5px;
     outline: none;
+
+    @media (max-width: 768px) {
+        width: 90%;
+    }
 }
 button {
     cursor: pointer;
