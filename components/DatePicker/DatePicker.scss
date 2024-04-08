@@ -76,4 +76,29 @@
             padding: .5rem 1.5rem .5rem 1.5rem;
         }
     }
+
+    @media (max-width: 768px) {
+
+        background-color: white;
+
+        height: max-content;
+        &__picker {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__picker__start, &__picker__end {
+            margin-bottom: 1rem;
+        }
+
+        &__values {
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+
+            &--button {
+                margin-top: 10px;
+            }
+        }
+    }
 }

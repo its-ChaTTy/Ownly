@@ -16,7 +16,7 @@ function ProductPageCards({ items, userId }) {
         <>
             <Modal isOpen={showCalender} onClose={() => setShowCalender(false)} isCentered size={'xxl'}>
                 <ModalOverlay />
-                <ModalContent h={'65%'} width={'60%'} >
+                <ModalContent h={'65%'} className="modalContent">
                     <DatePicker id={itemId} userId={userId} price={price} />
                 </ModalContent>
             </Modal>

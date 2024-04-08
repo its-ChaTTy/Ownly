@@ -46,6 +46,12 @@
         color: #000;
         font-weight: 500;
       }
+
+      &__btn {
+        &--btn2 {
+          display: none;
+        }
+      }
     }
 
     &__Button {
@@ -209,6 +215,16 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+        &__btn {
+          display: flex;
+          flex-direction: row;
+          &--btn2 {
+            display: block;
+            margin-left: 1rem;
+          }
+        
+        }
 
       }
 

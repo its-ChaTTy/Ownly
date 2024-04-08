@@ -6,6 +6,11 @@
   padding-left: 2rem;
   padding-right: 2rem;
 
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   &__Cards {
     padding-left: 5rem;
     padding-right: 2rem;
@@ -14,10 +19,23 @@
     // justify-content: center;
     max-width: max-content;
 
+    @media (max-width: 768px) {
+      margin-left: 1rem;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
     &--item {
-      margin-right: 2rem;
+      margin-right: 1rem;
       margin-bottom: 2rem;
       cursor: pointer;
+
+      @media (max-width: 768px) {
+        width: 40vw;
+        height: 60vw;
+        margin-left: 1rem;
+        margin-right: 0.5rem;
+      }
 
       &__overlay {
         &:hover {
@@ -78,5 +96,15 @@
         }
       }
     }
+  }
+}
+
+.modalContent {
+  width: 60%;
+}
+
+@media (max-width: 768px) {
+  .modalContent {
+      width: 90%;  // Adjust this as needed
   }
 }

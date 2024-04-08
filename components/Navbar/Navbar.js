@@ -75,14 +75,16 @@ function Navbar({ messages }) {
 		<div className={`Navbar ${isNotificationOpen ? 'blur' : ''}`}>
 			<div className="Navbar__container">
 				{/* <FaBars className="fabar-icon" onClick={() => setIsSidebarOpen(true)} /> */}
-				<div className="mobile-logo">
-					<Image
-						src="/Images/Logos/ownly_footer_logo.webp"
-						alt="Your Logo"
-						width={100}
-						height={100}
-					/>
-				</div>
+				<Link href="/">
+					<div className="mobile-logo">
+						<Image
+							src="/Images/Logos/ownly_footer_logo.webp"
+							alt="Your Logo"
+							width={100}
+							height={100}
+						/>
+					</div>
+				</Link>
 				<div className="Navbar__leftside">
 					<div className="Navbar__container--logo">
 						<Image
@@ -124,27 +126,6 @@ function Navbar({ messages }) {
 			</div>
 			{isNotificationOpen && <Notification messages={messages} onClose={handleCloseNotification} />}
 			{isRequestItemOpen && <RequestItem isOpen={isRequestItemOpen} onRequestClose={handleCloseRequestItem} />}
-			{/* {isSidebarOpen && (
-				<div className="Navbar__sidebar">
-					<FaTimes
-						className="close-icon"
-						onClick={() => setIsSidebarOpen(false)}
-					/>
-					<div className="Navbar__container--logo">
-						<Image
-							src="/Images/Logos/ownly_footer_logo.webp"
-							alt="Your Logo"
-							width={100}
-							height={100}
-						/>
-					</div>
-					<div className="Navbar__container--pages">
-						<p>Home</p>
-						<p>About us</p>
-						<p>Contact</p>
-					</div>
-				</div>
-			)} */}
 			<Modal
 				isOpen={isTermsModalOpen}
 				onRequestClose={handleCloseTermsModal}

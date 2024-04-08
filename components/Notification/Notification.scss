@@ -11,6 +11,11 @@
     overflow-y: auto;
     z-index: 1000;
     transition: all 0.3s ease; // Smooth transition for any changes
+
+    @media (max-width: 768px) {
+        top: 70px;
+        right: 0;
+    }
 }
 
 .Notification__container {

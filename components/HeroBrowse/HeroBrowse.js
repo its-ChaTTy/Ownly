@@ -4,6 +4,7 @@ import { useState } from "react";
 import useAuth from "@/hooks/useAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import RequestItem from "../RequestItem/RequestItem";
 
 function HeroBrowse() {
 
@@ -11,10 +12,19 @@ function HeroBrowse() {
   const { setAddModal } = useAuth();
 
   const [search, setSearch] = useState("");
+  const [isRequestItemOpen, setIsRequestItemOpen] = useState(false);
 
   const handleSearch = async () => {
     router.push(`/productPage?search=${search}`);
   };
+
+  const handleOpenRequestItem = () => {
+		setIsRequestItemOpen(true);
+	};
+
+	const handleCloseRequestItem = () => {
+		setIsRequestItemOpen(false);
+	};
 
   return (
     <div className="HeroBrowse">
@@ -53,12 +63,16 @@ function HeroBrowse() {
             />
           </div>
           <p>Or</p>
-          <button onClick={() => {
-            router.push("/profile");
-            setAddModal(true);
-          }} className="HeroBrowse__left__search__btn">List an Item</button>
+          <div className="HeroBrowse__left__search__btn">
+            <button onClick={() => {
+              router.push("/profile");
+              setAddModal(true);
+            }} className="HeroBrowse__left__search__btn--btn1">List an Item</button>
+            <button onClick={handleOpenRequestItem} className="HeroBrowse__left__search__btn--btn2">Request an Item</button>
+          </div>
         </div>
       </div>
+      {isRequestItemOpen && <RequestItem isOpen={isRequestItemOpen} onRequestClose={handleCloseRequestItem} />}
     </div>
   );
 }

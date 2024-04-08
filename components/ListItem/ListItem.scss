@@ -6,6 +6,7 @@
   grid-row-gap: 0px;
   height: 73vh;
 
+
   &__description {
     grid-area: 2 / 2 / 12 / 7;
     margin-right: 20px;
@@ -116,10 +117,10 @@
       padding:0 20px;
 
       &--card {
-        padding:10px 20px;
+        padding-top: 50px;
         .ListItem__images--card--button {
-          height: 15vh;
-          width: 30vw;
+          height: 10vh;
+          width: 20vw;
         }
       }
     }
@@ -128,6 +129,7 @@
       height: max-content;
       padding: 0 20px;
       margin-top: 5vh;
+      margin-bottom: 6vh;
 
       &--card {
         padding:0 20px;

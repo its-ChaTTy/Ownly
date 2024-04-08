@@ -104,7 +104,7 @@ const DatePicker = ({ id, userId = 0, price }) => {
             <div className='DatePicker__picker'>
                 <div className='DatePicker__picker__start'>
                     <p className='DatePicker__picker__start--text'>Start Date</p>
-                    <Calendar
+                    <Calendar className='DatePicker__picker__start--calendar'
                         onChange={onChangeStart}
                         value={startValue}
                     />
