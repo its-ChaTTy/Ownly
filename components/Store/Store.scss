@@ -66,10 +66,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    
+    @media (max-width:768px) {
+      &--itemContainer {
+        display: flex;
+        flex-direction: row;
+      }
+    }
 
     &--item {
       margin: 2rem;
       cursor: pointer;
+      width: 15vw;
 
       &__overlay {
         z-index: 10;
@@ -94,15 +102,6 @@
         transition: all 0.5s ease;
         cursor: pointer;
 
-        &--button2 {
-          color: white;
-          border: 1px solid white;
-          font-family: 'Roboto', sans-serif;
-          padding: .3rem 1rem .3rem 1rem;
-          border-radius: 1rem;
-          font-size: .8rem;
-        }
-
         &--button1 {
           background-color: white;
           color: black;
@@ -124,7 +123,7 @@
 
       &__text {
         margin-top: 0.7rem;
-
+        text-wrap: wrap;
         &--name {
           font-weight: 400;
           font-family: "Roboto", sans-serif;
@@ -133,6 +132,22 @@
         &--price {
           font-weight: 600;
           font-family: "Roboto", sans-serif;
+        }
+      }
+
+      &__button2 {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        &__button2 {
+          display: block;
+          color: black;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+          font-size: .8rem;
+          padding-right: 5px;
+          margin-left: auto;
         }
       }
     }

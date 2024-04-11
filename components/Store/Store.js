@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './Store.scss'
 import Slideshow from '@/components/SlideShow/Slideshow';
 import { useRouter } from 'next/router'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 const Store = ({ allItems }) => {
     const router = useRouter();
@@ -31,7 +33,7 @@ const Store = ({ allItems }) => {
                                 // Add a on hover view which displays 2 buttons over the card
                                 <div className='Store__items--item' key={index}>
                                     <div className='Store__items--item__overlay'>
-                                        <button className='Store__items--item__overlay--button1' onClick={() => {router.push('/productPage')}}>Buy Now</button>
+                                        <button className='Store__items--item__overlay--button1' onClick={() => { router.push('/productPage') }}>Rent Now</button>
                                     </div>
                                     <div className='Store__items--item__image'>
                                         {/* <img src={item.imageURL[0]} alt='item' /> */}
@@ -39,7 +41,12 @@ const Store = ({ allItems }) => {
                                     </div>
                                     <div className='Store__items--item__text'>
                                         <p className='Store__items--item__text--name'>{item.name}</p>
-                                        <p className='Store__items--item__text--price'>Rs. {item.price}</p>
+                                        <div className='Store__items--itemContainer'>
+                                            <p className='Store__items--item__text--price'>Rs. {item.price}</p>
+                                            <button className='Store__items--item__button2' onClick={() => { router.push('/productPage') }}>
+                                                <FontAwesomeIcon icon={faShoppingCart} />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )

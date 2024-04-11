@@ -19,6 +19,13 @@
     // justify-content: center;
     max-width: max-content;
 
+    @media (max-width:768px) {
+      &--itemContainer {
+        display: flex;
+        flex-direction: row;
+      }
+    }
+
     @media (max-width: 768px) {
       margin-left: 1rem;
       padding-left: 0;
@@ -29,6 +36,7 @@
       margin-right: 1rem;
       margin-bottom: 2rem;
       cursor: pointer;
+      width: 15vw;
 
       @media (max-width: 768px) {
         width: 40vw;
@@ -53,15 +61,6 @@
         opacity: 0;
         transition: all 0.5s ease;
         cursor: pointer;
-
-        &--button2 {
-          color: white;
-          border: 1px solid white;
-          font-family: 'Roboto', sans-serif;
-          padding: .3rem 1rem .3rem 1rem;
-          border-radius: 1rem;
-          font-size: .8rem;
-        }
 
         &--button1 {
           background-color: white;
@@ -93,6 +92,22 @@
         &--price {
           font-weight: 600;
           font-family: "Roboto", sans-serif;
+        }
+      }
+      
+      &__button2 {
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        &__button2 {
+          display: block;
+          color: black;
+          font-family: 'Roboto', sans-serif;
+          font-weight: bold;
+          font-size: .8rem;
+          padding-right: 5px;
+          margin-left: auto;
         }
       }
     }

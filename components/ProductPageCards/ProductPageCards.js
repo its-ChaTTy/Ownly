@@ -1,5 +1,7 @@
 import './ProductPageCards.scss';
 import Slideshow from '@/components/SlideShow/Slideshow';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import {
     Modal, ModalOverlay,
     ModalContent,
@@ -38,9 +40,20 @@ function ProductPageCards({ items, userId }) {
                             <div className='Product__Cards--item__image'>
                                 <Slideshow imageURL={item.imageURL} />
                             </div>
-                            <div className='Product__Cards--item__text'>
-                                <p className='Product__Cards--item__text--name'>{item.name}</p>
-                                <p className='Product__Cards--item__text--price'>Rs. {item.price}/Day</p>
+                            <div className='Store__items--item__text'>
+                                <p className='Store__items--item__text--name'>{item.name}</p>
+                                <div className='Store__items--itemContainer'>
+                                    <p className='Store__items--item__text--price'>Rs. {item.price}</p>
+                                    <button onClick={() => {
+                                        setItemId(item.id);
+                                        setPrice(item.price);
+                                        setShowCalender(true);
+                                    }} className='Store__items--item__button2' style={{
+                                        display: item.userId === userId ? 'none' : ''
+                                    }}>
+                                        <FontAwesomeIcon icon={faShoppingCart} />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     )
