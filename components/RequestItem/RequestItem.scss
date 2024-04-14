@@ -20,12 +20,14 @@
     box-sizing: border-box;
     overflow: auto;
     z-index: 1000; // ensure the modal is above other elements
+
     .requestHeading {
         margin-bottom: 20px;
         align-self: flex-start;
         font-weight: bold;
         font-size: 20px;
     }
+
     .close-icon {
         position: absolute;
         top: 10px;
@@ -35,6 +37,7 @@
         font-size: 24px; // adjust size as needed
         z-index: 1001; // ensure the close icon is above the modal
     }
+
     form {
         position: relative; // ensure the form is positioned relative to the modal
         background: white;
@@ -48,12 +51,14 @@
         z-index: 1000; // ensure the form is above the modal background
     }
 }
+
 .form-group {
     display: flex;
     flex-direction: column;
     align-self: flex-start;
 }
-input {
+
+.request-input {
     width: 135%; // or any width you prefer
     border: 2px solid #0000006b;
     border-radius: 5px;
@@ -64,14 +69,16 @@ input {
         width: 100%;
     }
 }
-button {
+
+.request-button {
     cursor: pointer;
     outline: none;
     padding-top: none;
     align-self: center;
     color: white;
 }
-.buttonContainer{
+
+.buttonContainer {
     align-self: flex-end;
     margin-top: 15px;
     margin-right: 10px;

@@ -28,10 +28,10 @@ export default function RequestItem({ isOpen, onRequestClose }) {
                 <h1 className='requestHeading'>Request an item</h1>
                 <div className="form-group">
                     <label>Product Name</label>
-                    <input type="text"  onChange={e => setItem(e.target.value)} required />
+                    <input type="text" className='request-input' onChange={e => setItem(e.target.value)} required />
                 </div>
                 <div className='buttonContainer'>
-                    <button type="submit">Submit</button>
+                    <button className='request-button' type="submit">Submit</button>
                 </div>
             </form>
         </Modal>
