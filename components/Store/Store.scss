@@ -51,7 +51,7 @@
       }
 
       @media (max-width: 768px){
-        width: 20vw;
+        width: 32vw;
 
         &__text {
           font-size: 0.7rem;
@@ -157,18 +157,12 @@
       flex-wrap: wrap;
       justify-content: space-between; // Optional: to space out the items
       align-items: center;
-    
+      
       &--item {
-        width: 45%; // Adjusted to allow two items per row
-        height: auto; // Adjusted to scale height automatically
-        margin: 1rem 2.5%; // Adjusted to add space around the item
-    
-        &__image {
-          img {
-            width: 100%; // Adjusted to match the item width
-            height: auto; // Adjusted to scale height automatically
-          }
-        }
+        margin: 1rem;
+        width: 100%; // Adjusted to allow two items per row
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
       }
     }
   }

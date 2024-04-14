@@ -75,16 +75,16 @@ function Navbar({ messages }) {
 		<div className={`Navbar ${isNotificationOpen ? 'blur' : ''}`}>
 			<div className="Navbar__container">
 				{/* <FaBars className="fabar-icon" onClick={() => setIsSidebarOpen(true)} /> */}
-				<Link href="/">
-					<div className="mobile-logo">
+				<div className="mobile-logo">
+					<Link href="/">
 						<Image
 							src="/Images/Logos/ownly_footer_logo.webp"
 							alt="Your Logo"
 							width={100}
 							height={100}
 						/>
-					</div>
-				</Link>
+					</Link>
+				</div>
 				<div className="Navbar__leftside">
 					<div className="Navbar__container--logo">
 						<Image

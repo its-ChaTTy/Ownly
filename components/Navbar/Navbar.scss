@@ -95,6 +95,7 @@
     .mobile-logo {
       display: block;
       margin-top: 20px;
+
       img {
         mix-blend-mode: exclusion;
       }
@@ -104,7 +105,7 @@
       width: 100%;
       display: flex;
       justify-content: flex-end;
-      align-items:flex-end;
+      align-items: flex-end;
       margin-top: -40px;
     }
 
@@ -112,7 +113,7 @@
       margin-left: 8px;
     }
 
-    .Navbar__rightside--text{
+    .Navbar__rightside--text {
       display: none;
     }
   }
