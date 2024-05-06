@@ -132,6 +132,10 @@
         &--price {
           font-weight: 600;
           font-family: "Roboto", sans-serif;
+
+          @media (max-width: 768px) {
+            margin-top: 8px;
+          }
         }
       }
 
@@ -142,12 +146,17 @@
       @media (max-width: 768px) {
         &__button2 {
           display: block;
-          color: black;
+          color: white;  // Changed text color to white for better visibility on a button
+          background-color: black;  // Added background color
           font-family: 'Roboto', sans-serif;
           font-weight: bold;
-          font-size: .8rem;
-          padding-right: 5px;
-          margin-left: auto;
+          font-size: 0.8rem;  // Increased font size for better visibility on mobile
+          padding: 5px 5px;  // Added vertical padding and increased horizontal padding
+          margin: 5px auto 0;  // Centered button horizontally and added top margin
+          cursor: pointer;  // Changed cursor to pointer on hover
+          text-align: center;  // Centered text
+          border-radius: 10px;
+          width: 50%;  // Set width to occupy most of the screen width
         }
       }
     }

@@ -51,7 +51,8 @@ function ProductPageCards({ items, userId }) {
                                     }} className='Store__items--item__button2' style={{
                                         display: item.userId === userId ? 'none' : ''
                                     }}>
-                                        <FontAwesomeIcon icon={faShoppingCart} />
+                                        {/* <FontAwesomeIcon icon={faShoppingCart} /> */}
+                                        Rent Now
                                     </button>
                                 </div>
                             </div>

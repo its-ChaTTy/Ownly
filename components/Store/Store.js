@@ -44,7 +44,7 @@ const Store = ({ allItems }) => {
                                         <div className='Store__items--itemContainer'>
                                             <p className='Store__items--item__text--price'>Rs. {item.price}</p>
                                             <button className='Store__items--item__button2' onClick={() => { router.push('/productPage') }}>
-                                                <FontAwesomeIcon icon={faShoppingCart} />
+                                                Rent Now
                                             </button>
                                         </div>
                                     </div>
