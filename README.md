@@ -1,12 +1,14 @@
-# Next.js Authentication Boilerplate
+# Ownly - Product Rental Platform for SNU Community
 
-This is a boilerplate codebase for building web applications with Next.js that includes user authentication, SCSS for styling, and a structured API route setup. It utilizes the [next-iron-session](https://github.com/vvo/next-iron-session) library for managing user sessions.
+Welcome to Ownly, a website where the SNU community can rent, list, and request products. Ownly is built using Next.js and Supabase to provide a seamless experience for product rentals within the university community.
 
 ## Features
 
-- User authentication (login, signup, logout) using Next.js API routes.
-- SCSS integration for styling your application.
-- Organized API routes for handling server-side logic.
+- **User Authentication**: Secure login, signup, and logout functionality.
+- **Product Listing**: Users can list products they want to rent out.
+- **Product Requests**: Users can request specific products they need.
+- **Community Focused**: Exclusively designed for the SNU community.
+- **Real-time Data**: Integration with Supabase for real-time database updates.
 
 ## Getting Started
 
@@ -16,6 +18,7 @@ Before you begin, make sure you have the following software installed on your ma
 
 - [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/)
+- [Supabase Account](https://supabase.io/)
 
 ### Installation
 
@@ -23,10 +26,10 @@ Before you begin, make sure you have the following software installed on your ma
 
    ```bash
    git clone <repository_url>
-   cd next-boilerplate
+   cd ownly
    ```
 
-2. Install dependencies
+2. Install dependencies:
 
    ```bash
    npm install
@@ -34,42 +37,48 @@ Before you begin, make sure you have the following software installed on your ma
    yarn install
    ```
 
-3. Configure environment variables
+3. Configure environment variables:
+
+    Create a `.env.local` file in the root of your project and add the following environment variables:
 
     ```bash
-   DATABASE_URL = 'YOUR_DATABASE_URL'
-   APPLICATION_SECRET='YOUR_APPLICATION_SECRET'
-   NODE_ENV='NODE_ENV'
-   ```
+    NEXT_PUBLIC_SUPABASE_URL='YOUR_SUPABASE_URL'
+    NEXT_PUBLIC_SUPABASE_ANON_KEY='YOUR_SUPABASE_ANON_KEY'
+    ```
 
-4. Start development server
+4. Start the development server:
 
     ```bash
-   npm run dev
-   or
-   yarn dev
-   ```
+    npm run dev
+    or
+    yarn dev
+    ```
 
-5. Your application should now be running at http://localhost:3000.
+5. Your application should now be running at [http://localhost:3000](http://localhost:3000).
 
-**Note**: The `DATABASE_URL` environment variable should be a connection string to your database, Also you need to update the provider in `schema.prisma` file according to your database provider.
 ## Usage
 
-- **Authentication Routes**: The `pages/api/auth` folder contains authentication API routes (`login.js`, `signup.js`, `logout.js`) for you to implement your authentication logic.
-
-- **Styles**: Add stylesheets in SCSS format to the `styles` folder and import them in your components.
-
-- **Customization**: Customize the pages in the `pages` directory according to your application requirements.
+- **Product Management**: Users can list products they want to rent out and browse or request products listed by others.
+- **User Authentication**: Implemented using Supabase Auth for secure and easy authentication.
+- **Real-time Updates**: All changes to product listings and requests are updated in real-time using Supabase.
 
 ## Deploying
 
-To deploy your Next.js application, follow the deployment instructions for your chosen hosting platform. Popular options include:
+To deploy Ownly, follow the deployment instructions for your chosen hosting platform. Popular options include:
 
 - [Vercel](https://vercel.com/)
 - [Netlify](https://www.netlify.com/)
 - [AWS Amplify](https://aws.amazon.com/amplify/)
 
+Ensure that your environment variables are set correctly on your hosting platform.
+
 ## Additional Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
-- [next-iron-session Documentation](https://github.com/vvo/next-iron-session)
+- [Supabase Documentation](https://supabase.io/docs)
+- [Vercel Deployment Guide](https://vercel.com/docs)
+- [Netlify Deployment Guide](https://docs.netlify.com/)
+- [AWS Amplify Deployment Guide](https://docs.amplify.aws/)
+
+Thank you for choosing Ownly! We hope you enjoy using our platform to rent and list products within the SNU community. If you have any questions or need further assistance, please feel free to contact us.
+```
