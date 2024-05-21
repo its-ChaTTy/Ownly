@@ -81,4 +81,3 @@ Ensure that your environment variables are set correctly on your hosting platfor
 - [AWS Amplify Deployment Guide](https://docs.amplify.aws/)
 
 Thank you for choosing Ownly! We hope you enjoy using our platform to rent and list products within the SNU community. If you have any questions or need further assistance, please feel free to contact us.
-```
